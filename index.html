@@ -115,6 +115,10 @@ h2{font-family:var(--display);font-size:22px;margin:0}
 .c-paper{background:var(--paper);color:var(--ink)}
 .sheet .cancel{font-weight:800;color:var(--ink-soft);padding:8px}
 
+.mode-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mode{display:flex;background:var(--paper);border-radius:999px;padding:4px;box-shadow:0 3px 0 var(--line)}
+.mode button{font-family:var(--display);font-size:18px;padding:8px 18px;border-radius:999px;color:var(--ink-soft)}
+.mode button.on{background:var(--ink);color:#fff}
 /* GALLERY */
 .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
 .pic{position:relative;background:var(--paper);border-radius:18px;padding:8px;box-shadow:0 4px 0 var(--line)}
@@ -138,7 +142,8 @@ h2{font-family:var(--display);font-size:22px;margin:0}
         <button class="big free" id="goFree"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1L19 8a2.1 2.1 0 0 0-3-3L5 16z"/><path d="M14 7l3 3"/></svg>Free draw</button>
         <button class="big gal" id="goGal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>My pictures</button>
       </div>
-      <h2>What do you want to draw?</h2>
+      <div class="mode-row"><h2>What do you want to draw?</h2>
+        <div class="mode" role="group" aria-label="Drawing style"><button id="mPencil">Pencil</button><button id="mColor">Color</button></div></div>
       <div class="grid" id="lessonGrid"></div>
     </div>
   </section>
@@ -231,108 +236,173 @@ const star=(cx,cy,R,r)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Mat
 const eye=(cx,cy,r,z)=>[{d:circ(cx,cy,r),f:INK,z:z||9},{d:circ(cx+r*.35,cy-r*.38,r*.36),f:'#fff',w:0,z:(z||9)+.1,t:0}];
 const blush=(cx,cy,r)=>({d:circ(cx,cy,r),f:'#F7A1A1',w:0,z:8,t:0});
 
-/* ---------- LESSONS ---------- */
+/* ---------- LESSONS (realistic) ---------- */
+/* extra helpers for realistic lessons */
+const mirror=d=>d.replace(/(-?\d+\.?\d*)[ ,]+(-?\d+\.?\d*)/g,(m,x,y)=>`${+(400-x).toFixed(1)} ${y}`);
+const rEye=(cx,cy,rx,ry,iris,z)=>{z=z||9;return[{d:`M${cx-rx} ${cy} Q${cx} ${cy-ry*1.7} ${cx+rx} ${cy} Q${cx} ${cy+ry*1.4} ${cx-rx} ${cy} Z`,f:iris,z,w:2.5,s:'#1B1410'},{d:circ(cx,cy,ry*.62),f:'#0E0B09',z:z+.1,w:0,t:0},{d:circ(cx-rx*.22,cy-ry*.32,ry*.26),f:'#FFFFFF',w:0,z:z+.2,t:0}]};
+const tufts=(cx,cy,rx,ry,n,amp)=>{let s=`M${cx+rx} ${cy}`;for(let i=0;i<n;i++){const a1=(i+.5)/n*2*Math.PI,a2=(i+1)/n*2*Math.PI,k=1+amp*(.55+.45*((i*5)%3)/2);s+=` Q${(cx+rx*k*Math.cos(a1)).toFixed(1)} ${(cy+ry*k*Math.sin(a1)).toFixed(1)} ${(cx+rx*Math.cos(a2)).toFixed(1)} ${(cy+ry*Math.sin(a2)).toFixed(1)}`}return s+' Z'};
+const spokes=(cx,cy,r)=>[0,1,2,3,4].map(i=>{const a=-Math.PI/2+i*2*Math.PI/5;return{d:`M${cx} ${cy} L${(cx+r*Math.cos(a)).toFixed(1)} ${(cy+r*Math.sin(a)).toFixed(1)}`,w:4,s:'#6E7684',z:4.2,t:0}});
+const both=(p)=>[p,Object.assign({},p,{d:mirror(p.d)})];
+
+const LION_FACE='M200 112 Q250 114 268 150 Q282 185 272 222 Q262 262 236 290 Q220 306 200 308 Q180 306 164 290 Q138 262 128 222 Q118 185 132 150 Q150 114 200 112 Z';
+const PANDA_HEAD='M200 112 Q262 112 288 160 Q306 200 294 240 Q278 288 232 304 Q200 312 168 304 Q122 288 106 240 Q94 200 112 160 Q138 112 200 112 Z';
+const BEAR_HEAD='M200 116 Q256 114 282 156 Q300 192 288 230 Q278 258 252 274 L148 274 Q122 258 112 230 Q100 192 118 156 Q144 114 200 116 Z';
+const CAR_BODY='M40 262 Q40 240 60 232 Q110 218 150 212 Q190 178 236 172 Q280 170 306 196 Q340 204 360 216 Q372 226 370 248 L368 262 Q366 270 356 270 L48 270 Q40 270 40 262 Z';
+
 const LESSONS=[
-{id:'lion',name:'Brave Lion',bg:'#FFE6B0',tex:{fur:[0,1,2]},cast:[200,346,120,12],steps:[
- {say:'Draw the face',talk:"Hello Rakan! Today we will draw a brave lion. First, draw the face. Make a big round shape, like an egg lying down.",parts:[{d:ell(200,210,78,72),f:'#F9C762',z:3}]},
- {say:'Draw the fluffy mane',talk:"Now the lion's fluffy mane. Draw bumpy waves all around the face. Bump, bump, bump, all the way around!",parts:[{d:wavy(200,212,124,14,24),f:'#D9822B',z:0}]},
- {say:'Add two round ears',talk:"Lions have little round ears. Draw two small circles on top of the face, one on each side.",parts:[{d:circ(140,150,21),f:'#F9C762',z:1},{d:circ(140,150,10),f:'#E8A04A',z:1.1},{d:circ(260,150,21),f:'#F9C762',z:1},{d:circ(260,150,10),f:'#E8A04A',z:1.1}]},
- {say:'Draw the eyes',talk:"Now the eyes. Draw two dots, and color them in. Then add two curvy eyebrows on top. He looks brave!",parts:[...eye(170,200,11),...eye(230,200,11),{d:'M154 179 Q170 170 186 179',w:5,z:9},{d:'M214 179 Q230 170 246 179',w:5,z:9}]},
- {say:'Draw the cheeks and nose',talk:"Draw two puffy cheeks below the eyes, like two little clouds. Then draw a nose on top, like a triangle with round corners.",parts:[{d:ell(184,246,24,18),f:'#FFE7B8',z:4},{d:ell(216,246,24,18),f:'#FFE7B8',z:4},{d:'M184 226 Q200 216 216 226 Q209 241 200 243 Q191 241 184 226 Z',f:'#8B4A2B',z:5}]},
- {say:'Add the mouth and dots',talk:"Draw a short line down from the nose, and a little smile. Then put tiny dots on the cheeks, where the whiskers grow.",parts:[{d:'M200 243 L200 256',w:5,z:6},{d:'M187 266 Q200 275 213 266',w:5,z:6},{d:circ(176,244,2.5),f:INK,w:0,z:6,t:0},{d:circ(186,252,2.5),f:INK,w:0,z:6,t:0},{d:circ(224,244,2.5),f:INK,w:0,z:6,t:0},{d:circ(214,252,2.5),f:INK,w:0,z:6,t:0},blush(150,232,9),blush(250,232,9)]},
- {say:'Add hair lines to the mane',talk:"Let's make the mane look furry. Draw little curvy lines inside the mane, here and there.",parts:[{d:'M98 196 Q112 208 106 228',w:4,z:2},{d:'M302 196 Q288 208 294 228',w:4,z:2},{d:'M118 276 Q134 280 138 296',w:4,z:2},{d:'M282 276 Q266 280 262 296',w:4,z:2},{d:'M184 104 Q200 112 216 104',w:4,z:2},{d:'M188 300 Q200 312 212 300',w:4,z:2}]},
- {say:'Draw the grass',talk:"Last step! Draw wavy green grass under the lion, and a little flower. Great job, you drew a lion!",parts:[{d:'M30 360 Q75 344 120 360 Q165 344 210 360 Q255 344 300 360 Q340 346 372 360',w:5,s:'#3E9B4F',z:-1},{d:circ(330,330,8),f:'#FF7BB5',z:-1},{d:'M330 338 L330 356',w:4,s:'#3E9B4F',z:-1.1}]}
+{id:'lion',name:'Lion',bg:'#F1E3C8',tex:{fur:[0,1,2,6]},steps:[
+ {say:'Draw the head shape',talk:"Hello Rakan! Today we will draw a real lion. First, the head. Start at the top, go wide for the cheeks, and get narrow at the chin, like a big shield.",parts:[{d:LION_FACE,f:'#C8964F',z:3}]},
+ {say:'Draw the big mane',talk:"Now the mane. It's the long hair around the head. Draw a big bumpy shape all around the face. Make it big, lions have lots of hair!",parts:[{d:tufts(200,214,152,150,22,.13),f:'#7A4A22',z:0}]},
+ {say:'Draw the ears',talk:"Draw two round ears on top of the head, half hiding in the mane. Then a darker shape inside each ear.",parts:[...both({d:'M142 152 Q124 112 150 100 Q176 102 176 132 Z',f:'#B07E3E',z:1}),...both({d:'M149 142 Q140 117 152 111 Q166 112 166 131 Z',f:'#5E3A1E',z:1.1})]},
+ {say:'Draw the eyes',talk:"Lion eyes are shaped like almonds, and they are golden. Draw them a little apart, with a dark circle in the middle. Then a line above each eye for the brow.",parts:[...rEye(167,190,16,8,'#C99A2E'),...rEye(233,190,16,8,'#C99A2E'),...both({d:'M146 175 Q166 163 190 172',w:3,z:9})]},
+ {say:'Draw the nose',talk:"Now the nose. Draw two long lines going down from between the eyes. At the bottom, draw a wide nose, like an upside down triangle with round corners.",parts:[...both({d:'M188 198 Q186 222 181 238',w:3,z:4}),{d:'M178 240 Q200 232 222 240 Q222 254 206 262 L200 266 L194 262 Q178 254 178 240 Z',f:'#4A2A1E',z:5}]},
+ {say:'Draw the muzzle and mouth',talk:"Under the nose, draw two puffy round shapes. That's where the whiskers grow. Then a line down from the nose and the mouth curving out on both sides.",parts:[{d:ell(176,272,26,18),f:'#E8D3B0',z:4},{d:ell(224,272,26,18),f:'#E8D3B0',z:4},{d:ell(200,298,18,9),f:'#E8D3B0',z:3.9},{d:'M200 266 L200 280',w:3,z:6},...both({d:'M200 280 Q188 291 168 286',w:3,z:6}),...[[166,266],[174,276],[182,268]].flatMap(([x,y])=>both({d:circ(x,y,2),f:'#3A2214',w:0,z:6,t:0}))]},
+ {say:'Add the fur lines',talk:"Last drawing step! Draw short lines on the forehead and on the cheeks, going down like hair. This makes the fur look real.",parts:[{d:'M200 122 L200 150',w:2.5,z:4},...both({d:'M180 126 Q184 144 186 160',w:2.5,z:4}),...both({d:'M136 196 Q142 214 140 232',w:2.5,z:4}),...both({d:'M100 230 Q112 250 110 272',w:2.5,z:2}),...both({d:'M150 330 Q160 342 172 346',w:2.5,z:2})]}
+],shade:[
+ {d:LION_FACE,f:'none',s:'rgba(40,20,5,.45)',w:18,z:2.9,stage:2},
+ {d:'M268 150 Q282 185 272 222 Q262 262 236 290 Q220 306 200 308 Q240 270 252 220 Q258 175 268 150 Z',f:'rgba(70,35,5,.3)',z:3.5,stage:2},
+ {d:ell(167,177,22,8),f:'rgba(40,20,5,.28)',z:3.6,stage:2},{d:ell(233,177,22,8),f:'rgba(40,20,5,.28)',z:3.6,stage:2},
+ {d:ell(200,308,44,9),f:'rgba(40,20,5,.3)',z:3.95,stage:2},
+ {d:ell(186,140,34,16),f:'rgba(255,240,200,.35)',z:3.6,stage:3},
+ {d:'M196 200 L192 234',f:'none',s:'rgba(255,240,210,.5)',w:7,z:3.7,stage:3},
+ {d:circ(190,245,3.5),f:'rgba(255,255,255,.7)',z:5.5,stage:3}
 ]},
-{id:'panda',name:'Panda',bg:'#D7EFD9',tex:{fur:[0,1]},cast:[200,316,100,12],steps:[
- {say:'Draw the big head',talk:"Let's draw a cute panda! First, draw a big round head, a little wider than it is tall.",parts:[{d:ell(200,215,98,88),f:'#FFFFFF',z:2}]},
- {say:'Draw the black ears',talk:"Now draw two round ears on top of the head. Panda ears are black, so color them in!",parts:[{d:circ(122,138,30),f:INK,z:1},{d:circ(278,138,30),f:INK,z:1}]},
- {say:'Draw the eye patches',talk:"Pandas have black patches around their eyes. Draw two shapes like big beans, leaning towards the nose.",parts:[{d:'M138 205 Q142 165 178 178 Q198 200 180 232 Q150 250 138 205 Z',f:INK,z:3},{d:'M262 205 Q258 165 222 178 Q202 200 220 232 Q250 250 262 205 Z',f:INK,z:3}]},
- {say:'Draw the shiny eyes',talk:"Inside each patch, draw a white circle for the eye, and a black dot in the middle. Shiny eyes!",parts:[{d:circ(168,205,11),f:'#fff',z:4},{d:circ(232,205,11),f:'#fff',z:4},...eye(170,207,5,5),...eye(230,207,5,5)]},
- {say:'Draw the nose and smile',talk:"Draw a little oval nose in the middle. Then a line down, and a smile that looks like the letter W.",parts:[{d:ell(200,246,16,11),f:INK,z:6},{d:circ(194,243,3),f:'#fff',w:0,z:6.1,t:0},{d:'M200 257 L200 267',w:5,z:6},{d:'M200 267 Q188 279 176 271',w:5,z:6},{d:'M200 267 Q212 279 224 271',w:5,z:6},blush(142,254,11),blush(258,254,11)]},
- {say:'Draw the bamboo',talk:"Pandas love bamboo! Draw a tall green stick next to the panda, with lines across it.",parts:[{d:'M318 352 L329 150 L344 150 L334 352 Z',f:'#7CC36A',z:0},{d:'M320 300 L336 300',w:4,z:0.1},{d:'M323 240 L339 240',w:4,z:0.1},{d:'M326 190 L341 190',w:4,z:0.1}]},
- {say:'Add the leaves',talk:"Now add some leaves on the bamboo. Make them pointy at the end, like little boats.",parts:[{d:'M340 200 Q372 180 388 194 Q362 208 340 200 Z',f:'#4FA34A',z:0.2},{d:'M332 262 Q300 252 288 264 Q314 274 332 262 Z',f:'#4FA34A',z:0.2},{d:'M343 160 Q360 132 380 136 Q366 158 343 160 Z',f:'#4FA34A',z:0.2}]}
+{id:'panda',name:'Panda',bg:'#DCE8D6',tex:{fur:[0,1,5]},cast:[200,384,130,10],steps:[
+ {say:'Draw the head',talk:"Let's draw a real panda! First, a big round head, a little wider at the cheeks.",parts:[{d:PANDA_HEAD,f:'#F2F0EA',z:2}]},
+ {say:'Draw the round ears',talk:"Draw two round ears on top of the head. Pandas have black ears. Shade them dark.",parts:[{d:ell(122,130,30,28),f:'#1E1E22',z:1},{d:ell(278,130,30,28),f:'#1E1E22',z:1}]},
+ {say:'Draw the eye patches',talk:"Now the black eye patches. They are shaped like tear drops, leaning down towards the outside. Make them big!",parts:[...both({d:'M190 192 Q186 168 164 166 Q138 168 134 196 Q132 228 150 236 Q172 238 184 220 Q192 208 190 192 Z',f:'#1E1E22',z:3})]},
+ {say:'Draw the small eyes',talk:"Panda eyes are small and dark brown. Draw a little oval inside each patch, near the top. Leave a tiny white dot for the shine.",parts:[...rEye(166,196,8,5,'#4A3626',4),...rEye(234,196,8,5,'#4A3626',4)]},
+ {say:'Draw the muzzle and nose',talk:"Draw a soft oval for the muzzle at the bottom of the face. Then a black nose on top, and the mouth under it.",parts:[{d:ell(200,258,42,32),f:'#FAF9F5',z:4,w:2},{d:'M184 238 Q200 230 216 238 Q214 252 200 256 Q186 252 184 238 Z',f:'#1E1E22',z:5},{d:'M200 256 L200 268',w:3,z:5},...both({d:'M200 268 Q190 278 180 274',w:3,z:5})]},
+ {say:'Draw the shoulders',talk:"Pandas have black shoulders and arms, and a white chest. Draw the shoulders going down from the head, wide at the bottom.",parts:[{d:'M122 280 Q100 330 96 384 L304 384 Q300 330 278 280 Z',f:'#1E1E22',z:0},{d:'M152 300 Q200 330 248 300 L262 384 L138 384 Z',f:'#F2F0EA',z:0.5}]},
+ {say:'Draw the bamboo',talk:"Last drawing step! Draw a green bamboo stick on the side, with rings on it, and long thin leaves.",parts:[{d:'M330 384 L338 120 L352 120 L346 384 Z',f:'#6E9E4A',z:0.6},{d:'M331 300 L347 300',w:3,z:0.7},{d:'M334 220 L350 220',w:3,z:0.7},{d:'M336 150 L351 150',w:3,z:0.7},{d:'M350 180 Q378 168 392 176 Q370 188 350 180 Z',f:'#4E8A3A',z:0.7},{d:'M336 250 Q304 246 292 256 Q318 262 336 250 Z',f:'#4E8A3A',z:2.5}]}
+],shade:[
+ {d:'M288 160 Q306 200 294 240 Q278 288 232 304 Q268 252 272 200 Q272 172 288 160 Z',f:'rgba(70,75,95,.25)',z:2.5,stage:2},
+ {d:ell(200,292,40,9),f:'rgba(40,40,60,.18)',z:4.5,stage:2},
+ {d:'M106 240 Q122 288 168 304 Q130 270 120 230 Z',f:'rgba(70,75,95,.15)',z:2.5,stage:2},
+ {d:ell(186,140,44,16),f:'rgba(255,255,255,.6)',z:2.6,stage:3},
+ {d:ell(196,244,4,3),f:'rgba(255,255,255,.6)',z:5.5,stage:3}
 ]},
-{id:'bear',name:'Teddy Bear',bg:'#F6DDBF',tex:{fur:[0,1,2]},cast:[200,348,84,9],steps:[
- {say:'Draw the round head',talk:"Let's draw a teddy bear! Start with a big round head. Go around, like drawing a ball.",parts:[{d:ell(200,220,96,88),f:'#B9783F',z:2}]},
- {say:'Draw the ears',talk:"Draw two round ears on top. Then draw a smaller circle inside each ear.",parts:[{d:circ(124,142,32),f:'#B9783F',z:1},{d:circ(124,142,16),f:'#E8B98A',z:1.1},{d:circ(276,142,32),f:'#B9783F',z:1},{d:circ(276,142,16),f:'#E8B98A',z:1.1}]},
- {say:'Draw the snout',talk:"Now draw the snout. It's an oval at the bottom of the face, like a little egg.",parts:[{d:ell(200,256,46,35),f:'#EBCB9F',z:3}]},
- {say:'Draw the eyes',talk:"Draw two eyes above the snout. Color them dark, and leave a tiny white spot so they sparkle!",parts:[...eye(164,205,11),...eye(236,205,11)]},
- {say:'Draw the nose',talk:"Draw the nose on top of the snout. It's like a round triangle, pointing down. Color it in.",parts:[{d:'M183 236 Q200 227 217 236 Q210 252 200 254 Q190 252 183 236 Z',f:INK,z:5},{d:circ(194,238,3.5),f:'#fff',w:0,z:5.1,t:0}]},
- {say:'Draw the smile',talk:"Draw a line down from the nose, then a happy smile. And two pink cheeks!",parts:[{d:'M200 254 L200 266',w:5,z:6},{d:'M200 266 Q189 278 177 270',w:5,z:6},{d:'M200 266 Q211 278 223 270',w:5,z:6},blush(140,250,11),blush(260,250,11)]},
- {say:'Add a bow tie',talk:"Let's give him a bow tie! Draw two triangles touching in the middle, and a small circle in the center.",parts:[{d:'M200 320 L160 298 L160 342 Z',f:'#E8423A',z:7},{d:'M200 320 L240 298 L240 342 Z',f:'#E8423A',z:7},{d:circ(200,320,10),f:'#C2302A',z:7.1}]},
- {say:'Add a fluffy tuft',talk:"Last step! Draw a little bumpy tuft of fur on top of the head. Your teddy bear is ready!",parts:[{d:'M186 136 Q192 120 200 134 Q207 118 214 136',w:5,z:6}]}
+{id:'bear',name:'Brown Bear',bg:'#E9DCC6',tex:{fur:[0,1,2,6]},cast:[200,384,130,10],steps:[
+ {say:'Draw the head',talk:"Let's draw a real brown bear! Draw a big, wide head. Round on top and flat at the bottom.",parts:[{d:BEAR_HEAD,f:'#7A4E2D',z:2}]},
+ {say:'Draw the ears',talk:"Bears have small round ears on top of the head. Draw one on each side, and a darker part inside.",parts:[...both({d:'M128 150 Q112 110 142 100 Q168 102 170 130 Z',f:'#6A4226',z:1}),...both({d:'M136 140 Q128 116 144 110 Q160 112 162 130 Z',f:'#3E2615',z:1.1})]},
+ {say:'Draw the long snout',talk:"Bears have a long snout. Draw a rounded shape in the middle of the face, going down past the bottom of the head.",parts:[{d:'M160 222 Q160 200 200 198 Q240 200 240 222 Q246 268 214 288 Q200 294 186 288 Q154 268 160 222 Z',f:'#A57549',z:3}]},
+ {say:'Draw the small eyes',talk:"Bear eyes are small and dark. Draw them high up, on each side of the snout.",parts:[...rEye(160,184,9,5,'#3A2414'),...rEye(240,184,9,5,'#3A2414')]},
+ {say:'Draw the big nose',talk:"Draw a big black nose at the top of the snout. It's wide on top and pointy at the bottom.",parts:[{d:'M180 226 Q200 216 220 226 Q220 244 205 251 L200 254 L195 251 Q180 244 180 226 Z',f:'#1E1612',z:5}]},
+ {say:'Draw the mouth',talk:"Draw a line down from the nose, then the mouth going out on each side.",parts:[{d:'M200 254 L200 268',w:3,z:5},...both({d:'M200 268 Q190 278 178 274',w:3,z:5})]},
+ {say:'Draw the strong shoulders',talk:"Bears are big and strong! Draw wide shoulders going down from the head.",parts:[{d:'M126 262 Q104 324 96 384 L304 384 Q296 324 274 262 Z',f:'#6A4226',z:0}]},
+ {say:'Add fur lines',talk:"Last drawing step! Draw short fur lines on the head and the shoulders, all going down.",parts:[{d:'M200 128 L200 150',w:2.5,z:4},...both({d:'M174 132 Q178 146 180 160',w:2.5,z:4}),...both({d:'M128 200 Q134 214 132 228',w:2.5,z:4}),...both({d:'M120 300 Q126 320 122 340',w:2.5,z:1}),...both({d:'M170 300 Q172 320 168 340',w:2.5,z:1})]}
+],shade:[
+ {d:'M282 156 Q300 192 288 230 Q278 258 252 274 Q270 230 270 196 Q270 170 282 156 Z',f:'rgba(30,15,5,.3)',z:2.5,stage:2},
+ {d:ell(160,183,17,10),f:'rgba(20,10,0,.3)',z:2.6,stage:2},{d:ell(240,183,17,10),f:'rgba(20,10,0,.3)',z:2.6,stage:2},
+ {d:ell(200,290,38,10),f:'rgba(20,10,0,.3)',z:3.5,stage:2},
+ {d:'M126 262 Q160 290 200 292 Q240 290 274 262 L276 278 Q200 310 124 278 Z',f:'rgba(20,10,0,.3)',z:0.5,stage:2},
+ {d:ell(190,148,40,16),f:'rgba(255,230,190,.25)',z:2.6,stage:3},
+ {d:ell(196,214,22,8),f:'rgba(255,235,200,.3)',z:3.5,stage:3},
+ {d:ell(193,232,5,3),f:'rgba(255,255,255,.6)',z:5.5,stage:3}
 ]},
-{id:'car',name:'Race Car',bg:'#FFD1CC',cast:[200,304,168,10],steps:[
- {say:'Draw the car body',talk:"Vroom vroom! Let's draw a race car. First, draw the car body. A long shape at the bottom, and a bump on top for the roof.",parts:[{d:'M50 262 L50 228 Q50 212 70 210 L128 206 L165 158 Q170 152 180 152 L262 152 Q272 152 278 158 L314 206 L338 210 Q352 214 352 232 L352 262 Q352 270 344 270 L58 270 Q50 270 50 262 Z',f:'#E8423A',z:1}]},
- {say:'Draw the windows',talk:"Now draw two windows in the roof. One on this side, and one on that side.",parts:[{d:'M146 204 L174 168 L210 168 L210 204 Z',f:'#BFE6FF',z:2},{d:'M226 168 L260 168 L290 204 L226 204 Z',f:'#BFE6FF',z:2},{d:'M184 176 L170 196',w:4,s:'#fff',z:2.1,t:0},{d:'M244 176 L234 194',w:4,s:'#fff',z:2.1,t:0}]},
- {say:'Draw two big wheels',talk:"Every car needs wheels! Draw two big circles at the bottom, and color them black.",parts:[{d:circ(122,272,34),f:INK,z:3},{d:circ(284,272,34),f:INK,z:3}]},
- {say:'Draw the shiny rims',talk:"Inside each wheel, draw a smaller grey circle. And a tiny dot in the middle.",parts:[{d:circ(122,272,16),f:'#D7DEE8',z:4},{d:circ(284,272,16),f:'#D7DEE8',z:4},{d:circ(122,272,5),f:INK,z:4.1},{d:circ(284,272,5),f:INK,z:4.1}]},
- {say:'Draw the doors',talk:"Draw a line down for the door, and two short lines for the door handles.",parts:[{d:'M218 212 L218 262',w:5,z:2},{d:'M196 224 L208 224',w:5,z:2},{d:'M232 224 L244 224',w:5,z:2}]},
- {say:'Draw the lights',talk:"Draw a yellow light at the front, so the car can see at night. And an orange light at the back.",parts:[{d:ell(342,228,8,11),f:'#FFE07A',z:2},{d:'M50 220 L64 220 L64 238 L50 238',f:'#FFB347',z:2}]},
- {say:'Add a racing number',talk:"Race cars have numbers! Draw a white circle on the side, and the number seven inside.",parts:[{d:circ(164,238,15),f:'#fff',z:2},{d:'M157 231 L171 231 L161 247',w:4,z:2.1}]},
- {say:'Draw the road and speed lines',talk:"Last step! Draw the road under the car, and speed lines behind it. Zoom! It's going so fast!",parts:[{d:'M24 308 L376 308',w:6,z:0},{d:'M18 196 L40 196',w:5,z:0},{d:'M10 224 L36 224',w:5,z:0},{d:'M18 252 L38 252',w:5,z:0}]}
+{id:'car',name:'Sports Car',bg:'#E4E6EA',cast:[205,276,175,9],steps:[
+ {say:'Draw the car body',talk:"Vroom! Let's draw a real sports car. Draw a long, low body. The roof is low and slopes down at the back, like a wave.",parts:[{d:CAR_BODY,f:'#C81E1E',z:1}]},
+ {say:'Draw the windows',talk:"Draw two windows in the roof. They follow the shape of the roof. Then a small side mirror.",parts:[{d:'M164 210 Q196 184 232 182 L234 210 Z',f:'#28323E',z:2},{d:'M246 182 Q280 182 298 202 L248 210 Z',f:'#28323E',z:2},{d:'M240 198 L256 194 L258 204 L242 206 Z',f:'#A8181A',z:2.2}]},
+ {say:'Draw the wheels',talk:"Draw two big wheels. Notice the front wheel is near the front, and the back wheel is near the back.",parts:[{d:circ(108,268,32),f:'#1B1B1F',z:3},{d:circ(302,268,32),f:'#1B1B1F',z:3}]},
+ {say:'Draw the rims',talk:"Inside each wheel, draw a silver circle for the rim. Then five lines from the middle, like a star.",parts:[{d:circ(108,268,19),f:'#B8BEC8',z:4},{d:circ(302,268,19),f:'#B8BEC8',z:4},...spokes(108,268,18),...spokes(302,268,18),{d:circ(108,268,5),f:'#4A4F57',z:4.3},{d:circ(302,268,5),f:'#4A4F57',z:4.3}]},
+ {say:'Draw the wheel arches and door',talk:"Draw curved lines over each wheel. Then a line for the door, and a small door handle.",parts:[{d:'M68 262 Q72 226 108 224 Q144 226 148 262',w:3,z:2.5},{d:'M262 262 Q266 226 302 224 Q338 226 342 262',w:3,z:2.5},{d:'M240 212 Q246 240 238 266',w:2.5,z:2.5},{d:'M212 228 L228 228',w:3.5,z:2.5}]},
+ {say:'Draw the lights',talk:"Draw a long headlight at the front, a red tail light at the back, and an air vent on the side.",parts:[{d:'M350 214 Q364 218 368 230 L350 228 Z',f:'#F4F1E1',z:2},{d:'M42 240 L58 236 L58 247 L42 249 Z',f:'#E3532A',z:2},{d:'M258 240 Q280 236 292 250 L262 252 Z',f:'#1B1B1F',z:2}]},
+ {say:'Draw the road',talk:"Last drawing step! Draw the road under the car. One long straight line.",parts:[{d:'M20 302 L380 302',w:3,z:0}]}
+],shade:[
+ {d:'M44 248 L368 248 L366 262 Q366 270 356 270 L48 270 Q40 270 42 262 Z',f:'rgba(0,0,0,.3)',z:1.5,stage:2},
+ {d:'M150 212 Q190 178 236 172 Q280 170 306 196 L300 200 Q276 180 236 182 Q196 186 160 214 Z',f:'rgba(0,0,0,.18)',z:1.6,stage:2},
+ {d:'M70 238 Q160 216 220 212 Q290 208 345 218',f:'none',s:'rgba(255,255,255,.6)',w:5,z:2.6,stage:3},
+ {d:'M182 206 L212 186',f:'none',s:'rgba(255,255,255,.35)',w:7,z:2.6,stage:3},
+ {d:'M262 204 L282 188',f:'none',s:'rgba(255,255,255,.3)',w:6,z:2.6,stage:3},
+ {d:ell(100,258,7,4),f:'rgba(255,255,255,.5)',z:4.4,stage:3},{d:ell(294,258,7,4),f:'rgba(255,255,255,.5)',z:4.4,stage:3}
 ]},
-{id:'tree',name:'Apple Tree',bg:'#D3F0C7',tex:{bark:[0],leaf:[1,2]},cast:[200,352,110,9],steps:[
- {say:'Draw the trunk',talk:"Let's draw an apple tree! First, draw the trunk. Two lines going up, a little wider at the bottom.",parts:[{d:'M180 345 Q186 290 184 236 L216 236 Q214 290 222 345 Z',f:'#9B6B43',z:1}]},
- {say:'Draw the fluffy leaves',talk:"Now draw the leaves on top. Make a big fluffy cloud shape, bumpy all around.",parts:[{d:wavy(200,158,100,10,26),f:'#4CB05E',z:2}]},
- {say:'Add lighter leaves',talk:"Draw two smaller bumpy clouds inside the big one. This makes the tree look fluffy and soft.",parts:[{d:wavy(158,178,40,7,10),f:'#62C473',z:3},{d:wavy(244,136,40,7,10),f:'#62C473',z:3}]},
- {say:'Draw the red apples',talk:"Time for apples! Draw little circles all over the leaves. Color them red. Yummy!",parts:[{d:circ(152,130,13),f:'#E8423A',z:4},{d:circ(232,196,13),f:'#E8423A',z:4},{d:circ(205,104,13),f:'#E8423A',z:4},{d:circ(276,160,13),f:'#E8423A',z:4},{d:circ(140,214,13),f:'#E8423A',z:4},{d:circ(148,126,3.5),f:'#fff',w:0,z:4.1,t:0},{d:circ(228,192,3.5),f:'#fff',w:0,z:4.1,t:0},{d:circ(201,100,3.5),f:'#fff',w:0,z:4.1,t:0},{d:circ(272,156,3.5),f:'#fff',w:0,z:4.1,t:0},{d:circ(136,210,3.5),f:'#fff',w:0,z:4.1,t:0}]},
- {say:'Add lines to the trunk',talk:"Draw a few wiggly lines on the trunk, and a little hole. Maybe a squirrel lives there!",parts:[{d:'M194 302 Q199 290 195 278',w:4,z:1.1},{d:'M209 326 Q213 314 209 302',w:4,z:1.1},{d:ell(206,262,7,9),f:INK,z:1.1}]},
- {say:'Draw the grass',talk:"Draw a line for the ground, and some pointy grass. Spiky, spiky!",parts:[{d:'M30 352 L370 352',w:5,s:'#3E9B4F',z:0},{d:'M60 352 L67 336 L74 352',w:4,s:'#3E9B4F',z:0},{d:'M300 352 L307 336 L314 352',w:4,s:'#3E9B4F',z:0},{d:'M110 352 L116 340 L122 352',w:4,s:'#3E9B4F',z:0}]},
- {say:'Add the sun and a bird',talk:"Last step! Draw a sun in the sky and a little bird flying. Your tree is so pretty!",parts:[{d:circ(345,52,24),f:'#FFC93C',z:0},{d:'M64 70 Q76 58 88 70 Q100 58 112 70',w:5,z:0}]}
+{id:'tree',name:'Apple Tree',bg:'#DDEBD3',tex:{bark:[0],leaf:[1,2]},cast:[200,356,120,9],steps:[
+ {say:'Draw the trunk',talk:"Let's draw a real apple tree! Draw the trunk. It's wide at the bottom, gets thinner, and splits into two branches at the top.",parts:[{d:'M174 354 Q186 320 186 280 Q184 250 170 226 L184 222 Q196 242 200 252 Q206 236 222 220 L234 228 Q216 250 214 280 Q214 320 228 354 Z',f:'#6B4A33',z:1}]},
+ {say:'Draw the big leafy top',talk:"Now draw the leaves. Make a big bumpy cloud shape on top of the trunk. Real trees are not perfect circles, so make it bumpy everywhere!",parts:[{d:tufts(200,150,104,94,16,.14),f:'#3E7D3A',z:2}]},
+ {say:'Draw leaf clusters',talk:"Inside the big shape, draw three smaller bumpy clouds. These are bunches of leaves catching the sun.",parts:[{d:tufts(146,172,46,40,9,.16),f:'#4C8F44',z:3},{d:tufts(258,160,48,42,9,.16),f:'#4C8F44',z:3},{d:tufts(204,104,50,38,9,.16),f:'#5AA04E',z:3}]},
+ {say:'Draw the apples',talk:"Draw small round apples here and there in the leaves. Add a tiny stick on top of each one.",parts:[[150,140],[232,196],[196,128],[276,140],[132,206],[184,200]].flatMap(([x,y])=>[{d:circ(x,y,10),f:'#B8262A',z:4},{d:`M${x} ${y-10} L${x+2} ${y-16}`,w:2.5,z:4.1,t:0}])},
+ {say:'Draw the bark and roots',talk:"Draw wiggly lines on the trunk for the bark, and roots spreading at the bottom.",parts:[{d:'M196 300 Q201 286 197 272',w:2.5,z:1.2},{d:'M208 334 Q212 318 208 304',w:2.5,z:1.2},{d:'M174 354 Q162 352 150 356',w:3,z:1.2},{d:'M228 354 Q242 352 254 356',w:3,z:1.2}]},
+ {say:'Draw the grass',talk:"Last drawing step! Draw the ground and some grass with short pointy lines.",parts:[{d:'M30 356 L370 356',w:3,s:'#4A7A3A',z:0},...[60,96,290,320,350].map(x=>({d:`M${x} 356 L${x+4} 344 L${x+8} 356`,w:2.5,s:'#4A7A3A',z:0}))]}
+],shade:[
+ {d:tufts(216,190,78,52,11,.14),f:'rgba(10,40,10,.32)',z:3.5,stage:2},
+ {d:'M206 262 Q206 320 220 354 L228 354 Q214 320 214 280 Q214 266 218 256 Z',f:'rgba(0,0,0,.3)',z:1.3,stage:2},
+ {d:ell(200,236,60,10),f:'rgba(0,0,0,.25)',z:1.3,stage:2},
+ {d:tufts(170,96,36,24,8,.14),f:'rgba(255,255,200,.22)',z:3.6,stage:3},
+ {d:tufts(116,150,24,20,7,.14),f:'rgba(255,255,200,.18)',z:3.6,stage:3}
 ]},
-{id:'fish',name:'Little Fish',bg:'#BFE6FF',tex:{scale:[0]},steps:[
- {say:'Draw the fish body',talk:"Let's draw a fish! Draw a shape like a lemon lying on its side. Pointy at both ends.",parts:[{d:'M80 200 Q170 100 280 200 Q170 300 80 200 Z',f:'#FF9F43',z:2}]},
- {say:'Draw the tail',talk:"Now draw the tail at the back. It looks like a triangle with a curvy end.",parts:[{d:'M275 200 L345 140 Q330 200 345 260 Z',f:'#FF7A30',z:1}]},
- {say:'Draw the fins',talk:"Fish have fins to swim. Draw one on top, one on the bottom, and a little one on the side.",parts:[{d:'M150 145 Q185 82 246 152 Z',f:'#FF7A30',z:1},{d:'M168 254 Q190 302 222 258 Z',f:'#FF7A30',z:1},{d:'M168 206 Q196 188 206 216 Q190 232 168 206 Z',f:'#FF7A30',z:3}]},
- {say:'Draw the big eye',talk:"Draw a big round eye near the front. White circle first, then a black dot inside.",parts:[{d:circ(128,190,15),f:'#fff',z:3},...eye(131,192,8,4)]},
- {say:'Draw the stripes',talk:"Draw two curvy stripes on the body, like the letter C going the other way.",parts:[{d:'M214 152 Q232 200 214 248',w:7,s:'#fff',z:2.5},{d:'M246 172 Q258 200 246 228',w:7,s:'#fff',z:2.5}]},
- {say:'Draw the mouth and scales',talk:"Draw a tiny smile at the front. Then add little curves on the body for scales.",parts:[{d:'M90 206 Q99 214 108 208',w:4,z:3},{d:'M160 168 Q168 176 176 168',w:4,z:2.6},{d:'M164 228 Q172 236 180 228',w:4,z:2.6},{d:'M186 196 Q194 204 202 196',w:4,z:2.6}]},
- {say:'Add the sea',talk:"Last step! Draw bubbles going up, some seaweed, and wavy sand at the bottom. Splash!",parts:[{d:circ(52,140,10),f:'#E6F6FF',z:0},{d:circ(40,98,14),f:'#E6F6FF',z:0},{d:circ(62,58,8),f:'#E6F6FF',z:0},{d:'M330 352 Q314 322 330 292 Q346 262 330 232',w:7,s:'#2FA866',z:0},{d:'M20 356 Q110 340 200 356 Q290 340 380 356',w:5,s:'#D8A657',z:0}]}
+{id:'fish',name:'Goldfish',bg:'#CFE4EE',tex:{scale:[0]},steps:[
+ {say:'Draw the fish body',talk:"Let's draw a real goldfish! Draw the body. It's round at the front and thinner at the back, like a teardrop on its side.",parts:[{d:'M70 200 Q100 150 170 140 Q240 136 290 190 Q296 200 290 210 Q240 262 170 258 Q100 250 70 200 Z',f:'#E8762C',z:2}]},
+ {say:'Draw the flowing tail',talk:"Goldfish have a big flowing tail. Draw it at the back, wide like a fan, with a dip in the middle.",parts:[{d:'M286 200 Q320 160 360 136 Q342 200 360 264 Q320 240 286 200 Z',f:'#F29A50',z:1}]},
+ {say:'Draw the fins',talk:"Draw a fin on top of the back, a small fin underneath, and a fin on the side, behind the head.",parts:[{d:'M150 146 Q190 100 252 152 Z',f:'#F29A50',z:1},{d:'M150 250 Q160 282 192 262 Z',f:'#F29A50',z:1},{d:'M150 212 Q178 200 190 226 Q172 238 150 212 Z',f:'#F5A866',z:3}]},
+ {say:'Draw the eye and mouth',talk:"Draw a round eye near the front, a small mouth at the tip, and a curved line behind the eye. That's the gill, where the fish breathes!",parts:[{d:circ(104,190,11),f:'#F2E6C9',z:3},{d:circ(104,190,6.5),f:'#141414',z:3.1,w:0},{d:circ(101,187,2.4),f:'#fff',z:3.2,w:0,t:0},{d:'M72 204 Q80 210 88 206',w:2.5,z:3},{d:'M128 158 Q112 200 130 244',w:2.5,z:3}]},
+ {say:'Draw the fin lines',talk:"Fins have thin lines in them. Draw straight lines in the tail and the top fin, spreading out like a fan.",parts:[{d:'M300 196 L352 150',w:1.8,z:1.1},{d:'M300 204 L352 252',w:1.8,z:1.1},{d:'M300 200 L350 200',w:1.8,z:1.1},{d:'M176 142 L184 118',w:1.8,z:1.1},{d:'M204 142 L210 120',w:1.8,z:1.1},{d:'M228 146 L236 132',w:1.8,z:1.1}]},
+ {say:'Draw the water plants',talk:"Last drawing step! Draw bubbles going up, a long water plant, and the sandy bottom.",parts:[{d:circ(52,140,8),f:'#E6F4FA',z:0},{d:circ(42,104,11),f:'#E6F4FA',z:0},{d:circ(58,66,6),f:'#E6F4FA',z:0},{d:'M330 356 Q314 320 330 290 Q346 260 330 228',w:6,s:'#4E8A3A',z:0},{d:'M20 358 Q110 344 200 358 Q290 344 380 358',w:3,s:'#B89A62',z:0}]}
+],shade:[
+ {d:'M100 166 Q170 136 270 172 Q210 156 170 156 Q130 158 100 176 Z',f:'rgba(110,30,0,.3)',z:2.5,stage:2},
+ {d:'M90 224 Q140 254 200 256 Q250 252 284 212 Q240 262 170 258 Q110 252 90 224 Z',f:'rgba(110,30,0,.25)',z:2.5,stage:2},
+ {d:ell(150,176,40,14),f:'rgba(255,240,200,.45)',z:2.6,stage:3},
+ {d:ell(330,200,14,40),f:'rgba(255,255,255,.18)',z:1.2,stage:3}
 ]},
-{id:'whale',name:'Big Whale',bg:'#BCD9F5',tex:{skin:[0,2]},steps:[
- {say:'Draw the whale body',talk:"Let's draw a big whale! Draw a big round shape, like a giant jelly bean.",parts:[{d:'M70 228 Q70 140 190 140 Q300 140 312 218 Q300 290 180 290 Q70 290 70 228 Z',f:'#3F7FD6',z:2}]},
- {say:'Draw the tummy',talk:"Now draw the tummy. A curved line along the bottom of the body. Whale tummies are light!",parts:[{d:'M84 246 Q110 290 190 290 Q262 290 302 244 Q246 268 186 268 Q124 268 84 246 Z',f:'#D7ECFF',z:3}]},
- {say:'Draw the tail',talk:"Draw the tail at the back. It goes up, and splits into two ends, like a heart.",parts:[{d:'M300 225 Q330 205 340 165 L362 196 L388 176 Q380 232 312 250 Z',f:'#3F7FD6',z:1}]},
- {say:'Draw the eye and smile',talk:"Draw a shiny eye at the front, and a long, happy smile.",parts:[...eye(128,210,9),{d:'M86 236 Q130 258 178 244',w:5,z:4}]},
- {say:'Draw the fin',talk:"Draw a little flipper on the side, like a small wing.",parts:[{d:'M186 270 Q200 312 236 300 Q222 286 220 270 Z',f:'#2E66B8',z:4}]},
- {say:'Add tummy lines',talk:"Draw short lines on the tummy, one, two, three, four!",parts:[{d:'M130 270 L134 284',w:4,z:4},{d:'M160 273 L162 287',w:4,z:4},{d:'M190 274 L190 288',w:4,z:4},{d:'M220 272 L218 286',w:4,z:4}]},
- {say:'Draw the water spout',talk:"Whales blow water from their heads! Draw a line going up, and two curls at the top.",parts:[{d:'M160 140 L160 104',w:6,s:'#6EC1FF',z:0},{d:'M160 104 Q138 76 120 90',w:6,s:'#6EC1FF',z:0},{d:'M160 104 Q182 76 200 90',w:6,s:'#6EC1FF',z:0},{d:circ(116,98,6),f:'#BFE6FF',z:0},{d:circ(204,98,6),f:'#BFE6FF',z:0}]},
- {say:'Draw the waves',talk:"Last step! Draw wavy water under the whale. Up and down, up and down. Splash!",parts:[{d:'M20 330 Q60 310 100 330 Q140 310 180 330 Q220 310 260 330 Q300 310 340 330 Q368 316 386 326',w:5,s:'#2C8CE8',z:5}]}
+{id:'whale',name:'Humpback Whale',bg:'#C3D6E4',tex:{skin:[0,3]},steps:[
+ {say:'Draw the long body',talk:"Let's draw a real whale! Whales are long. Draw a long body, round at the front and thin at the back.",parts:[{d:'M40 210 Q60 170 140 168 Q240 166 300 196 Q330 210 340 214 Q300 236 220 248 Q120 260 70 240 Q40 228 40 210 Z',f:'#4A6378',z:2}]},
+ {say:'Draw the belly with lines',talk:"Draw the light belly under the body. Whales have long lines on their belly. Draw a few long curved lines there.",parts:[{d:'M50 222 Q90 252 170 252 Q240 248 300 222 Q240 238 170 240 Q100 240 50 222 Z',f:'#C9D3DA',z:3},{d:'M70 234 Q130 248 200 246',w:1.8,z:3.1},{d:'M90 242 Q150 252 220 246',w:1.8,z:3.1}]},
+ {say:'Draw the tail',talk:"Draw the tail at the end. It has two wide flat parts, one going up and one going down.",parts:[{d:'M334 212 Q360 196 380 170 Q372 205 390 214 Q372 222 380 258 Q360 230 334 218 Z',f:'#4A6378',z:1}]},
+ {say:'Draw the long flipper',talk:"Humpback whales have very long flippers, like wings! Draw one under the body. And a small bump on the back.",parts:[{d:'M150 244 Q172 296 236 304 Q204 272 194 248 Z',f:'#4A6378',z:4},{d:'M262 190 Q272 178 286 194 Z',f:'#4A6378',z:1.5}]},
+ {say:'Draw the eye and mouth',talk:"Draw a small eye near the corner of the mouth, and a long mouth line along the head.",parts:[{d:ell(98,214,4,3),f:'#0E0E10',z:4},{d:'M44 214 Q80 226 118 222',w:2.5,z:4}]},
+ {say:'Draw the ocean',talk:"Last drawing step! Draw bubbles, and light rays coming down from the top of the ocean.",parts:[{d:'M60 20 L100 140',w:10,s:'rgba(255,255,255,.35)',z:0,t:0},{d:'M180 20 L200 120',w:12,s:'rgba(255,255,255,.3)',z:0,t:0},{d:circ(40,160,6),f:'#E4EEF4',z:0},{d:circ(30,130,8),f:'#E4EEF4',z:0},{d:circ(46,100,5),f:'#E4EEF4',z:0},{d:'M20 356 Q120 344 220 356 Q300 346 380 356',w:3,s:'#8BA5B6',z:0}]}
+],shade:[
+ {d:'M60 192 Q140 168 300 198 Q200 184 140 184 Q90 186 60 204 Z',f:'rgba(0,10,25,.3)',z:2.5,stage:2},
+ {d:'M170 270 Q200 296 236 304 Q206 286 190 260 Z',f:'rgba(0,10,25,.25)',z:4.5,stage:2},
+ {d:ell(130,190,50,10),f:'rgba(255,255,255,.22)',z:2.6,stage:3}
 ]},
-{id:'dolphin',name:'Happy Dolphin',bg:'#C3ECF2',tex:{skin:[0,2,3,4]},steps:[
- {say:'Draw the dolphin body',talk:"Let's draw a happy dolphin! Draw a long, round body with a little round nose at the front.",parts:[{d:'M58 224 Q60 210 92 212 Q104 196 120 186 Q160 162 230 165 Q300 172 334 220 Q290 256 210 256 Q150 256 108 238 Q72 240 58 224 Z',f:'#6FA8DC',z:2}]},
- {say:'Draw the tummy',talk:"Draw the tummy under the body. A long curvy line from the nose to the back.",parts:[{d:'M108 238 Q150 256 210 256 Q262 256 300 236 Q248 244 200 241 Q146 239 112 228 Z',f:'#E3F2FF',z:3}]},
- {say:'Draw the back fin',talk:"Dolphins have a fin on their back. Draw a shape like a shark fin, curving back.",parts:[{d:'M196 168 Q212 122 248 116 Q234 146 246 172 Z',f:'#5A93C9',z:1}]},
- {say:'Draw the tail',talk:"Draw the tail at the back. It has two pointy ends, one up and one down.",parts:[{d:'M328 218 L374 182 Q362 216 380 258 Z',f:'#5A93C9',z:1}]},
- {say:'Draw the flipper',talk:"Draw a little flipper under the body. It helps the dolphin swim.",parts:[{d:'M190 250 Q192 288 226 294 Q214 272 222 252 Z',f:'#5A93C9',z:4}]},
- {say:'Draw the eye and smile',talk:"Draw a shiny eye, a big smile, and a little blow hole on top of the head.",parts:[...eye(130,204,7),{d:'M70 226 Q92 236 120 226',w:4,z:4},{d:'M158 176 Q164 170 170 176',w:4,z:4}]},
- {say:'Draw the water',talk:"Last step! Draw the waves and some water drops. Your dolphin is jumping! Wheee!",parts:[{d:'M30 318 Q75 298 120 318 Q165 298 210 318 Q255 298 300 318 Q340 300 372 316',w:5,s:'#2C8CE8',z:0},{d:'M64 270 Q56 284 64 292 Q72 284 64 270 Z',f:'#BFE6FF',z:0},{d:'M346 120 Q338 134 346 142 Q354 134 346 120 Z',f:'#BFE6FF',z:0},{d:'M80 120 Q72 134 80 142 Q88 134 80 120 Z',f:'#BFE6FF',z:0}]}
+{id:'dolphin',name:'Dolphin',bg:'#C7E2EA',tex:{skin:[0,2,3,4]},steps:[
+ {say:'Draw the dolphin body',talk:"Let's draw a real dolphin! Draw a long smooth body with a long thin nose at the front. Dolphins are shaped like a torpedo.",parts:[{d:'M40 214 Q50 204 92 202 Q120 180 180 170 Q260 160 320 196 Q340 208 344 214 Q300 236 230 244 Q160 250 110 232 Q70 228 40 214 Z',f:'#7C93A6',z:2}]},
+ {say:'Draw the light belly',talk:"Draw the light grey belly under the body. It starts at the nose and goes to the tail.",parts:[{d:'M48 216 Q100 236 170 240 Q240 240 300 222 Q240 230 180 228 Q120 226 92 212 Z',f:'#E2E8EC',z:3}]},
+ {say:'Draw the back fin',talk:"Draw the fin on the back. It curves backwards, like a wave.",parts:[{d:'M210 170 Q226 128 262 120 Q246 150 256 176 Z',f:'#6C8396',z:1}]},
+ {say:'Draw the tail',talk:"Draw the tail at the back. It's flat and wide, with two pointy ends.",parts:[{d:'M336 210 Q364 188 386 182 Q370 206 388 238 Q362 228 336 218 Z',f:'#6C8396',z:1}]},
+ {say:'Draw the flipper',talk:"Draw a flipper under the body, pointing back.",parts:[{d:'M170 238 Q168 272 198 286 Q190 262 198 242 Z',f:'#6C8396',z:4}]},
+ {say:'Draw the eye and mouth',talk:"Draw a small eye behind the mouth, and a long mouth line on the nose. It looks like the dolphin is smiling!",parts:[{d:ell(108,206,4,3),f:'#0E0E10',z:4},{d:'M42 214 Q70 220 100 214',w:2.5,z:4},{d:'M126 182 Q132 178 138 182',w:2.5,z:4}]},
+ {say:'Draw the waves',talk:"Last drawing step! Draw the waves under the dolphin, and some water drops flying.",parts:[{d:'M20 320 Q70 300 120 320 Q170 300 220 320 Q270 300 320 320 Q350 308 380 316',w:3,s:'#3E7FA8',z:0},{d:'M70 272 Q62 286 70 294 Q78 286 70 272 Z',f:'#E4F2F8',z:0},{d:'M350 120 Q342 134 350 142 Q358 134 350 120 Z',f:'#E4F2F8',z:0}]}
+],shade:[
+ {d:'M92 202 Q120 180 180 170 Q260 160 320 196 Q260 180 200 182 Q140 186 100 208 Z',f:'rgba(10,25,40,.3)',z:2.5,stage:2},
+ {d:'M180 260 Q186 278 198 286 Q190 268 194 252 Z',f:'rgba(10,25,40,.25)',z:4.5,stage:2},
+ {d:ell(160,186,50,8),f:'rgba(255,255,255,.35)',z:2.6,stage:3}
 ]},
-{id:'spider',name:'Silly Spider',bg:'#E4D8F7',tex:{fur:[0,1]},cast:[200,352,120,10],steps:[
- {say:'Draw the big body',talk:"Let's draw a silly spider! First, a big round body, like a balloon.",parts:[{d:ell(200,242,62,56),f:'#5B3A8C',z:2}]},
- {say:'Draw the head',talk:"Draw a smaller circle on top of the body. That's the head!",parts:[{d:circ(200,160,38),f:'#6C4BA0',z:3}]},
- {say:'Draw eight legs',talk:"Spiders have eight legs! Draw four bendy legs on this side, and four on that side. Count with me: one, two, three, four!",parts:[{d:'M150 214 Q105 175 85 205',w:9,s:'#3E2766',z:1},{d:'M146 236 Q100 226 75 255',w:9,s:'#3E2766',z:1},{d:'M150 258 Q110 276 95 310',w:9,s:'#3E2766',z:1},{d:'M164 280 Q140 312 140 340',w:9,s:'#3E2766',z:1},{d:'M250 214 Q295 175 315 205',w:9,s:'#3E2766',z:1},{d:'M254 236 Q300 226 325 255',w:9,s:'#3E2766',z:1},{d:'M250 258 Q290 276 305 310',w:9,s:'#3E2766',z:1},{d:'M236 280 Q260 312 260 340',w:9,s:'#3E2766',z:1}]},
- {say:'Give it cute shoes',talk:"Ha ha! Let's give the spider shoes. Draw a little circle at the end of every leg.",parts:[[85,205],[75,255],[95,310],[140,340],[315,205],[325,255],[305,310],[260,340]].map(([x,y])=>({d:circ(x,y,9),f:'#FF7BB5',z:1.2}))},
- {say:'Draw the big eyes',talk:"Draw two big white eyes on the head, and black dots inside. Look, it's looking at you!",parts:[{d:circ(186,152,13),f:'#fff',z:4},{d:circ(214,152,13),f:'#fff',z:4},...eye(188,155,6,5),...eye(212,155,6,5)]},
- {say:'Draw the smile',talk:"Draw a big happy smile under the eyes. And two pink cheeks!",parts:[{d:'M184 176 Q200 192 216 176',w:5,z:5},blush(170,174,6),blush(230,174,6)]},
- {say:'Add spots',talk:"Draw some round spots on the body. Big ones and small ones!",parts:[{d:circ(178,230,11),f:'#8E6BCB',z:2.1},{d:circ(222,252,13),f:'#8E6BCB',z:2.1},{d:circ(194,272,7),f:'#8E6BCB',z:2.1}]},
- {say:'Draw the web',talk:"Last step! Draw a line going up, that's the spider's string. And a web in the corner. You did it!",parts:[{d:'M200 122 L200 30',w:4,z:0},{d:'M20 20 L126 20',w:3,s:'#8C97AE',z:0},{d:'M20 20 L20 126',w:3,s:'#8C97AE',z:0},{d:'M20 20 L100 100',w:3,s:'#8C97AE',z:0},{d:'M54 20 Q48 48 20 54',w:3,s:'#8C97AE',z:0},{d:'M92 20 Q80 80 20 92',w:3,s:'#8C97AE',z:0}]}
+{id:'spider',name:'Jumping Spider',bg:'#E3DDD4',tex:{fur:[0,1]},cast:[200,352,130,10],steps:[
+ {say:'Draw the front body',talk:"Let's draw a real jumping spider! Spiders have two body parts. First, draw the front part, a wide oval.",parts:[{d:ell(200,178,40,36),f:'#4A362B',z:3}]},
+ {say:'Draw the back body',talk:"Now the back part. It's bigger and round, like an egg, under the front part.",parts:[{d:ell(200,264,58,64),f:'#3B2A22',z:2}]},
+ {say:'Draw four legs on the left',talk:"Spiders have eight legs, four on each side. Each leg bends, like an elbow. Draw four bendy legs on this side. One, two, three, four!",parts:['M168 166 L120 128 L92 148 L68 136','M164 182 L110 168 L80 196 L56 196','M166 196 L114 212 L92 252 L70 264','M172 208 L130 248 L118 296 L100 318'].map(d=>({d,w:7,s:'#2E2019',z:1}))},
+ {say:'Draw four legs on the right',talk:"Now four legs on the other side, just like a mirror. One, two, three, four!",parts:['M168 166 L120 128 L92 148 L68 136','M164 182 L110 168 L80 196 L56 196','M166 196 L114 212 L92 252 L70 264','M172 208 L130 248 L118 296 L100 318'].map(d=>({d:mirror(d),w:7,s:'#2E2019',z:1}))},
+ {say:'Draw the big eyes',talk:"Jumping spiders have two big shiny eyes in front, and smaller eyes on the sides. Draw them big and dark, with a white shine.",parts:[{d:circ(186,168,9),f:'#0E0B09',z:4},{d:circ(214,168,9),f:'#0E0B09',z:4},{d:circ(174,156,4),f:'#0E0B09',z:4},{d:circ(226,156,4),f:'#0E0B09',z:4},{d:circ(183,164,3),f:'#fff',w:0,z:4.1,t:0},{d:circ(211,164,3),f:'#fff',w:0,z:4.1,t:0},...both({d:'M188 208 Q186 222 194 226 L198 212 Z',f:'#2E2019',z:3.5})]},
+ {say:'Draw the pattern',talk:"Draw a pattern on the back part. A line down the middle, and arrow shapes, like little V's.",parts:[{d:'M200 222 L200 312',w:2.5,s:'#C99A5A',z:2.1},{d:'M178 248 L200 260 L222 248',w:3,s:'#C99A5A',z:2.1},{d:'M182 274 L200 286 L218 274',w:3,s:'#C99A5A',z:2.1},{d:'M188 298 L200 306 L212 298',w:3,s:'#C99A5A',z:2.1}]},
+ {say:'Draw the web line',talk:"Last drawing step! Draw a thin line going up from the spider. That's the silk it hangs on.",parts:[{d:'M200 142 L200 24',w:1.5,s:'#8C8C8C',z:0}]}
+],shade:[
+ {d:ell(224,286,30,40),f:'rgba(0,0,0,.3)',z:2.05,stage:2},
+ {d:ell(200,206,34,10),f:'rgba(0,0,0,.3)',z:2.9,stage:2},
+ {d:ell(182,240,16,22),f:'rgba(255,240,220,.22)',z:2.2,stage:3},
+ {d:ell(188,160,16,6),f:'rgba(255,240,220,.25)',z:3.1,stage:3}
 ]},
-{id:'hero',name:'Super Rakan',bg:'#FFE08A',cast:[200,364,90,8],steps:[
- {say:'Draw the head',talk:"Let's draw a superhero. It's Super Rakan! First, draw a round head.",parts:[{d:circ(200,150,52),f:'#F5C9A0',z:3}]},
- {say:'Draw the hair',talk:"Draw the hair on top of the head, with a little wave in the front.",parts:[{d:'M149 142 Q148 92 200 92 Q252 92 251 142 Q238 118 214 116 Q196 128 170 122 Q158 128 149 142 Z',f:'#3A2A20',z:4}]},
- {say:'Draw the hero mask',talk:"Every hero needs a mask! Draw a band across the eyes, and two eye holes.",parts:[{d:'M148 148 Q200 132 252 148 L248 172 Q200 160 152 172 Z',f:'#2C8CE8',z:5},{d:circ(180,156,8),f:'#fff',z:5.1},{d:circ(220,156,8),f:'#fff',z:5.1},...eye(181,157,4,5.2),...eye(219,157,4,5.2)]},
- {say:'Draw the ears and smile',talk:"Draw two little ears on the sides, and a big brave smile.",parts:[{d:circ(148,156,10),f:'#F5C9A0',z:2},{d:circ(252,156,10),f:'#F5C9A0',z:2},{d:'M184 182 Q200 196 216 182',w:5,z:5},blush(166,182,7),blush(234,182,7)]},
- {say:'Draw the body',talk:"Now draw the body under the head. It's like a box that gets a little wider at the bottom.",parts:[{d:'M158 212 Q200 198 242 212 L254 318 L146 318 Z',f:'#2C8CE8',z:2}]},
- {say:'Draw the red cape',talk:"Draw a big red cape behind the body. It flies in the wind! Swoosh!",parts:[{d:'M158 212 L104 345 Q150 330 200 345 Q250 330 296 345 L242 212 Z',f:'#E8423A',z:0}]},
- {say:'Draw the star and belt',talk:"Draw a big star on the chest. And a yellow belt around the middle.",parts:[{d:star(200,248,24,10),f:'#FFC93C',z:3},{d:'M150 282 L250 282 L251 296 L149 296 Z',f:'#FFC93C',z:3}]},
- {say:'Draw the strong arms',talk:"Draw two strong arms. One up high, and one out to the side. Make round fists at the end!",parts:[{d:'M160 222 Q124 238 112 200',w:16,s:'#2C8CE8',z:1},{d:'M240 222 Q280 232 300 206',w:16,s:'#2C8CE8',z:1},{d:circ(110,190,12),f:'#F5C9A0',z:1.2},{d:circ(304,198,12),f:'#F5C9A0',z:1.2}]},
- {say:'Draw the legs and boots',talk:"Last step! Draw two legs, and red boots at the bottom. Super Rakan is ready to save the day!",parts:[{d:'M174 318 L174 346',w:16,s:'#2C8CE8',z:1},{d:'M226 318 L226 346',w:16,s:'#2C8CE8',z:1},{d:ell(170,352,18,10),f:'#E8423A',z:1.2},{d:ell(230,352,18,10),f:'#E8423A',z:1.2}]}
+{id:'hero',name:'Super Rakan',bg:'#E8E2D6',cast:[200,374,95,8],steps:[
+ {say:'Draw the head',talk:"Let's draw Super Rakan, a real superhero! Real people have small heads compared to their bodies. Draw an oval head at the top, and a neck under it.",parts:[{d:ell(200,92,24,30),f:'#D9A57E',z:3},{d:'M192 118 L192 132 L208 132 L208 118',f:'#C8936C',z:2.5}]},
+ {say:'Draw the hair and mask',talk:"Draw the hair on top of the head. Then a mask across the eyes, with two small eye holes.",parts:[{d:'M176 88 Q174 58 200 58 Q228 58 224 88 Q216 70 200 72 Q186 70 176 88 Z',f:'#2B1E16',z:4},{d:'M176 86 Q200 79 224 86 L222 98 Q200 93 178 98 Z',f:'#1E5AA8',z:4.5},{d:ell(190,90,4.5,2.5),f:'#F4F4F4',z:4.6},{d:ell(210,90,4.5,2.5),f:'#F4F4F4',z:4.6},{d:'M194 108 Q200 112 206 108',w:2,z:4}]},
+ {say:'Draw the strong body',talk:"Draw the body. It's wide at the shoulders and gets thinner at the waist, like a triangle upside down.",parts:[{d:'M150 134 Q200 122 250 134 Q262 170 248 200 Q240 230 236 252 L164 252 Q160 230 152 200 Q138 170 150 134 Z',f:'#1E5AA8',z:2}]},
+ {say:'Draw the arms',talk:"Draw two strong arms. One hand is on his hip, and the other arm is up high with a fist. Super!",parts:[{d:'M150 138 Q128 150 126 190 Q128 214 152 228 L158 214 Q142 204 142 188 Q144 162 156 150 Z',f:'#1E5AA8',z:1.8},{d:'M250 138 Q272 120 282 84 L266 80 Q258 110 240 126 Z',f:'#1E5AA8',z:1.8},{d:circ(274,74,10),f:'#D9A57E',z:1.9},{d:circ(156,222,8),f:'#D9A57E',z:2.2}]},
+ {say:'Draw the belt and legs',talk:"Draw a belt at the waist. Then two long legs going down. Legs are long, as long as the body!",parts:[{d:'M164 252 L236 252 L236 264 L164 264 Z',f:'#D8A928',z:2.5},{d:'M164 264 L198 264 L194 302 L188 368 L170 368 L168 302 Z',f:'#1E5AA8',z:2},{d:'M202 264 L236 264 L232 302 L230 368 L212 368 L206 302 Z',f:'#1E5AA8',z:2}]},
+ {say:'Draw the boots and star',talk:"Draw red boots on the feet, and a gold star on the chest.",parts:[{d:'M168 332 L190 332 L188 368 L162 372 L165 356 Z',f:'#B3261E',z:2.6},{d:'M210 332 L232 332 L236 356 L238 372 L212 368 Z',f:'#B3261E',z:2.6},{d:star(200,172,18,7.5),f:'#D8A928',z:2.6}]},
+ {say:'Draw the cape',talk:"Last drawing step! Draw a long red cape behind him, flowing down to the ground. Swoosh!",parts:[{d:'M150 136 Q118 240 104 372 Q160 358 200 372 Q240 358 296 372 Q282 240 250 136 Z',f:'#B3261E',z:0}]}
+],shade:[
+ {d:'M250 134 Q262 170 248 200 Q240 230 236 252 L222 252 Q232 210 236 170 Q240 146 250 134 Z',f:'rgba(0,10,40,.3)',z:2.1,stage:2},
+ {d:'M140 250 Q130 310 126 362',f:'none',s:'rgba(60,0,0,.3)',w:5,z:0.1,stage:2},{d:'M268 250 Q276 310 280 362',f:'none',s:'rgba(60,0,0,.3)',w:5,z:0.1,stage:2},
+ {d:'M226 270 L222 366 L230 366 L232 302 Z',f:'rgba(0,10,40,.3)',z:2.1,stage:2},
+ {d:ell(212,98,10,18),f:'rgba(80,30,0,.2)',z:3.1,stage:2},
+ {d:ell(180,150,22,10),f:'rgba(255,255,255,.25)',z:2.7,stage:3},
+ {d:ell(192,80,7,10),f:'rgba(255,240,220,.3)',z:3.2,stage:3}
 ]}
 ];
+
 /* attach step index to every part */
-LESSONS.forEach(l=>{let k=0;l.steps.forEach((s,si)=>s.parts.forEach(p=>{p.si=si;p.k=k++;if(p.w===undefined)p.w=6}))});
+LESSONS.forEach(l=>{let k=0;l.steps.forEach((s,si)=>s.parts.forEach(p=>{p.si=si;p.k=k++;if(p.w===undefined)p.w=3.5}))});
+LESSONS.forEach(l=>(l.shade||[]).forEach((q,i)=>{q.k=1000+i;q.si=-1;q.t=0;if(q.w===undefined)q.w=0}));
 const allParts=l=>l.steps.flatMap(s=>s.parts);
 const byZ=arr=>arr.slice().sort((a,b)=>(a.z||0)-(b.z||0)||a.k-b.k);
 
@@ -344,39 +414,58 @@ const TEX={
  leaf:'<pattern id="tx-leaf" width="14" height="12" patternUnits="userSpaceOnUse"><path d="M2 9q3-6 6-1M8 4q3-5 5 0" fill="none" stroke="#123D1A" stroke-opacity=".3" stroke-width="1.3" stroke-linecap="round"/></pattern>',
  skin:'<pattern id="tx-skin" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="#00204F" fill-opacity=".16"/><circle cx="6.5" cy="6" r=".7" fill="#00204F" fill-opacity=".12"/></pattern>'
 };
-const DEFS=`<defs><radialGradient id="sh" cx=".36" cy=".3" r=".92"><stop offset=".42" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".52"/></radialGradient><radialGradient id="hl" cx=".3" cy=".24" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><radialGradient id="cast" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#1A1A2E" stop-opacity=".38"/><stop offset="1" stop-color="#1A1A2E" stop-opacity="0"/></radialGradient><linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".06"/></linearGradient>${Object.values(TEX).join('')}</defs>`;
+const DEFS=`<defs><radialGradient id="sh" cx=".36" cy=".3" r=".92"><stop offset=".42" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient><radialGradient id="hl" cx=".3" cy=".24" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><radialGradient id="cast" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#1A1A2E" stop-opacity=".38"/><stop offset="1" stop-color="#1A1A2E" stop-opacity="0"/></radialGradient><linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".06"/></linearGradient>${Object.values(TEX).join('')}</defs>`;
+let MODE=(()=>{try{return localStorage.getItem('rk_mode')||'color'}catch(e){return'color'}})();
+function toGray(c){
+  if(!c||c==='none'||c.startsWith('url'))return c;
+  let m=c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if(m){let h=m[1];if(h.length===3)h=h.split('').map(x=>x+x).join('');const n=parseInt(h,16),v=Math.round(.3*(n>>16&255)+.59*(n>>8&255)+.11*(n&255));const q=v.toString(16).padStart(2,'0');return'#'+q+q+q}
+  m=c.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/i);
+  if(m){const v=Math.round(.3*m[1]+.59*m[2]+.11*m[3]);return`rgba(${v},${v},${v},${m[4]===undefined?1:m[4]})`}
+  return c;
+}
 function darken(hex,f){const n=parseInt(hex.slice(1),16);const c=[n>>16&255,n>>8&255,n&255].map(v=>Math.round(v*(1-f)));return'#'+c.map(v=>v.toString(16).padStart(2,'0')).join('')}
 function texFor(l,p){if(!l.tex||!p.f||p.f===INK||p.t===0)return null;for(const k in l.tex)if(l.tex[k].includes(p.si))return k;return null}
-function artSVG(l,stage){
-  if(stage===undefined)stage=4;
+function artSVG(l,stage,mode){
+  if(stage===undefined)stage=4;mode=mode||MODE;
+  const G=mode==='pencil'?toGray:(c=>c);
   let g='';
   if(stage>=4&&l.cast){const [cx,cy,rx,ry]=l.cast;g+=`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#cast)"/>`}
-  for(const p of byZ(allParts(l))){
-    if(stage===0){if(p.t===0)continue;g+=`<path d="${p.d}" fill="${p.f?'#fff':'none'}" stroke="#6A6F7A" stroke-width="${p.w===0?2:Math.min(p.w,3.5)}"/>`;continue}
+  const items=stage===0?allParts(l):allParts(l).concat((l.shade||[]).filter(q=>stage>=q.stage));
+  for(const p of byZ(items)){
+    if(stage===0){if(p.t===0)continue;g+=`<path d="${p.d}" fill="${p.f?'#fff':'none'}" stroke="#6A6F7A" stroke-width="${p.w===0?2:Math.min(p.w,3)}"/>`;continue}
+    if(p.si===-1){g+=`<path d="${p.d}" fill="${G(p.f||'none')}" stroke="${p.s?G(p.s):'none'}" stroke-width="${p.w||0}"/>`;continue}
     const filled=p.f&&p.t!==0;
-    if(p.f)g+=`<path d="${p.d}" fill="${p.f}"/>`;
+    if(p.f)g+=`<path d="${p.d}" fill="${G(p.f)}"/>`;
     if(filled){
       const tx=stage>=4&&texFor(l,p);if(tx)g+=`<path d="${p.d}" fill="url(#tx-${tx})"/>`;
       if(stage>=2)g+=`<path d="${p.d}" fill="url(#sh)"/>`;
       if(stage>=3)g+=`<path d="${p.d}" fill="url(#hl)"/>`;
     }
     if(p.w!==0){
-      const line=p.s||(p.f&&p.f!==INK&&p.f.toLowerCase()!=='#fff'&&p.f.toLowerCase()!=='#ffffff'?darken(p.f,.5):(p.f?'#7B8494':INK));
-      const lw=p.f?Math.min(p.w,3):p.w;
-      g+=`<path d="${p.d}" fill="none" stroke="${line}" stroke-width="${lw}"/>`;
+      const line=p.s||(p.f&&/^#/.test(p.f)&&p.f!==INK&&p.f.toLowerCase()!=='#fff'&&p.f.toLowerCase()!=='#ffffff'?darken(p.f,.5):(p.f?'#7B8494':'#2A2420'));
+      const lw=p.f?Math.min(p.w,2.5):p.w;
+      g+=`<path d="${p.d}" fill="none" stroke="${G(line)}" stroke-width="${lw}"/>`;
     }
   }
-  return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">${DEFS}<rect width="400" height="400" fill="${l.bg}"/><rect width="400" height="400" fill="url(#bgG)"/><g stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
+  const bg=mode==='pencil'?'#EEEDE8':l.bg;
+  return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">${DEFS}<rect width="400" height="400" fill="${bg}"/><rect width="400" height="400" fill="url(#bgG)"/><g stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
 }
-const SHADE_STEPS=[
- {say:'Color it in',talk:"Now let's color it with real colors. Color softly, all in the same direction, just like the picture."},
- {say:'Add the shadows',talk:"Look! The light comes from the top left, like the sun. So the bottom right side is darker. Press a little harder there to make a shadow."},
- {say:'Add the shiny light',talk:"Now the light. At the top left, make it lighter and shiny. On paper, leave a little white spot there."},
- {say:'Add texture and ground shadow',talk:''}
-];
+const SHADE_C=[
+ {say:'Color it in',talk:"Now let's color it with real colors. Use your colored pencils softly, all in the same direction, just like the picture."},
+ {say:'Add the shadows',talk:"Look! The light comes from the top left, like the sun. So the bottom right side is darker. Press harder there, or use a darker color, to make shadows."},
+ {say:'Add the light',talk:"Now the light. At the top left, make it lighter and shiny. Leave a little white spot there, or use a white pencil."},
+ {say:'Add texture and ground shadow',talk:''}];
+const SHADE_P=[
+ {say:'Shade it softly',talk:"Now hold your pencil on its side, and shade everything with light grey. Press very lightly, like a feather. Make the dark parts a little darker."},
+ {say:'Add the dark shadows',talk:"The light comes from the top left, like the sun. So the bottom right side is in shadow. Press harder there to make it dark. Black parts are the darkest of all!"},
+ {say:'Add the light',talk:"Now use your eraser to make light spots at the top left, where the sun shines. Or leave the paper white there."},
+ {say:'Add texture and ground shadow',talk:''}];
+const SH=()=>MODE==='pencil'?SHADE_P:SHADE_C;
 const TEXTALK={fur:"Now draw lots of tiny short lines, all going the same way, for soft fur. ",scale:"Now draw little curves, like tiny rainbows, for the fish scales. ",bark:"Now draw wiggly lines on the trunk for the bark. ",leaf:"Draw little leaf shapes in the leaves. ",skin:"Now add tiny dots to make the skin look smooth and wet. "};
-function finalTalk(l){let t='';if(l.tex)for(const k in l.tex)t+=TEXTALK[k]||'';if(l.cast)t+="Then draw a soft grey shadow on the ground under it. ";return t+"Wow! Now it looks real!"}
+function finalTalk(l){let t='';if(l.tex)for(const k in l.tex)t+=TEXTALK[k]||'';if(l.cast)t+="Then draw a soft grey shadow on the ground under it. ";if(MODE==='pencil')t+="Then rub very gently with a tissue to blend the grey. ";return t+"Wow! Now it looks real!"}
 
+const GREYS=['#1E1E1E','#4A4A4A','#777777','#A3A3A3','#CFCFCF','#FFFFFF'];
 const COLORS=['#1F2A44','#E8423A','#FF7A30','#FFC93C','#2FA866','#2C8CE8','#8E5BD9','#FF7BB5','#B9783F','#FFFFFF'];
 const SIZES=[6,12,22];
 
@@ -386,9 +475,12 @@ let stars=store.get('rk_stars',0), doneSet=store.get('rk_done',{});
 /* ---------- HOME ---------- */
 function renderHome(){
   $('starCount').textContent=stars;
+  $('mPencil').classList.toggle('on',MODE==='pencil');$('mColor').classList.toggle('on',MODE==='color');
   $('lessonGrid').innerHTML=LESSONS.map(l=>`<button class="card" data-id="${l.id}">${artSVG(l)}<b>${l.name}</b><small class="${doneSet[l.id]?'done-badge':''}">${doneSet[l.id]?'Done ★':l.steps.length+' steps'}</small></button>`).join('');
   $('lessonGrid').querySelectorAll('.card').forEach(b=>b.onclick=()=>{unlockAudio();openChooser(LESSONS.find(l=>l.id===b.dataset.id))});
 }
+function setMode(m){MODE=m;try{localStorage.setItem('rk_mode',m)}catch(e){}renderHome();say(m==='pencil'?'Pencil drawing! Grey and black, like a real artist.':'Color drawing! Real colors.')}
+$('mPencil').onclick=()=>{unlockAudio();setMode('pencil')};$('mColor').onclick=()=>{unlockAudio();setMode('color')};
 function show(id){['home','studio','paperMode','gallery'].forEach(s=>$(s).hidden=s!==id);$('chooser').hidden=true}
 
 /* ---------- SOUND + VOICE ---------- */
@@ -452,7 +544,8 @@ let lesson=null, step=0, phase='free', tool='pen', color=COLORS[0], sizeI=1, und
 let demo=null; /* {start, parts:[{pts,len}]} "watch me" pencil animation */
 
 function buildSwatches(){
-  $('swatches').innerHTML=COLORS.map(c=>`<button class="sw${c===color?' sel':''}" style="background:${c}" data-c="${c}" aria-label="color"></button>`).join('');
+  const PAL=(phase==='color'&&MODE==='pencil')?GREYS:COLORS;
+  $('swatches').innerHTML=PAL.map(c=>`<button class="sw${c===color?' sel':''}" style="background:${c}" data-c="${c}" aria-label="color"></button>`).join('');
   $('swatches').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{color=b.dataset.c;if(tool!=='pen'&&tool!=='fill')setTool('pen');buildSwatches()});
 }
 const TOOLBTN={pen:'tPen',fill:'tFill',erase:'tErase',shade:'tShade',light:'tLight'};
@@ -510,10 +603,10 @@ function startColoring(){
   cs=0;colorStep();redrawGuide();
 }
 function colorStep(){
-  const st=SHADE_STEPS[cs];
+  const st=SH()[cs];
   $('ref').innerHTML=artSVG(lesson,cs+1);$('ref').hidden=false;
   $('tFill').hidden=false;$('tShade').hidden=cs<1;$('tLight').hidden=cs<2;
-  if(cs===0){setTool('fill');color=COLORS[3]}else if(cs===1)setTool('shade');else if(cs===2)setTool('light');else{setTool('pen');sizeI=0;color='#6B4423';$('sizeDot').style.width='8px';$('sizeDot').style.height='8px'}
+  if(cs===0){setTool('fill');color=MODE==='pencil'?GREYS[3]:COLORS[3]}else if(cs===1)setTool('shade');else if(cs===2)setTool('light');else{setTool('pen');sizeI=0;color=MODE==='pencil'?'#3A3A3A':'#6B4423';$('sizeDot').style.width='8px';$('sizeDot').style.height='8px'}
   buildSwatches();
   $('hint').textContent=st.say;
   const extra=cs===0?" Look at the little picture. Pick a color, then tap inside a shape to paint it.":cs===1?" Use the shadow brush, the half black circle.":cs===2?" Use the light brush, the little sun.":"";
@@ -685,7 +778,7 @@ function pmText(i){
   const n=pmL.steps.length;
   if(i===0)return{say:'Get your paper ready',talk:"Let's draw a "+pmL.name+" on paper! Get a paper, a pencil, and your crayons. Draw nice and big! Tap the green button when you are ready."};
   if(i<=n){const s=pmL.steps[i-1];return{say:s.say,talk:s.talk+" Watch me, then draw it on your paper. Tap I drew it when you finish."}}
-  if(i>n&&i<=n+4){const c=i-n-1,st=SHADE_STEPS[c];return{say:st.say,talk:(c===3?finalTalk(pmL):st.talk+(c===0?" Use your colored pencils. Take your time!":""))}}
+  if(i>n&&i<=n+4){const c=i-n-1,st=SH()[c];return{say:st.say,talk:(c===3?finalTalk(pmL):st.talk+(c===0?" Use your colored pencils. Take your time!":""))}}
   return{say:'You did it!',talk:"You did it, Rakan! Amazing! Three stars for you! Take a photo of your drawing to keep it."};
 }
 function renderPM(){
