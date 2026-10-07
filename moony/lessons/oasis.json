@@ -1,0 +1,94 @@
+{
+  "id": "oasis",
+  "title": "Palms around quiet water",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Build an oasis from masses before describing leaves.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "oasis",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Group the pale dunes, midtone water and dark palms. Notice that palm crowns differ in angle and size.",
+      "talk": "Study the reference. Group the pale dunes, midtone water and dark palms. Notice that palm crowns differ in angle and size. Pause the narration and practise on paper. Before continuing, ask yourself: Are there three clear value families?",
+      "check": "Are there three clear value families?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Place the water ellipse and three trunks of different heights. Keep the horizon level.",
+      "talk": "Light block-in. Place the water ellipse and three trunks of different heights. Keep the horizon level. Pause the narration and practise on paper. Before continuing, ask yourself: Is the main palm away from the exact centre?",
+      "check": "Is the main palm away from the exact centre?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Check the crown spread relative to each trunk. Mark fronds as broad directional arcs first.",
+      "talk": "Refine the construction. Check the crown spread relative to each trunk. Mark fronds as broad directional arcs first. Pause the narration and practise on paper. Before continuing, ask yourself: Do the palms have different silhouettes?",
+      "check": "Do the palms have different silhouettes?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Map the palms as connected dark masses against lighter sand. Keep the water a middle value.",
+      "talk": "Three-value map. Map the palms as connected dark masses against lighter sand. Keep the water a middle value. Pause the narration and practise on paper. Before continuing, ask yourself: Can you recognise the oasis without individual leaves?",
+      "check": "Can you recognise the oasis without individual leaves?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer the shaded dunes and the palm trunks. Keep distant palms lower in contrast.",
+      "talk": "Five values and layers. Layer the shaded dunes and the palm trunks. Keep distant palms lower in contrast. Pause the narration and practise on paper. Before continuing, ask yourself: Does the nearest palm have the strongest darks?",
+      "check": "Does the nearest palm have the strongest darks?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften broad water and sand passages, leaving the main crown firmer.",
+      "talk": "Selective blending. Soften broad water and sand passages, leaving the main crown firmer. Pause the narration and practise on paper. Before continuing, ask yourself: Are foreground and background edges different?",
+      "check": "Are foreground and background edges different?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a few narrow water lights and a restrained light on the trunk.",
+      "talk": "Lift the lights. Lift a few narrow water lights and a restrained light on the trunk. Pause the narration and practise on paper. Before continuing, ask yourself: Are the water marks horizontal?",
+      "check": "Are the water marks horizontal?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Split only selected fronds into fine leaflets. Avoid drawing every leaflet with equal contrast.",
+      "talk": "Texture and detail. Split only selected fronds into fine leaflets. Avoid drawing every leaflet with equal contrast. Pause the narration and practise on paper. Before continuing, ask yourself: Does the crown remain one readable mass?",
+      "check": "Does the crown remain one readable mass?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Add a contact dark at the main palm and soften secondary foliage.",
+      "talk": "Final accents and edges. Add a contact dark at the main palm and soften secondary foliage. Pause the narration and practise on paper. Before continuing, ask yourself: Is the focal palm clear without excessive detail?",
+      "check": "Is the focal palm clear without excessive detail?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

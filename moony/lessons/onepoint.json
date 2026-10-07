@@ -1,0 +1,94 @@
+{
+  "id": "onepoint",
+  "title": "One point, measurable depth",
+  "group": "Perspective",
+  "minutes": 50,
+  "goal": "Use a horizon, one vanishing point and proportional measurement.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "onepoint",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study the corridor: lines receding straight ahead meet at one vanishing point. The horizon represents eye level.",
+      "talk": "Study the reference. Study the corridor: lines receding straight ahead meet at one vanishing point. The horizon represents eye level. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify which edges actually recede?",
+      "check": "Can you identify which edges actually recede?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Draw the horizon and place one vanishing point. Hold a pencil at a fixed arm\u2019s length to compare observed height-to-width ratios, not centimetres.",
+      "talk": "Light block-in. Draw the horizon and place one vanishing point. Hold a pencil at a fixed arm\u2019s length to compare observed height-to-width ratios, not centimetres. Pause the narration and practise on paper. Before continuing, ask yourself: Have you kept your viewing position fixed?",
+      "check": "Have you kept your viewing position fixed?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Draw the nearest rectangular opening, then connect its depth edges to the vanishing point. Keep verticals vertical.",
+      "talk": "Refine the construction. Draw the nearest rectangular opening, then connect its depth edges to the vanishing point. Keep verticals vertical. Pause the narration and practise on paper. Before continuing, ask yourself: Do all parallel depth edges share the same vanishing point?",
+      "check": "Do all parallel depth edges share the same vanishing point?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Assign light to the floor, middle to one wall and dark to the other.",
+      "talk": "Three-value map. Assign light to the floor, middle to one wall and dark to the other. Pause the narration and practise on paper. Before continuing, ask yourself: Does the corridor read without detail?",
+      "check": "Does the corridor read without detail?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Add repeated floor divisions with shrinking gaps. For exact equal spacing, use a diagonal construction; the illustration is only a depth study.",
+      "talk": "Five values and layers. Add repeated floor divisions with shrinking gaps. For exact equal spacing, use a diagonal construction; the illustration is only a depth study. Pause the narration and practise on paper. Before continuing, ask yourself: Do near gaps appear larger than far ones?",
+      "check": "Do near gaps appear larger than far ones?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften distant tones slightly and maintain stronger near contrasts.",
+      "talk": "Selective blending. Soften distant tones slightly and maintain stronger near contrasts. Pause the narration and practise on paper. Before continuing, ask yourself: Is the far end quieter?",
+      "check": "Is the far end quieter?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a light passage on the floor without changing the perspective lines.",
+      "talk": "Lift the lights. Lift a light passage on the floor without changing the perspective lines. Pause the narration and practise on paper. Before continuing, ask yourself: Does the light remain on the floor plane?",
+      "check": "Does the light remain on the floor plane?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add a few vertical wall divisions. Check them against the horizon and vanishing point.",
+      "talk": "Texture and detail. Add a few vertical wall divisions. Check them against the horizon and vanishing point. Pause the narration and practise on paper. Before continuing, ask yourself: Do the divisions fit the same space?",
+      "check": "Do the divisions fit the same space?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Remove excess construction lines. Repeat a tiny room from observation, measuring angles before details.",
+      "talk": "Final accents and edges. Remove excess construction lines. Repeat a tiny room from observation, measuring angles before details. Pause the narration and practise on paper. Before continuing, ask yourself: Can you explain the depth without relying on texture?",
+      "check": "Can you explain the depth without relying on texture?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

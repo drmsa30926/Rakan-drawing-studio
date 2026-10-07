@@ -1,0 +1,94 @@
+{
+  "id": "village",
+  "title": "A stone house in the valley",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Combine perspective, terrain and restrained texture.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "village",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study the roof, two walls and surrounding valley. The house is the focal area; distant hills remain quiet.",
+      "talk": "Study the reference. Study the roof, two walls and surrounding valley. The house is the focal area; distant hills remain quiet. Pause the narration and practise on paper. Before continuing, ask yourself: Can you rank roof, walls and hills by value?",
+      "check": "Can you rank roof, walls and hills by value?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Mark the horizon, house corner and broad valley slopes. Compare house height with the nearby tree.",
+      "talk": "Light block-in. Mark the horizon, house corner and broad valley slopes. Compare house height with the nearby tree. Pause the narration and practise on paper. Before continuing, ask yourself: Is the house proportionate to the landscape?",
+      "check": "Is the house proportionate to the landscape?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Align receding roof and wall edges to consistent vanishing directions. Keep door sides vertical.",
+      "talk": "Refine the construction. Align receding roof and wall edges to consistent vanishing directions. Keep door sides vertical. Pause the narration and practise on paper. Before continuing, ask yourself: Does the roof sit correctly on the walls?",
+      "check": "Does the roof sit correctly on the walls?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Map the dark roof, lighter wall and shadow wall. Keep hills in lighter middle values.",
+      "talk": "Three-value map. Map the dark roof, lighter wall and shadow wall. Keep hills in lighter middle values. Pause the narration and practise on paper. Before continuing, ask yourself: Does the building read without stone details?",
+      "check": "Does the building read without stone details?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer roof and shadow wall. Add a grounded contact shadow where the house meets terrain.",
+      "talk": "Five values and layers. Layer roof and shadow wall. Add a grounded contact shadow where the house meets terrain. Pause the narration and practise on paper. Before continuing, ask yourself: Is the building seated rather than floating?",
+      "check": "Is the building seated rather than floating?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften distant hills. Blend wall patches gently without rounding the architectural corners.",
+      "talk": "Selective blending. Soften distant hills. Blend wall patches gently without rounding the architectural corners. Pause the narration and practise on paper. Before continuing, ask yourself: Are building edges firmer than distant hills?",
+      "check": "Are building edges firmer than distant hills?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a restrained light on the sunlit wall and path.",
+      "talk": "Lift the lights. Lift a restrained light on the sunlit wall and path. Pause the narration and practise on paper. Before continuing, ask yourself: Does the light agree with the roof\u2019s shadow?",
+      "check": "Does the light agree with the roof\u2019s shadow?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Suggest only a few stone courses, following the wall\u2019s perspective. Make the doorway the strongest small dark.",
+      "talk": "Texture and detail. Suggest only a few stone courses, following the wall\u2019s perspective. Make the doorway the strongest small dark. Pause the narration and practise on paper. Before continuing, ask yourself: Do masonry marks follow the wall plane?",
+      "check": "Do masonry marks follow the wall plane?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Sharpen a short roof edge and soften secondary vegetation. Review the whole valley before adding more stones.",
+      "talk": "Final accents and edges. Sharpen a short roof edge and soften secondary vegetation. Review the whole valley before adding more stones. Pause the narration and practise on paper. Before continuing, ask yourself: Is the house still the visual focus?",
+      "check": "Is the house still the visual focus?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

@@ -1,0 +1,94 @@
+{
+  "id": "cube",
+  "title": "Planes of a cube",
+  "group": "Form & light",
+  "minutes": 40,
+  "goal": "Construct the form, then explain it with one consistent light source.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "cube",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Compare the three visible planes. Under this light the top is lightest, the left middle, and the right darkest.",
+      "talk": "Study the reference. Compare the three visible planes. Under this light the top is lightest, the left middle, and the right darkest. Pause the narration and practise on paper. Before continuing, ask yourself: Can you rank the planes before drawing?",
+      "check": "Can you rank the planes before drawing?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Place the nearest vertical edge and the top corners lightly. Use a real box to check the angles.",
+      "talk": "Light block-in. Place the nearest vertical edge and the top corners lightly. Use a real box to check the angles. Pause the narration and practise on paper. Before continuing, ask yourself: Do the edges converge consistently?",
+      "check": "Do the edges converge consistently?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Connect the back corners and check proportions. Do not force all receding edges to remain parallel.",
+      "talk": "Refine the construction. Connect the back corners and check proportions. Do not force all receding edges to remain parallel. Pause the narration and practise on paper. Before continuing, ask yourself: Does the box feel solid rather than twisted?",
+      "check": "Does the box feel solid rather than twisted?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Assign one value to each major plane. Reserve paper white for the brightest small area.",
+      "talk": "Three-value map. Assign one value to each major plane. Reserve paper white for the brightest small area. Pause the narration and practise on paper. Before continuing, ask yourself: Are the plane values clearly distinct?",
+      "check": "Are the plane values clearly distinct?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer each plane evenly, keeping a consistent light direction. Add a darker cast shadow on the table.",
+      "talk": "Five values and layers. Layer each plane evenly, keeping a consistent light direction. Add a darker cast shadow on the table. Pause the narration and practise on paper. Before continuing, ask yourself: Does the shadow sit on the supporting surface?",
+      "check": "Does the shadow sit on the supporting surface?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend only streaky patches within a plane. Do not blend across a sharp corner.",
+      "talk": "Selective blending. Blend only streaky patches within a plane. Do not blend across a sharp corner. Pause the narration and practise on paper. Before continuing, ask yourself: Are corners still crisp?",
+      "check": "Are corners still crisp?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a restrained light on the top plane if needed. Avoid a white outline around every edge.",
+      "talk": "Lift the lights. Lift a restrained light on the top plane if needed. Avoid a white outline around every edge. Pause the narration and practise on paper. Before continuing, ask yourself: Is the top a plane rather than a glowing border?",
+      "check": "Is the top a plane rather than a glowing border?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add a few surface marks only if visible on your real box. Keep them weaker than the plane contrast.",
+      "talk": "Texture and detail. Add a few surface marks only if visible on your real box. Keep them weaker than the plane contrast. Pause the narration and practise on paper. Before continuing, ask yourself: Does texture remain subordinate?",
+      "check": "Does texture remain subordinate?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Deepen contact darks and soften the distant cast-shadow edge. Remove unnecessary construction lines.",
+      "talk": "Final accents and edges. Deepen contact darks and soften the distant cast-shadow edge. Remove unnecessary construction lines. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cube read with minimal outlining?",
+      "check": "Does the cube read with minimal outlining?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

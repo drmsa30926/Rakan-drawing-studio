@@ -1,0 +1,94 @@
+{
+  "id": "cone",
+  "title": "A cone and its shadow",
+  "group": "Form & light",
+  "minutes": 40,
+  "goal": "Construct the form, then explain it with one consistent light source.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "cone",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study the apex, curved base and shadow wedge. Light comes from above left.",
+      "talk": "Study the reference. Study the apex, curved base and shadow wedge. Light comes from above left. Pause the narration and practise on paper. Before continuing, ask yourself: Can you locate the axis from apex to base centre?",
+      "check": "Can you locate the axis from apex to base centre?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Mark a vertical axis, apex and base width with very light strokes.",
+      "talk": "Light block-in. Mark a vertical axis, apex and base width with very light strokes. Pause the narration and practise on paper. Before continuing, ask yourself: Is the apex over the base centre?",
+      "check": "Is the apex over the base centre?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Connect the sloping sides to a curved elliptical base. Avoid a pointed or flat triangular base.",
+      "talk": "Refine the construction. Connect the sloping sides to a curved elliptical base. Avoid a pointed or flat triangular base. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cone have volume rather than look like a triangle?",
+      "check": "Does the cone have volume rather than look like a triangle?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Group the broad lit plane, turning halftone and dark side. Place the cast shadow on the ground.",
+      "talk": "Three-value map. Group the broad lit plane, turning halftone and dark side. Place the cast shadow on the ground. Pause the narration and practise on paper. Before continuing, ask yourself: Are the light and shadow families separate?",
+      "check": "Are the light and shadow families separate?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer strokes in the direction from apex toward base. Keep transitions aligned to the turning surface.",
+      "talk": "Five values and layers. Layer strokes in the direction from apex toward base. Keep transitions aligned to the turning surface. Pause the narration and practise on paper. Before continuing, ask yourself: Do strokes follow the cone\u2019s slope?",
+      "check": "Do strokes follow the cone\u2019s slope?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend the broad transition selectively. Keep the apex and selected silhouette clear.",
+      "talk": "Selective blending. Blend the broad transition selectively. Keep the apex and selected silhouette clear. Pause the narration and practise on paper. Before continuing, ask yourself: Have you retained the cone\u2019s structure?",
+      "check": "Have you retained the cone\u2019s structure?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a narrow soft light on the lit face. Do not outline the whole cone in white.",
+      "talk": "Lift the lights. Lift a narrow soft light on the lit face. Do not outline the whole cone in white. Pause the narration and practise on paper. Before continuing, ask yourself: Is the lift contained inside the light family?",
+      "check": "Is the lift contained inside the light family?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Restore a few directional marks and refine the base curve. Leave the distant cast shadow quieter.",
+      "talk": "Texture and detail. Restore a few directional marks and refine the base curve. Leave the distant cast shadow quieter. Pause the narration and practise on paper. Before continuing, ask yourself: Does the base sit on the table?",
+      "check": "Does the base sit on the table?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Add the contact dark and compare both side angles. Stop before every edge becomes equally sharp.",
+      "talk": "Final accents and edges. Add the contact dark and compare both side angles. Stop before every edge becomes equally sharp. Pause the narration and practise on paper. Before continuing, ask yourself: Is the apex clear without a heavy outline?",
+      "check": "Is the apex clear without a heavy outline?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

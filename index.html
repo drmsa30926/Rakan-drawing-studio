@@ -129,6 +129,7 @@ h2{font-family:var(--display);font-size:22px;margin:0}
 .empty{background:var(--paper);border-radius:20px;padding:28px 20px;text-align:center;color:var(--ink-soft);font-weight:800;line-height:1.5}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="moony/style.css">
 </head><body>
 
 
@@ -859,11 +860,12 @@ $('galBack').onclick=goHome;
 $('goFree').onclick=()=>{unlockAudio();openFree()};
 
 
-/* auto-update: if a newer version is published, reload once with a fresh URL */
-const APP_VERSION='1791383045';
-try{fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APP_VERSION){const u=new URL(location.href);if(u.searchParams.get('v')!==j.v){u.searchParams.set('v',j.v);location.replace(u.toString())}}}).catch(()=>{})}catch(e){}
+/* Small public bridge: existing kids lesson and storage logic stay in their closure. */
+window.RakanBridge={home:goHome,hush,speak(text){unlockAudio();const wasOn=voiceOn;voiceOn=true;say(text);voiceOn=wasOn}};
 renderHome();
 })();
 </script>
 
+<script type="module" src="moony/app.js"></script>
+<script src="updates.js" defer></script>
 </body></html>

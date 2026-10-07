@@ -1,0 +1,94 @@
+{
+  "id": "cliffs",
+  "title": "Sea cliffs and moving water",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Separate angular rock from horizontal water.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "cliffs",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study the heavy cliff mass against quieter sea. Identify the brightest foam and the deepest crevices.",
+      "talk": "Study the reference. Study the heavy cliff mass against quieter sea. Identify the brightest foam and the deepest crevices. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify the main cliff silhouette?",
+      "check": "Can you identify the main cliff silhouette?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Mark a level horizon and the cliff\u2019s major angles. Reserve sea space beside it.",
+      "talk": "Light block-in. Mark a level horizon and the cliff\u2019s major angles. Reserve sea space beside it. Pause the narration and practise on paper. Before continuing, ask yourself: Is the horizon level?",
+      "check": "Is the horizon level?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Break the cliff into broad planes. Place the shoreline where land actually meets water.",
+      "talk": "Refine the construction. Break the cliff into broad planes. Place the shoreline where land actually meets water. Pause the narration and practise on paper. Before continuing, ask yourself: Do the planes belong to one rock mass?",
+      "check": "Do the planes belong to one rock mass?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Map pale sea, middle rock and dark crevices. Reserve paper for the brightest foam.",
+      "talk": "Three-value map. Map pale sea, middle rock and dark crevices. Reserve paper for the brightest foam. Pause the narration and practise on paper. Before continuing, ask yourself: Are the three masses readable?",
+      "check": "Are the three masses readable?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer rock planes with descending strokes and water with flatter marks. Use the darkest pencil only in selected cracks.",
+      "talk": "Five values and layers. Layer rock planes with descending strokes and water with flatter marks. Use the darkest pencil only in selected cracks. Pause the narration and practise on paper. Before continuing, ask yourself: Are rock and water marks different?",
+      "check": "Are rock and water marks different?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend the distant sea and a few quiet rock planes. Keep nearer fracture edges firmer.",
+      "talk": "Selective blending. Blend the distant sea and a few quiet rock planes. Keep nearer fracture edges firmer. Pause the narration and practise on paper. Before continuing, ask yourself: Does blending preserve the material contrast?",
+      "check": "Does blending preserve the material contrast?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift broken foam shapes near the base. Avoid a continuous white outline around the cliff.",
+      "talk": "Lift the lights. Lift broken foam shapes near the base. Avoid a continuous white outline around the cliff. Pause the narration and practise on paper. Before continuing, ask yourself: Does the foam look irregular?",
+      "check": "Does the foam look irregular?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add sparse cracks following rock structure and shallow curved wave marks on the sea.",
+      "talk": "Texture and detail. Add sparse cracks following rock structure and shallow curved wave marks on the sea. Pause the narration and practise on paper. Before continuing, ask yourself: Do cracks follow the planes rather than random decoration?",
+      "check": "Do cracks follow the planes rather than random decoration?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Choose one strong cliff edge, soften the distance and check the foam against the dark base.",
+      "talk": "Final accents and edges. Choose one strong cliff edge, soften the distance and check the foam against the dark base. Pause the narration and practise on paper. Before continuing, ask yourself: Does the focal edge dominate the detail?",
+      "check": "Does the focal edge dominate the detail?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

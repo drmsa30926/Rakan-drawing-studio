@@ -1,0 +1,94 @@
+{
+  "id": "texture",
+  "title": "Stippling, circulism and paper tooth",
+  "group": "Foundations",
+  "minutes": 25,
+  "goal": "Make texture without losing the large value masses.",
+  "kit": "HB, 2B, 4B; medium-tooth paper.",
+  "art": "texture",
+  "steps": [
+    {
+      "title": "Compare the patches",
+      "grade": "HB",
+      "text": "Study dots, small overlapping circles and layered graphite. Each can describe texture, but all must first communicate a light or dark mass.",
+      "talk": "Compare the patches. Study dots, small overlapping circles and layered graphite. Each can describe texture, but all must first communicate a light or dark mass. Pause the narration and practise on paper. Before continuing, ask yourself: Can you rank the patches by value?",
+      "check": "Can you rank the patches by value?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Three practice areas",
+      "grade": "2H",
+      "text": "Mark three equal windows. Reserve an unmarked strip below each to compare with paper white.",
+      "talk": "Three practice areas. Mark three equal windows. Reserve an unmarked strip below each to compare with paper white. Pause the narration and practise on paper. Before continuing, ask yourself: Is the reserve strip clean?",
+      "check": "Is the reserve strip clean?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Space the dots",
+      "grade": "HB",
+      "text": "Build stippling with light taps. Put dots closer together to deepen tone; avoid stabbing holes in the paper.",
+      "talk": "Space the dots. Build stippling with light taps. Put dots closer together to deepen tone; avoid stabbing holes in the paper. Pause the narration and practise on paper. Before continuing, ask yourself: Are the dots marks rather than dents?",
+      "check": "Are the dots marks rather than dents?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Overlap circles",
+      "grade": "HB",
+      "text": "Use tiny irregular overlapping circles for circulism. Avoid visible rows or repeated loops of identical size.",
+      "talk": "Overlap circles. Use tiny irregular overlapping circles for circulism. Avoid visible rows or repeated loops of identical size. Pause the narration and practise on paper. Before continuing, ask yourself: Does the patch merge into a tone when you squint?",
+      "check": "Does the patch merge into a tone when you squint?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Layer the graphite",
+      "grade": "2B \u2192 4B",
+      "text": "In the third window, overlap broad side-of-pencil strokes. Let the paper tooth show through the first layer, then fill selected gaps.",
+      "talk": "Layer the graphite. In the third window, overlap broad side-of-pencil strokes. Let the paper tooth show through the first layer, then fill selected gaps. Pause the narration and practise on paper. Before continuing, ask yourself: Can you deepen tone while preserving some tooth?",
+      "check": "Can you deepen tone while preserving some tooth?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Blend a small sample",
+      "grade": "Clean stump",
+      "text": "Blend only one corner of each patch with a clean stump. Compare the result with the untouched marks. Stop if it becomes smeared.",
+      "talk": "Blend a small sample. Blend only one corner of each patch with a clean stump. Compare the result with the untouched marks. Stop if it becomes smeared. Pause the narration and practise on paper. Before continuing, ask yourself: Which texture loses its character when blended?",
+      "check": "Which texture loses its character when blended?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Lift specks",
+      "grade": "Kneaded eraser",
+      "text": "Dab tiny lights into the darker patch. Rotate to a clean eraser surface frequently so you lift instead of redepositing graphite.",
+      "talk": "Lift specks. Dab tiny lights into the darker patch. Rotate to a clean eraser surface frequently so you lift instead of redepositing graphite. Pause the narration and practise on paper. Before continuing, ask yourself: Are the lights irregular and controlled?",
+      "check": "Are the lights irregular and controlled?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Study a stone",
+      "grade": "2B",
+      "text": "Draw a small stone using three broad values, then add only a few specks and cracks. Keep details less contrasted than the deepest shadow.",
+      "talk": "Study a stone. Draw a small stone using three broad values, then add only a few specks and cracks. Keep details less contrasted than the deepest shadow. Pause the narration and practise on paper. Before continuing, ask yourself: Does the stone read as a form before its texture?",
+      "check": "Does the stone read as a form before its texture?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "Record a recipe",
+      "grade": "HB",
+      "text": "Write which pencil, spacing and layers made your most useful patch. Repeat it beside the first without copying each individual mark.",
+      "talk": "Record a recipe. Write which pencil, spacing and layers made your most useful patch. Repeat it beside the first without copying each individual mark. Pause the narration and practise on paper. Before continuing, ask yourself: Can you recreate the same overall tone?",
+      "check": "Can you recreate the same overall tone?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

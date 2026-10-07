@@ -1,0 +1,94 @@
+{
+  "id": "clouds",
+  "title": "Clouds are forms, not outlines",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Reserve paper lights and model a cloud\u2019s underside.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "clouds",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Observe the cloud as a connected volume, with a bright top and darker underside. The sky is darker than the brightest cloud.",
+      "talk": "Study the reference. Observe the cloud as a connected volume, with a bright top and darker underside. The sky is darker than the brightest cloud. Pause the narration and practise on paper. Before continuing, ask yourself: Can you see the cloud as one mass?",
+      "check": "Can you see the cloud as one mass?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Place a few overlapping cloud masses lightly. Keep the skyline low.",
+      "talk": "Light block-in. Place a few overlapping cloud masses lightly. Keep the skyline low. Pause the narration and practise on paper. Before continuing, ask yourself: Are the cloud lobes unequal?",
+      "check": "Are the cloud lobes unequal?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Join the lobes into a natural silhouette, avoiding repeated scallops.",
+      "talk": "Refine the construction. Join the lobes into a natural silhouette, avoiding repeated scallops. Pause the narration and practise on paper. Before continuing, ask yourself: Is the outline varied and asymmetrical?",
+      "check": "Is the outline varied and asymmetrical?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Map middle-value sky, light cloud and a darker cloud base.",
+      "talk": "Three-value map. Map middle-value sky, light cloud and a darker cloud base. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cloud emerge without a dark outline?",
+      "check": "Does the cloud emerge without a dark outline?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer the sky evenly and build subtle underside tones. Keep the brightest upper lobes largely untouched.",
+      "talk": "Five values and layers. Layer the sky evenly and build subtle underside tones. Keep the brightest upper lobes largely untouched. Pause the narration and practise on paper. Before continuing, ask yourself: Is the sky free of accidental streaks?",
+      "check": "Is the sky free of accidental streaks?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend selected interior turns and soften portions of the cloud boundary. Keep other edges firmer.",
+      "talk": "Selective blending. Blend selected interior turns and soften portions of the cloud boundary. Keep other edges firmer. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cloud have both soft and defined edges?",
+      "check": "Does the cloud have both soft and defined edges?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Dab upper lights with a clean eraser. Do not make all lobes equally white.",
+      "talk": "Lift the lights. Dab upper lights with a clean eraser. Do not make all lobes equally white. Pause the narration and practise on paper. Before continuing, ask yourself: Are the lights grouped near the top?",
+      "check": "Are the lights grouped near the top?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add only a few smaller vapour forms. Keep the main structure stronger than small wisps.",
+      "talk": "Texture and detail. Add only a few smaller vapour forms. Keep the main structure stronger than small wisps. Pause the narration and practise on paper. Before continuing, ask yourself: Is the cloud still one coherent form?",
+      "check": "Is the cloud still one coherent form?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Strengthen the low distant land and review the sky-to-cloud contrast.",
+      "talk": "Final accents and edges. Strengthen the low distant land and review the sky-to-cloud contrast. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cloud look volumetric at arm\u2019s length?",
+      "check": "Does the cloud look volumetric at arm\u2019s length?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

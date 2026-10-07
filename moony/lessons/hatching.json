@@ -1,0 +1,94 @@
+{
+  "id": "hatching",
+  "title": "Strokes that describe a surface",
+  "group": "Foundations",
+  "minutes": 25,
+  "goal": "Control tone with spacing, layers and direction.",
+  "kit": "HB, 2B, 4B; sharp point; drawing paper.",
+  "art": "hatching",
+  "steps": [
+    {
+      "title": "Compare three textures",
+      "grade": "HB",
+      "text": "The first patch uses parallel lines, the second crossed layers, and the third curved strokes. Squint: texture should combine into a readable tone.",
+      "talk": "Compare three textures. The first patch uses parallel lines, the second crossed layers, and the third curved strokes. Squint: texture should combine into a readable tone. Pause the narration and practise on paper. Before continuing, ask yourself: Can you separate stroke direction from overall value?",
+      "check": "Can you separate stroke direction from overall value?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Block three windows",
+      "grade": "2H",
+      "text": "Draw three equal rectangles. Leave a clean margin around each. Keep all practice marks inside the window.",
+      "talk": "Block three windows. Draw three equal rectangles. Leave a clean margin around each. Keep all practice marks inside the window. Pause the narration and practise on paper. Before continuing, ask yourself: Are all three comparison areas equal?",
+      "check": "Are all three comparison areas equal?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Parallel hatching",
+      "grade": "HB",
+      "text": "Fill the first patch with separated parallel lines. Keep pressure and angle consistent. Lift the pencil at the end of each stroke.",
+      "talk": "Parallel hatching. Fill the first patch with separated parallel lines. Keep pressure and angle consistent. Lift the pencil at the end of each stroke. Pause the narration and practise on paper. Before continuing, ask yourself: Are the gaps more regular than your first attempt?",
+      "check": "Are the gaps more regular than your first attempt?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Cross the second layer",
+      "grade": "HB",
+      "text": "Fill the second patch, then cross it with another layer at a modest angle. Avoid making a rigid checkerboard or grinding into intersections.",
+      "talk": "Cross the second layer. Fill the second patch, then cross it with another layer at a modest angle. Avoid making a rigid checkerboard or grinding into intersections. Pause the narration and practise on paper. Before continuing, ask yourself: Does the second layer deepen the value evenly?",
+      "check": "Does the second layer deepen the value evenly?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Build the darks",
+      "grade": "2B \u2192 4B",
+      "text": "Reduce spacing and add layers to the lower half of each patch. Keep the top lighter. Avoid dark outlines around the patch.",
+      "talk": "Build the darks. Reduce spacing and add layers to the lower half of each patch. Keep the top lighter. Avoid dark outlines around the patch. Pause the narration and practise on paper. Before continuing, ask yourself: Is the tonal change gradual?",
+      "check": "Is the tonal change gradual?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Wrap a cylinder",
+      "grade": "HB",
+      "text": "In the third patch use gently curved bands as though wrapping an upright cylinder. Keep all curves consistent with the same surface.",
+      "talk": "Wrap a cylinder. In the third patch use gently curved bands as though wrapping an upright cylinder. Keep all curves consistent with the same surface. Pause the narration and practise on paper. Before continuing, ask yourself: Do the curves describe one coherent form?",
+      "check": "Do the curves describe one coherent form?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Lift a band of light",
+      "grade": "Kneaded eraser",
+      "text": "Dab a narrow band in the contour-hatched patch. Preserve some visible strokes; a highlight does not need a blank white stripe.",
+      "talk": "Lift a band of light. Dab a narrow band in the contour-hatched patch. Preserve some visible strokes; a highlight does not need a blank white stripe. Pause the narration and practise on paper. Before continuing, ask yourself: Does the lifted band still belong to the same surface?",
+      "check": "Does the lifted band still belong to the same surface?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Choose the texture",
+      "grade": "2B",
+      "text": "Compare a smooth cup with a rough stone. Use restrained contour marks for the cup and broken marks for the stone. Do not blend away every stroke.",
+      "talk": "Choose the texture. Compare a smooth cup with a rough stone. Use restrained contour marks for the cup and broken marks for the stone. Do not blend away every stroke. Pause the narration and practise on paper. Before continuing, ask yourself: Does the mark direction support the material?",
+      "check": "Does the mark direction support the material?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "Draw from observation",
+      "grade": "HB \u2192 2B",
+      "text": "Shade a spoon handle or cylindrical pencil using hatching only. Work for three minutes, then inspect it at arm\u2019s length.",
+      "talk": "Draw from observation. Shade a spoon handle or cylindrical pencil using hatching only. Work for three minutes, then inspect it at arm\u2019s length. Pause the narration and practise on paper. Before continuing, ask yourself: Does the object read before you notice the individual lines?",
+      "check": "Does the object read before you notice the individual lines?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

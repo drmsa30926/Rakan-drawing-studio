@@ -1,0 +1,94 @@
+{
+  "id": "twopoint",
+  "title": "Two points, one solid corner",
+  "group": "Perspective",
+  "minutes": 50,
+  "goal": "Construct a corner with two vanishing points and use a grid thoughtfully.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "twopoint",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study a box seen from a corner. Horizontal edges belong to two families, each receding to its own vanishing point.",
+      "talk": "Study the reference. Study a box seen from a corner. Horizontal edges belong to two families, each receding to its own vanishing point. Pause the narration and practise on paper. Before continuing, ask yourself: Can you separate the two edge families?",
+      "check": "Can you separate the two edge families?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Mark the horizon and two widely spaced vanishing points. Place the nearest vertical corner.",
+      "talk": "Light block-in. Mark the horizon and two widely spaced vanishing points. Place the nearest vertical corner. Pause the narration and practise on paper. Before continuing, ask yourself: Are the vanishing points far enough apart to avoid extreme distortion?",
+      "check": "Are the vanishing points far enough apart to avoid extreme distortion?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Connect the top and bottom of the near edge to both points. Add the left and right vertical edges, then close the box.",
+      "talk": "Refine the construction. Connect the top and bottom of the near edge to both points. Add the left and right vertical edges, then close the box. Pause the narration and practise on paper. Before continuing, ask yourself: Do vertical edges remain parallel in this level-view study?",
+      "check": "Do vertical edges remain parallel in this level-view study?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Assign different tones to the two visible walls while keeping the same light source.",
+      "talk": "Three-value map. Assign different tones to the two visible walls while keeping the same light source. Pause the narration and practise on paper. Before continuing, ask yourself: Do the values support the corner?",
+      "check": "Do the values support the corner?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Add small divisions using converging guides. A grid overlay can transfer landmark positions, but does not replace perspective reasoning.",
+      "talk": "Five values and layers. Add small divisions using converging guides. A grid overlay can transfer landmark positions, but does not replace perspective reasoning. Pause the narration and practise on paper. Before continuing, ask yourself: Can you draw the corner again without the grid?",
+      "check": "Can you draw the corner again without the grid?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend within the wall planes only. Preserve the near corner.",
+      "talk": "Selective blending. Blend within the wall planes only. Preserve the near corner. Pause the narration and practise on paper. Before continuing, ask yourself: Are you keeping the two planes distinct?",
+      "check": "Are you keeping the two planes distinct?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift any excess construction graphite from the light wall.",
+      "talk": "Lift the lights. Lift any excess construction graphite from the light wall. Pause the narration and practise on paper. Before continuing, ask yourself: Does the wall still have a consistent value?",
+      "check": "Does the wall still have a consistent value?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add one doorway with edges that follow the relevant vanishing point.",
+      "talk": "Texture and detail. Add one doorway with edges that follow the relevant vanishing point. Pause the narration and practise on paper. Before continuing, ask yourself: Does the doorway belong to its wall plane?",
+      "check": "Does the doorway belong to its wall plane?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Check every receding edge against its point. Make a second study with a higher horizon and compare the visible top.",
+      "talk": "Final accents and edges. Check every receding edge against its point. Make a second study with a higher horizon and compare the visible top. Pause the narration and practise on paper. Before continuing, ask yourself: Can you explain how changing eye level changes the view?",
+      "check": "Can you explain how changing eye level changes the view?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

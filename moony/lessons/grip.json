@@ -1,0 +1,94 @@
+{
+  "id": "grip",
+  "title": "A quieter, more confident line",
+  "group": "Foundations",
+  "minutes": 20,
+  "goal": "Control movement and pressure before drawing an object.",
+  "kit": "2H, HB; medium-tooth drawing paper, 120\u2013200 gsm; scrap sheet under your hand.",
+  "art": "grip",
+  "steps": [
+    {
+      "title": "Observe the marks",
+      "grade": "HB",
+      "text": "Look at the straight lines and ellipses. Notice even spacing and pale beginnings. Test both pencils on your own paper; grades vary between brands.",
+      "talk": "Observe the marks. Look at the straight lines and ellipses. Notice even spacing and pale beginnings. Test both pencils on your own paper; grades vary between brands. Pause the narration and practise on paper. Before continuing, ask yourself: Can you distinguish a pale line from a deeply indented one?",
+      "check": "Can you distinguish a pale line from a deeply indented one?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Set up two grips",
+      "grade": "2H",
+      "text": "Use a relaxed tripod grip for small precise marks. Hold farther back in an overhand grip to use the side of the graphite for broader marks. Keep your wrist comfortable.",
+      "talk": "Set up two grips. Use a relaxed tripod grip for small precise marks. Hold farther back in an overhand grip to use the side of the graphite for broader marks. Keep your wrist comfortable. Pause the narration and practise on paper. Before continuing, ask yourself: Is the grip relaxed rather than squeezed?",
+      "check": "Is the grip relaxed rather than squeezed?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Ghost a straight line",
+      "grade": "2H",
+      "text": "Place two small dots 10 cm apart. Rehearse the movement above the paper three times, moving the forearm and shoulder. Touch down for one light pass.",
+      "talk": "Ghost a straight line. Place two small dots 10 cm apart. Rehearse the movement above the paper three times, moving the forearm and shoulder. Touch down for one light pass. Pause the narration and practise on paper. Before continuing, ask yourself: Did you make one deliberate stroke rather than scratchy corrections?",
+      "check": "Did you make one deliberate stroke rather than scratchy corrections?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Repeat parallel lines",
+      "grade": "HB",
+      "text": "Draw seven parallel lines. Rotate the page to suit your natural movement. Keep the gaps similar; accuracy matters more than speed.",
+      "talk": "Repeat parallel lines. Draw seven parallel lines. Rotate the page to suit your natural movement. Keep the gaps similar; accuracy matters more than speed. Pause the narration and practise on paper. Before continuing, ask yourself: Are the gaps approximately equal?",
+      "check": "Are the gaps approximately equal?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Build pressure gradually",
+      "grade": "HB \u2192 2B",
+      "text": "Draw three rows from light to dark. Add a second pass to deepen a mark. Do not force the 2H into the surface to make a black line.",
+      "talk": "Build pressure gradually. Draw three rows from light to dark. Add a second pass to deepen a mark. Do not force the 2H into the surface to make a black line. Pause the narration and practise on paper. Before continuing, ask yourself: Does the paper still have its surface texture?",
+      "check": "Does the paper still have its surface texture?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Ghost ellipses",
+      "grade": "HB",
+      "text": "Draw a light bounding rectangle. Rehearse a smooth ellipse inside it, then draw through twice with a steady rhythm. Check its tilt and symmetry.",
+      "talk": "Ghost ellipses. Draw a light bounding rectangle. Rehearse a smooth ellipse inside it, then draw through twice with a steady rhythm. Check its tilt and symmetry. Pause the narration and practise on paper. Before continuing, ask yourself: Do the ellipses have rounded ends without sharp corners?",
+      "check": "Do the ellipses have rounded ends without sharp corners?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Vary the mark",
+      "grade": "2B",
+      "text": "Use the side of the point for a broad band, then rotate to the tip for a narrow line. Keep the same gentle pressure. Blending is not needed in this drill.",
+      "talk": "Vary the mark. Use the side of the point for a broad band, then rotate to the tip for a narrow line. Keep the same gentle pressure. Blending is not needed in this drill. Pause the narration and practise on paper. Before continuing, ask yourself: Can you change line width without pressing harder?",
+      "check": "Can you change line width without pressing harder?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Lift and review",
+      "grade": "Kneaded eraser",
+      "text": "Roll the kneaded eraser into a soft edge and dab one dark mark. Compare lifting with rubbing. Keep one imperfect row as a dated baseline.",
+      "talk": "Lift and review. Roll the kneaded eraser into a soft edge and dab one dark mark. Compare lifting with rubbing. Keep one imperfect row as a dated baseline. Pause the narration and practise on paper. Before continuing, ask yourself: Did lifting lighten the mark without scuffing the paper?",
+      "check": "Did lifting lighten the mark without scuffing the paper?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "Two-minute repeat",
+      "grade": "HB",
+      "text": "Repeat five lines and five ellipses without guides. Date the sheet. Choose one measurable target for tomorrow: spacing, pressure or smoother curves.",
+      "talk": "Two-minute repeat. Repeat five lines and five ellipses without guides. Date the sheet. Choose one measurable target for tomorrow: spacing, pressure or smoother curves. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify one improvement and one practice target?",
+      "check": "Can you identify one improvement and one practice target?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

@@ -1,0 +1,94 @@
+{
+  "id": "forest",
+  "title": "A path into the forest",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Organise repeated trees around a receding path.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "forest",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Find the light path, middle-distance trees and dark near trunks. Squint to ignore individual leaves.",
+      "talk": "Study the reference. Find the light path, middle-distance trees and dark near trunks. Squint to ignore individual leaves. Pause the narration and practise on paper. Before continuing, ask yourself: Does the path lead toward a clear distance?",
+      "check": "Does the path lead toward a clear distance?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Place the path\u2019s converging sides and its narrow distant end. Add the largest trunk positions.",
+      "talk": "Light block-in. Place the path\u2019s converging sides and its narrow distant end. Add the largest trunk positions. Pause the narration and practise on paper. Before continuing, ask yourself: Does the path narrow consistently?",
+      "check": "Does the path narrow consistently?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Vary trunk widths and intervals. Avoid symmetrical rows or identical crowns.",
+      "talk": "Refine the construction. Vary trunk widths and intervals. Avoid symmetrical rows or identical crowns. Pause the narration and practise on paper. Before continuing, ask yourself: Are the near trees larger?",
+      "check": "Are the near trees larger?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Keep the path light, distant foliage midtone and foreground trunks dark.",
+      "talk": "Three-value map. Keep the path light, distant foliage midtone and foreground trunks dark. Pause the narration and practise on paper. Before continuing, ask yourself: Is the light path continuous?",
+      "check": "Is the light path continuous?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Layer the nearest trunks and undergrowth. Reduce contrast and detail in the distance.",
+      "talk": "Five values and layers. Layer the nearest trunks and undergrowth. Reduce contrast and detail in the distance. Pause the narration and practise on paper. Before continuing, ask yourself: Is the distance visibly quieter?",
+      "check": "Is the distance visibly quieter?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften distant foliage lightly; leave selected foreground trunk edges clear.",
+      "talk": "Selective blending. Soften distant foliage lightly; leave selected foreground trunk edges clear. Pause the narration and practise on paper. Before continuing, ask yourself: Do softer edges support depth?",
+      "check": "Do softer edges support depth?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift broken light patches on the path. Vary their size and keep them smaller farther away.",
+      "talk": "Lift the lights. Lift broken light patches on the path. Vary their size and keep them smaller farther away. Pause the narration and practise on paper. Before continuing, ask yourself: Do the light patches sit on the ground?",
+      "check": "Do the light patches sit on the ground?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add a few bark marks and near leaves. Follow trunk direction and group foliage into masses.",
+      "talk": "Texture and detail. Add a few bark marks and near leaves. Follow trunk direction and group foliage into masses. Pause the narration and practise on paper. Before continuing, ask yourself: Are most leaves implied rather than individually outlined?",
+      "check": "Are most leaves implied rather than individually outlined?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Deepen the nearest contact shadows and reduce distracting marks at the sides.",
+      "talk": "Final accents and edges. Deepen the nearest contact shadows and reduce distracting marks at the sides. Pause the narration and practise on paper. Before continuing, ask yourself: Does your eye follow the path into the picture?",
+      "check": "Does your eye follow the path into the picture?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

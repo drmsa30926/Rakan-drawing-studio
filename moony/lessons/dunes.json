@@ -1,0 +1,94 @@
+{
+  "id": "dunes",
+  "title": "The turning dune",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Use a clear ridge and broad shadow to describe sand.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "dunes",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Notice the dominant sweeping ridges and large shadow wedges. The sun is low, but graphite records value rather than the colour of sunset.",
+      "talk": "Study the reference. Notice the dominant sweeping ridges and large shadow wedges. The sun is low, but graphite records value rather than the colour of sunset. Pause the narration and practise on paper. Before continuing, ask yourself: Can you trace the largest ridge in the air?",
+      "check": "Can you trace the largest ridge in the air?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Place three sweeping ridge lines with varied spacing. Keep the horizon low-contrast and leave room for the foreground slope.",
+      "talk": "Light block-in. Place three sweeping ridge lines with varied spacing. Keep the horizon low-contrast and leave room for the foreground slope. Pause the narration and practise on paper. Before continuing, ask yourself: Are the ridges varied rather than parallel stripes?",
+      "check": "Are the ridges varied rather than parallel stripes?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Check each crest as one continuous turning line. Simplify small bumps until the main slopes feel coherent.",
+      "talk": "Refine the construction. Check each crest as one continuous turning line. Simplify small bumps until the main slopes feel coherent. Pause the narration and practise on paper. Before continuing, ask yourself: Does every shadow belong to a particular ridge?",
+      "check": "Does every shadow belong to a particular ridge?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Reserve bright slopes, assign middle tones to turning planes and group the lee-side shadows.",
+      "talk": "Three-value map. Reserve bright slopes, assign middle tones to turning planes and group the lee-side shadows. Pause the narration and practise on paper. Before continuing, ask yourself: Can you read the dunes in three values?",
+      "check": "Can you read the dunes in three values?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Build the shadow faces with layered strokes following the slope. Keep distant dunes paler; darkest graphite belongs near the viewer.",
+      "talk": "Five values and layers. Build the shadow faces with layered strokes following the slope. Keep distant dunes paler; darkest graphite belongs near the viewer. Pause the narration and practise on paper. Before continuing, ask yourself: Does the value range increase toward the foreground?",
+      "check": "Does the value range increase toward the foreground?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Blend broad sand planes lightly along the flow of the dune. Protect the crisp crest where light meets shadow.",
+      "talk": "Selective blending. Blend broad sand planes lightly along the flow of the dune. Protect the crisp crest where light meets shadow. Pause the narration and practise on paper. Before continuing, ask yourself: Is the crest still distinct?",
+      "check": "Is the crest still distinct?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Dab a narrow reflected-light passage without making it brighter than the lit slope. Reserve the cleanest light near the focal crest.",
+      "talk": "Lift the lights. Dab a narrow reflected-light passage without making it brighter than the lit slope. Reserve the cleanest light near the focal crest. Pause the narration and practise on paper. Before continuing, ask yourself: Is reflected light subordinate to direct light?",
+      "check": "Is reflected light subordinate to direct light?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add a few curved wind-ripple marks in the foreground. Reduce their spacing and contrast into the distance.",
+      "talk": "Texture and detail. Add a few curved wind-ripple marks in the foreground. Reduce their spacing and contrast into the distance. Pause the narration and practise on paper. Before continuing, ask yourself: Do ripples diminish with distance?",
+      "check": "Do ripples diminish with distance?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Sharpen a short focal ridge and soften the rest. Remove any dark outlines around distant dunes.",
+      "talk": "Final accents and edges. Sharpen a short focal ridge and soften the rest. Remove any dark outlines around distant dunes. Pause the narration and practise on paper. Before continuing, ask yourself: Does the image work without the ripple detail?",
+      "check": "Does the image work without the ripple detail?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

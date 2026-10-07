@@ -1,0 +1,94 @@
+{
+  "id": "values",
+  "title": "The nine-value ladder",
+  "group": "Foundations",
+  "minutes": 25,
+  "goal": "Separate nine values with controlled layers, including untouched paper.",
+  "kit": "HB, 2B, 4B, 6B; kneaded eraser; medium-tooth paper.",
+  "art": "values",
+  "steps": [
+    {
+      "title": "Read the extremes",
+      "grade": "HB",
+      "text": "Value 1 is untouched paper; 9 is your deepest usable graphite. Screen tones are only a guide: glare, brightness and pencil brand change how values appear.",
+      "talk": "Read the extremes. Value 1 is untouched paper; 9 is your deepest usable graphite. Screen tones are only a guide: glare, brightness and pencil brand change how values appear. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify the lightest and darkest samples?",
+      "check": "Can you identify the lightest and darkest samples?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Draw nine boxes",
+      "grade": "2H",
+      "text": "Lightly mark nine equal boxes about 2 cm wide. Leave gaps between them so neighbouring tones do not contaminate your judgement.",
+      "talk": "Draw nine boxes. Lightly mark nine equal boxes about 2 cm wide. Leave gaps between them so neighbouring tones do not contaminate your judgement. Pause the narration and practise on paper. Before continuing, ask yourself: Are the construction lines light enough to disappear?",
+      "check": "Are the construction lines light enough to disappear?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Anchor light, middle, dark",
+      "grade": "HB \u2192 6B",
+      "text": "Keep box 1 blank. Build box 5 with HB and 2B. Build box 9 with repeated 4B and 6B layers, without polishing the surface.",
+      "talk": "Anchor light, middle, dark. Keep box 1 blank. Build box 5 with HB and 2B. Build box 9 with repeated 4B and 6B layers, without polishing the surface. Pause the narration and practise on paper. Before continuing, ask yourself: Do the three anchors remain distinct when you squint?",
+      "check": "Do the three anchors remain distinct when you squint?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Insert five values",
+      "grade": "HB \u2192 4B",
+      "text": "Add boxes 3 and 7, placing each visually halfway between its neighbours. Judge the relationships rather than counting pencil passes.",
+      "talk": "Insert five values. Add boxes 3 and 7, placing each visually halfway between its neighbours. Judge the relationships rather than counting pencil passes. Pause the narration and practise on paper. Before continuing, ask yourself: Are 1, 3, 5, 7 and 9 ordered from light to dark?",
+      "check": "Are 1, 3, 5, 7 and 9 ordered from light to dark?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Complete nine values",
+      "grade": "HB \u2192 6B",
+      "text": "Fill boxes 2, 4, 6 and 8. Alternate the stroke direction gently to reduce gaps. Use softer graphite for deeper tones, not extra force.",
+      "talk": "Complete nine values. Fill boxes 2, 4, 6 and 8. Alternate the stroke direction gently to reduce gaps. Use softer graphite for deeper tones, not extra force. Pause the narration and practise on paper. Before continuing, ask yourself: Is every adjacent pair visibly different?",
+      "check": "Is every adjacent pair visibly different?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Even the layers",
+      "grade": "2B",
+      "text": "Fill pale gaps with small overlapping strokes. A clean stump may lightly soften a patch, but do not blend across the gaps between boxes.",
+      "talk": "Even the layers. Fill pale gaps with small overlapping strokes. A clean stump may lightly soften a patch, but do not blend across the gaps between boxes. Pause the narration and practise on paper. Before continuing, ask yourself: Are the centres and corners of each box similar in value?",
+      "check": "Are the centres and corners of each box similar in value?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Lift a correction",
+      "grade": "Kneaded eraser",
+      "text": "If a box is too dark, dab it gently and rebuild. Protect box 1 from graphite on your fingers.",
+      "talk": "Lift a correction. If a box is too dark, dab it gently and rebuild. Protect box 1 from graphite on your fingers. Pause the narration and practise on paper. Before continuing, ask yourself: Does box 1 still match clean paper?",
+      "check": "Does box 1 still match clean paper?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Check under one light",
+      "grade": "HB",
+      "text": "Tilt the sheet slightly to detect graphite shine. Return it flat and compare with a small viewing hole cut in scrap paper to isolate each box.",
+      "talk": "Check under one light. Tilt the sheet slightly to detect graphite shine. Return it flat and compare with a small viewing hole cut in scrap paper to isolate each box. Pause the narration and practise on paper. Before continuing, ask yourself: Are you judging tone rather than reflected glare?",
+      "check": "Are you judging tone rather than reflected glare?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "Use the scale",
+      "grade": "HB \u2192 4B",
+      "text": "Choose a mug and match its light, middle and shadow to three boxes. Make a tiny three-value thumbnail before attempting detail.",
+      "talk": "Use the scale. Choose a mug and match its light, middle and shadow to three boxes. Make a tiny three-value thumbnail before attempting detail. Pause the narration and practise on paper. Before continuing, ask yourself: Can you state which three values describe the mug?",
+      "check": "Can you state which three values describe the mug?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

@@ -1,0 +1,94 @@
+{
+  "id": "edges",
+  "title": "Hard, soft and lost edges",
+  "group": "Foundations",
+  "minutes": 25,
+  "goal": "Direct attention with edge contrast and restraint.",
+  "kit": "HB, 2B, 4B; kneaded eraser; clean stump.",
+  "art": "edges",
+  "steps": [
+    {
+      "title": "Read the edge types",
+      "grade": "HB",
+      "text": "A hard edge changes tone abruptly. A soft edge turns gradually. A lost edge occurs where adjacent values are similar. These depend on lighting and viewing conditions.",
+      "talk": "Read the edge types. A hard edge changes tone abruptly. A soft edge turns gradually. A lost edge occurs where adjacent values are similar. These depend on lighting and viewing conditions. Pause the narration and practise on paper. Before continuing, ask yourself: Can you find an edge that disappears?",
+      "check": "Can you find an edge that disappears?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Block three masses",
+      "grade": "2H",
+      "text": "Lightly place three ovals. Do not strengthen the outlines: later tones will define the boundaries.",
+      "talk": "Block three masses. Lightly place three ovals. Do not strengthen the outlines: later tones will define the boundaries. Pause the narration and practise on paper. Before continuing, ask yourself: Are the outlines weaker than the future shading?",
+      "check": "Are the outlines weaker than the future shading?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Three-value design",
+      "grade": "HB",
+      "text": "Reserve light, middle and shadow. Decide which edge will attract attention before adding detail.",
+      "talk": "Three-value design. Reserve light, middle and shadow. Decide which edge will attract attention before adding detail. Pause the narration and practise on paper. Before continuing, ask yourself: Can you name the focal edge?",
+      "check": "Can you name the focal edge?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Make one hard edge",
+      "grade": "2B",
+      "text": "Bring a dark patch against a light area with a sharp, deliberate boundary. Avoid surrounding every form with the same dark contour.",
+      "talk": "Make one hard edge. Bring a dark patch against a light area with a sharp, deliberate boundary. Avoid surrounding every form with the same dark contour. Pause the narration and practise on paper. Before continuing, ask yourself: Is only the chosen edge strongly defined?",
+      "check": "Is only the chosen edge strongly defined?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Turn a soft edge",
+      "grade": "2B",
+      "text": "Use smaller tonal differences over several layers to turn the second form. Keep its interior value distinct from its boundary.",
+      "talk": "Turn a soft edge. Use smaller tonal differences over several layers to turn the second form. Keep its interior value distinct from its boundary. Pause the narration and practise on paper. Before continuing, ask yourself: Does the edge turn rather than blur randomly?",
+      "check": "Does the edge turn rather than blur randomly?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Lose an edge",
+      "grade": "HB / stump",
+      "text": "Match part of the third object to the surrounding tone. Let that boundary disappear, retaining another edge to describe the form.",
+      "talk": "Lose an edge. Match part of the third object to the surrounding tone. Let that boundary disappear, retaining another edge to describe the form. Pause the narration and practise on paper. Before continuing, ask yourself: Can the viewer still understand the object?",
+      "check": "Can the viewer still understand the object?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Recover a light",
+      "grade": "Kneaded eraser",
+      "text": "Lift a narrow light only where it clarifies the form. Keep its end soft.",
+      "talk": "Recover a light. Lift a narrow light only where it clarifies the form. Keep its end soft. Pause the narration and practise on paper. Before continuing, ask yourself: Did the lift clarify rather than fragment the form?",
+      "check": "Did the lift clarify rather than fragment the form?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Accents and restraint",
+      "grade": "4B",
+      "text": "Choose two or three small dark accents near the focal area. Leave quieter passages quiet.",
+      "talk": "Accents and restraint. Choose two or three small dark accents near the focal area. Leave quieter passages quiet. Pause the narration and practise on paper. Before continuing, ask yourself: Does your eye travel to the intended focal area?",
+      "check": "Does your eye travel to the intended focal area?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "A five-minute study",
+      "grade": "HB \u2192 4B",
+      "text": "Draw a crumpled tissue with one hard, one soft and one lost edge. Write where each occurs and why.",
+      "talk": "A five-minute study. Draw a crumpled tissue with one hard, one soft and one lost edge. Write where each occurs and why. Pause the narration and practise on paper. Before continuing, ask yourself: Can you explain each edge using light or overlapping form?",
+      "check": "Can you explain each edge using light or overlapping form?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

@@ -1,0 +1,94 @@
+{
+  "id": "cylinder",
+  "title": "Ellipses and a cylinder",
+  "group": "Form & light",
+  "minutes": 40,
+  "goal": "Construct the form, then explain it with one consistent light source.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "cylinder",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Study a plain cup without its handle. Compare the top ellipse, vertical sides, turning tone and contact shadow.",
+      "talk": "Study the reference. Study a plain cup without its handle. Compare the top ellipse, vertical sides, turning tone and contact shadow. Pause the narration and practise on paper. Before continuing, ask yourself: Can you locate the vertical centreline?",
+      "check": "Can you locate the vertical centreline?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Mark a centreline and equal side boundaries. Sketch a bounding box for the top ellipse.",
+      "talk": "Light block-in. Mark a centreline and equal side boundaries. Sketch a bounding box for the top ellipse. Pause the narration and practise on paper. Before continuing, ask yourself: Are both halves balanced?",
+      "check": "Are both halves balanced?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Draw a smooth ellipse with no pointed ends. Check the lower curve against your actual eye level rather than copying its width blindly.",
+      "talk": "Refine the construction. Draw a smooth ellipse with no pointed ends. Check the lower curve against your actual eye level rather than copying its width blindly. Pause the narration and practise on paper. Before continuing, ask yourself: Do the ellipses share one axis?",
+      "check": "Do the ellipses share one axis?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Group the light-facing band, halftone and shadow side. Keep the top plane separate.",
+      "talk": "Three-value map. Group the light-facing band, halftone and shadow side. Keep the top plane separate. Pause the narration and practise on paper. Before continuing, ask yourself: Does the body turn from light to dark?",
+      "check": "Does the body turn from light to dark?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Build vertical layers around the side. Add subtle reflected light on the far dark edge without making a white stripe.",
+      "talk": "Five values and layers. Build vertical layers around the side. Add subtle reflected light on the far dark edge without making a white stripe. Pause the narration and practise on paper. Before continuing, ask yourself: Is reflected light inside the shadow range?",
+      "check": "Is reflected light inside the shadow range?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften vertical transitions without smearing the top rim. Preserve a firmer contact area.",
+      "talk": "Selective blending. Soften vertical transitions without smearing the top rim. Preserve a firmer contact area. Pause the narration and practise on paper. Before continuing, ask yourself: Is the cylinder curved rather than striped?",
+      "check": "Is the cylinder curved rather than striped?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a vertical light band appropriate to a matte surface. Leave some graphite if the material is not shiny.",
+      "talk": "Lift the lights. Lift a vertical light band appropriate to a matte surface. Leave some graphite if the material is not shiny. Pause the narration and practise on paper. Before continuing, ask yourself: Does the light follow the long axis?",
+      "check": "Does the light follow the long axis?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Use restrained vertical or wrapping strokes. Add no artificial texture to a smooth cup.",
+      "talk": "Texture and detail. Use restrained vertical or wrapping strokes. Add no artificial texture to a smooth cup. Pause the narration and practise on paper. Before continuing, ask yourself: Do the marks describe the surface?",
+      "check": "Do the marks describe the surface?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Check the ellipse again; correct shape before darkening the rim. Reserve the darkest marks for contact.",
+      "talk": "Final accents and edges. Check the ellipse again; correct shape before darkening the rim. Reserve the darkest marks for contact. Pause the narration and practise on paper. Before continuing, ask yourself: Does the cylinder stand upright?",
+      "check": "Does the cylinder stand upright?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

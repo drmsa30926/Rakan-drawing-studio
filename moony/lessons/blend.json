@@ -1,0 +1,94 @@
+{
+  "id": "blend",
+  "title": "Layer, blend, then lift",
+  "group": "Foundations",
+  "minutes": 25,
+  "goal": "Soften transitions without muddying the lights.",
+  "kit": "HB, 2B, 4B; clean stump or folded tissue; kneaded eraser.",
+  "art": "blend",
+  "steps": [
+    {
+      "title": "Compare three treatments",
+      "grade": "HB",
+      "text": "Look for the difference between visible strokes, softened tone and a lifted light. Blending changes edges and texture; it does not replace a sound value map.",
+      "talk": "Compare three treatments. Look for the difference between visible strokes, softened tone and a lifted light. Blending changes edges and texture; it does not replace a sound value map. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify where the light should remain?",
+      "check": "Can you identify where the light should remain?",
+      "visual": 0,
+      "minutes": 2
+    },
+    {
+      "title": "Light construction",
+      "grade": "2H",
+      "text": "Draw three simple ovals. Reserve a small upper-left light in each. Use your palest construction lines.",
+      "talk": "Light construction. Draw three simple ovals. Reserve a small upper-left light in each. Use your palest construction lines. Pause the narration and practise on paper. Before continuing, ask yourself: Are the reserved lights in the same position?",
+      "check": "Are the reserved lights in the same position?",
+      "visual": 1,
+      "minutes": 2
+    },
+    {
+      "title": "Map three values",
+      "grade": "HB",
+      "text": "Assign a light, middle and dark to each oval. Keep their relative positions consistent with upper-left lighting.",
+      "talk": "Map three values. Assign a light, middle and dark to each oval. Keep their relative positions consistent with upper-left lighting. Pause the narration and practise on paper. Before continuing, ask yourself: Are the darks opposite the light?",
+      "check": "Are the darks opposite the light?",
+      "visual": 2,
+      "minutes": 2
+    },
+    {
+      "title": "Add transitional values",
+      "grade": "HB \u2192 2B",
+      "text": "Insert a halftone between light and middle, then a darker halftone before the shadow. Layer gradually.",
+      "talk": "Add transitional values. Insert a halftone between light and middle, then a darker halftone before the shadow. Layer gradually. Pause the narration and practise on paper. Before continuing, ask yourself: Do transitions have enough space to turn?",
+      "check": "Do transitions have enough space to turn?",
+      "visual": 3,
+      "minutes": 2
+    },
+    {
+      "title": "Layer first",
+      "grade": "2B \u2192 4B",
+      "text": "Fill gaps with overlapping strokes. Deepen only the shadow. Leave the first oval visibly hatched for comparison.",
+      "talk": "Layer first. Fill gaps with overlapping strokes. Deepen only the shadow. Leave the first oval visibly hatched for comparison. Pause the narration and practise on paper. Before continuing, ask yourself: Is there already a readable form before blending?",
+      "check": "Is there already a readable form before blending?",
+      "visual": 4,
+      "minutes": 2
+    },
+    {
+      "title": "Blend selectively",
+      "grade": "Clean stump / tissue",
+      "text": "Use a clean tool on the second oval, moving from lighter to darker areas. Use a fresh surface for the light. Avoid fingers, which can transfer oils.",
+      "talk": "Blend selectively. Use a clean tool on the second oval, moving from lighter to darker areas. Use a fresh surface for the light. Avoid fingers, which can transfer oils. Pause the narration and practise on paper. Before continuing, ask yourself: Have you preserved the main value separation?",
+      "check": "Have you preserved the main value separation?",
+      "visual": 5,
+      "minutes": 2
+    },
+    {
+      "title": "Lift the light",
+      "grade": "Kneaded eraser",
+      "text": "Dab a light into the third oval. Build it gradually rather than scrubbing a white hole. Some graphite may not lift completely.",
+      "talk": "Lift the light. Dab a light into the third oval. Build it gradually rather than scrubbing a white hole. Some graphite may not lift completely. Pause the narration and practise on paper. Before continuing, ask yourself: Does the highlight have a controlled edge?",
+      "check": "Does the highlight have a controlled edge?",
+      "visual": 6,
+      "minutes": 2
+    },
+    {
+      "title": "Restore dark accents",
+      "grade": "4B",
+      "text": "Reinforce a small shadow area softened by blending. Avoid outlining the whole object.",
+      "talk": "Restore dark accents. Reinforce a small shadow area softened by blending. Avoid outlining the whole object. Pause the narration and practise on paper. Before continuing, ask yourself: Are the darkest accents limited?",
+      "check": "Are the darkest accents limited?",
+      "visual": 7,
+      "minutes": 2
+    },
+    {
+      "title": "Compare and repeat",
+      "grade": "HB",
+      "text": "Write one benefit and one drawback of blending your paper. Repeat a small oval with half as much blending.",
+      "talk": "Compare and repeat. Write one benefit and one drawback of blending your paper. Repeat a small oval with half as much blending. Pause the narration and practise on paper. Before continuing, ask yourself: Which version describes the form more clearly?",
+      "check": "Which version describes the form more clearly?",
+      "visual": 8,
+      "minutes": 2
+    }
+  ],
+  "source": "Original procedural instructional study; no external reference photograph.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "grip",
+    "title": "A quieter, more confident line",
+    "group": "Foundations",
+    "minutes": 20,
+    "goal": "Control movement and pressure before drawing an object.",
+    "art": "grip"
+  },
+  {
+    "id": "values",
+    "title": "The nine-value ladder",
+    "group": "Foundations",
+    "minutes": 25,
+    "goal": "Separate nine values with controlled layers, including untouched paper.",
+    "art": "values"
+  },
+  {
+    "id": "hatching",
+    "title": "Strokes that describe a surface",
+    "group": "Foundations",
+    "minutes": 25,
+    "goal": "Control tone with spacing, layers and direction.",
+    "art": "hatching"
+  },
+  {
+    "id": "texture",
+    "title": "Stippling, circulism and paper tooth",
+    "group": "Foundations",
+    "minutes": 25,
+    "goal": "Make texture without losing the large value masses.",
+    "art": "texture"
+  },
+  {
+    "id": "blend",
+    "title": "Layer, blend, then lift",
+    "group": "Foundations",
+    "minutes": 25,
+    "goal": "Soften transitions without muddying the lights.",
+    "art": "blend"
+  },
+  {
+    "id": "edges",
+    "title": "Hard, soft and lost edges",
+    "group": "Foundations",
+    "minutes": 25,
+    "goal": "Direct attention with edge contrast and restraint.",
+    "art": "edges"
+  },
+  {
+    "id": "sphere",
+    "title": "A sphere in one light",
+    "group": "Form & light",
+    "minutes": 40,
+    "goal": "Construct the form, then explain it with one consistent light source.",
+    "art": "sphere"
+  },
+  {
+    "id": "cube",
+    "title": "Planes of a cube",
+    "group": "Form & light",
+    "minutes": 40,
+    "goal": "Construct the form, then explain it with one consistent light source.",
+    "art": "cube"
+  },
+  {
+    "id": "cylinder",
+    "title": "Ellipses and a cylinder",
+    "group": "Form & light",
+    "minutes": 40,
+    "goal": "Construct the form, then explain it with one consistent light source.",
+    "art": "cylinder"
+  },
+  {
+    "id": "cone",
+    "title": "A cone and its shadow",
+    "group": "Form & light",
+    "minutes": 40,
+    "goal": "Construct the form, then explain it with one consistent light source.",
+    "art": "cone"
+  },
+  {
+    "id": "onepoint",
+    "title": "One point, measurable depth",
+    "group": "Perspective",
+    "minutes": 50,
+    "goal": "Use a horizon, one vanishing point and proportional measurement.",
+    "art": "onepoint"
+  },
+  {
+    "id": "twopoint",
+    "title": "Two points, one solid corner",
+    "group": "Perspective",
+    "minutes": 50,
+    "goal": "Construct a corner with two vanishing points and use a grid thoughtfully.",
+    "art": "twopoint"
+  },
+  {
+    "id": "mountains",
+    "title": "Mountains, still water",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Separate distance, mountain planes and a quiet reflection.",
+    "art": "mountains"
+  },
+  {
+    "id": "dunes",
+    "title": "The turning dune",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Use a clear ridge and broad shadow to describe sand.",
+    "art": "dunes"
+  },
+  {
+    "id": "oasis",
+    "title": "Palms around quiet water",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Build an oasis from masses before describing leaves.",
+    "art": "oasis"
+  },
+  {
+    "id": "forest",
+    "title": "A path into the forest",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Organise repeated trees around a receding path.",
+    "art": "forest"
+  },
+  {
+    "id": "cliffs",
+    "title": "Sea cliffs and moving water",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Separate angular rock from horizontal water.",
+    "art": "cliffs"
+  },
+  {
+    "id": "clouds",
+    "title": "Clouds are forms, not outlines",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Reserve paper lights and model a cloud\u2019s underside.",
+    "art": "clouds"
+  },
+  {
+    "id": "tree",
+    "title": "The old tree study",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Construct trunk, canopy masses and selective bark texture.",
+    "art": "tree"
+  },
+  {
+    "id": "village",
+    "title": "A stone house in the valley",
+    "group": "Landscapes",
+    "minutes": 50,
+    "goal": "Combine perspective, terrain and restrained texture.",
+    "art": "village"
+  }
+]

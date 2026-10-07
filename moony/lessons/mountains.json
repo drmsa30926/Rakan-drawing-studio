@@ -1,0 +1,94 @@
+{
+  "id": "mountains",
+  "title": "Mountains, still water",
+  "group": "Landscapes",
+  "minutes": 50,
+  "goal": "Separate distance, mountain planes and a quiet reflection.",
+  "kit": "2H, HB, 2B, 4B, 6B; kneaded eraser; clean stump; medium-tooth paper.",
+  "art": "mountains",
+  "steps": [
+    {
+      "title": "Study the reference",
+      "grade": "HB / observation",
+      "text": "Squint at the study: pale sky, middle-value mountains, dark shoreline. The water reflection sits directly beneath the land it reflects.",
+      "talk": "Study the reference. Squint at the study: pale sky, middle-value mountains, dark shoreline. The water reflection sits directly beneath the land it reflects. Pause the narration and practise on paper. Before continuing, ask yourself: Can you identify three connected value masses?",
+      "check": "Can you identify three connected value masses?",
+      "visual": 0,
+      "minutes": 4
+    },
+    {
+      "title": "Light block-in",
+      "grade": "2H",
+      "text": "Set the shoreline slightly below the middle of the page. Measure the highest peak and its horizontal position before drawing smaller ridges.",
+      "talk": "Light block-in. Set the shoreline slightly below the middle of the page. Measure the highest peak and its horizontal position before drawing smaller ridges. Pause the narration and practise on paper. Before continuing, ask yourself: Is the shoreline horizontal?",
+      "check": "Is the shoreline horizontal?",
+      "visual": 1,
+      "minutes": 4
+    },
+    {
+      "title": "Refine the construction",
+      "grade": "2H \u2192 HB",
+      "text": "Break the mountain silhouette into a few unequal slopes. Use a vertical guide from each major peak to locate its reflection.",
+      "talk": "Refine the construction. Break the mountain silhouette into a few unequal slopes. Use a vertical guide from each major peak to locate its reflection. Pause the narration and practise on paper. Before continuing, ask yourself: Do the reflections align vertically?",
+      "check": "Do the reflections align vertically?",
+      "visual": 2,
+      "minutes": 4
+    },
+    {
+      "title": "Three-value map",
+      "grade": "HB",
+      "text": "Keep the sky light, group the mountains into a middle mass, and reserve the darkest value for the near shoreline.",
+      "talk": "Three-value map. Keep the sky light, group the mountains into a middle mass, and reserve the darkest value for the near shoreline. Pause the narration and practise on paper. Before continuing, ask yourself: Does the thumbnail read without texture?",
+      "check": "Does the thumbnail read without texture?",
+      "visual": 3,
+      "minutes": 4
+    },
+    {
+      "title": "Five values and layers",
+      "grade": "2B \u2192 4B \u2192 6B",
+      "text": "Separate light-facing and shadow-facing mountain planes. Keep distant ridges lower in contrast. Use 6B only for small near accents.",
+      "talk": "Five values and layers. Separate light-facing and shadow-facing mountain planes. Keep distant ridges lower in contrast. Use 6B only for small near accents. Pause the narration and practise on paper. Before continuing, ask yourself: Are near planes stronger than distant ones?",
+      "check": "Are near planes stronger than distant ones?",
+      "visual": 4,
+      "minutes": 4
+    },
+    {
+      "title": "Selective blending",
+      "grade": "Clean stump / 2B",
+      "text": "Soften only distant transitions. Keep selected near ridges firm. Blend water horizontally instead of smearing it vertically.",
+      "talk": "Selective blending. Soften only distant transitions. Keep selected near ridges firm. Blend water horizontally instead of smearing it vertically. Pause the narration and practise on paper. Before continuing, ask yourself: Does the distance remain softer?",
+      "check": "Does the distance remain softer?",
+      "visual": 5,
+      "minutes": 4
+    },
+    {
+      "title": "Lift the lights",
+      "grade": "Kneaded eraser",
+      "text": "Lift a few horizontal light interruptions in the water. Leave most reflection shapes connected.",
+      "talk": "Lift the lights. Lift a few horizontal light interruptions in the water. Leave most reflection shapes connected. Pause the narration and practise on paper. Before continuing, ask yourself: Are the water lights mostly horizontal?",
+      "check": "Are the water lights mostly horizontal?",
+      "visual": 6,
+      "minutes": 4
+    },
+    {
+      "title": "Texture and detail",
+      "grade": "HB \u2192 4B",
+      "text": "Add sparse broken rock marks down the slopes and small shoreline trees. Keep water marks flatter and less detailed.",
+      "talk": "Texture and detail. Add sparse broken rock marks down the slopes and small shoreline trees. Keep water marks flatter and less detailed. Pause the narration and practise on paper. Before continuing, ask yourself: Does each texture follow its surface?",
+      "check": "Does each texture follow its surface?",
+      "visual": 7,
+      "minutes": 4
+    },
+    {
+      "title": "Final accents and edges",
+      "grade": "4B / 6B sparingly",
+      "text": "Deepen two shoreline accents and soften an unimportant peak edge. Compare the whole image at arm\u2019s length before stopping.",
+      "talk": "Final accents and edges. Deepen two shoreline accents and soften an unimportant peak edge. Compare the whole image at arm\u2019s length before stopping. Pause the narration and practise on paper. Before continuing, ask yourself: Is the reflection quieter than the mountain?",
+      "check": "Is the reflection quieter than the mountain?",
+      "visual": 8,
+      "minutes": 4
+    }
+  ],
+  "source": "Original AI-generated graphite reference. Intermediate images are analytical contour and value views of this same reference, not hand-drawn stages.",
+  "drill": "Repeat the study at half size without the grid. Compare your darkest dark, lightest light and largest shape before adding detail."
+}
