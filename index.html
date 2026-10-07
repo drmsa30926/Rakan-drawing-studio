@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -857,6 +858,10 @@ $('goGal').onclick=()=>{renderGallery();show('gallery')};
 $('galBack').onclick=goHome;
 $('goFree').onclick=()=>{unlockAudio();openFree()};
 
+
+/* auto-update: if a newer version is published, reload once with a fresh URL */
+const APP_VERSION='1791383045';
+try{fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APP_VERSION){const u=new URL(location.href);if(u.searchParams.get('v')!==j.v){u.searchParams.set('v',j.v);location.replace(u.toString())}}}).catch(()=>{})}catch(e){}
 renderHome();
 })();
 </script>

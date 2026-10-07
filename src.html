@@ -843,6 +843,10 @@ $('goGal').onclick=()=>{renderGallery();show('gallery')};
 $('galBack').onclick=goHome;
 $('goFree').onclick=()=>{unlockAudio();openFree()};
 
+
+/* auto-update: if a newer version is published, reload once with a fresh URL */
+const APP_VERSION='1791383045';
+try{fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.v&&j.v!==APP_VERSION){const u=new URL(location.href);if(u.searchParams.get('v')!==j.v){u.searchParams.set('v',j.v);location.replace(u.toString())}}}).catch(()=>{})}catch(e){}
 renderHome();
 })();
 </script>
