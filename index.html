@@ -164,6 +164,8 @@ h2{font-family:var(--display);font-size:22px;margin:0}
           <button class="tool sel" id="tPen" aria-label="Crayon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1L19 8a2.1 2.1 0 0 0-3-3L5 16z"/></svg></button>
           <button class="tool" id="tFill" aria-label="Paint bucket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l8 8-7 7-8-8z"/><path d="M4 10h15"/><path d="M20 15s2 2.6 2 4a2 2 0 0 1-4 0c0-1.4 2-4 2-4z"/></svg></button>
           <button class="tool" id="tErase" aria-label="Eraser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l5 5-11 11H5l-3-3z"/><path d="M9 10l5 5M10 21h11"/></svg></button>
+          <button class="tool" id="tShade" hidden aria-label="Shadow brush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+          <button class="tool" id="tLight" hidden aria-label="Light brush"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></button>
           <button class="tool size" id="tSize" aria-label="Crayon size"><i id="sizeDot" style="width:14px;height:14px"></i></button>
         </div>
         <div class="tg">
@@ -231,7 +233,7 @@ const blush=(cx,cy,r)=>({d:circ(cx,cy,r),f:'#F7A1A1',w:0,z:8,t:0});
 
 /* ---------- LESSONS ---------- */
 const LESSONS=[
-{id:'lion',name:'Brave Lion',bg:'#FFE6B0',steps:[
+{id:'lion',name:'Brave Lion',bg:'#FFE6B0',tex:{fur:[0,1,2]},cast:[200,346,120,12],steps:[
  {say:'Draw the face',talk:"Hello Rakan! Today we will draw a brave lion. First, draw the face. Make a big round shape, like an egg lying down.",parts:[{d:ell(200,210,78,72),f:'#F9C762',z:3}]},
  {say:'Draw the fluffy mane',talk:"Now the lion's fluffy mane. Draw bumpy waves all around the face. Bump, bump, bump, all the way around!",parts:[{d:wavy(200,212,124,14,24),f:'#D9822B',z:0}]},
  {say:'Add two round ears',talk:"Lions have little round ears. Draw two small circles on top of the face, one on each side.",parts:[{d:circ(140,150,21),f:'#F9C762',z:1},{d:circ(140,150,10),f:'#E8A04A',z:1.1},{d:circ(260,150,21),f:'#F9C762',z:1},{d:circ(260,150,10),f:'#E8A04A',z:1.1}]},
@@ -241,7 +243,7 @@ const LESSONS=[
  {say:'Add hair lines to the mane',talk:"Let's make the mane look furry. Draw little curvy lines inside the mane, here and there.",parts:[{d:'M98 196 Q112 208 106 228',w:4,z:2},{d:'M302 196 Q288 208 294 228',w:4,z:2},{d:'M118 276 Q134 280 138 296',w:4,z:2},{d:'M282 276 Q266 280 262 296',w:4,z:2},{d:'M184 104 Q200 112 216 104',w:4,z:2},{d:'M188 300 Q200 312 212 300',w:4,z:2}]},
  {say:'Draw the grass',talk:"Last step! Draw wavy green grass under the lion, and a little flower. Great job, you drew a lion!",parts:[{d:'M30 360 Q75 344 120 360 Q165 344 210 360 Q255 344 300 360 Q340 346 372 360',w:5,s:'#3E9B4F',z:-1},{d:circ(330,330,8),f:'#FF7BB5',z:-1},{d:'M330 338 L330 356',w:4,s:'#3E9B4F',z:-1.1}]}
 ]},
-{id:'panda',name:'Panda',bg:'#D7EFD9',steps:[
+{id:'panda',name:'Panda',bg:'#D7EFD9',tex:{fur:[0,1]},cast:[200,316,100,12],steps:[
  {say:'Draw the big head',talk:"Let's draw a cute panda! First, draw a big round head, a little wider than it is tall.",parts:[{d:ell(200,215,98,88),f:'#FFFFFF',z:2}]},
  {say:'Draw the black ears',talk:"Now draw two round ears on top of the head. Panda ears are black, so color them in!",parts:[{d:circ(122,138,30),f:INK,z:1},{d:circ(278,138,30),f:INK,z:1}]},
  {say:'Draw the eye patches',talk:"Pandas have black patches around their eyes. Draw two shapes like big beans, leaning towards the nose.",parts:[{d:'M138 205 Q142 165 178 178 Q198 200 180 232 Q150 250 138 205 Z',f:INK,z:3},{d:'M262 205 Q258 165 222 178 Q202 200 220 232 Q250 250 262 205 Z',f:INK,z:3}]},
@@ -250,7 +252,7 @@ const LESSONS=[
  {say:'Draw the bamboo',talk:"Pandas love bamboo! Draw a tall green stick next to the panda, with lines across it.",parts:[{d:'M318 352 L329 150 L344 150 L334 352 Z',f:'#7CC36A',z:0},{d:'M320 300 L336 300',w:4,z:0.1},{d:'M323 240 L339 240',w:4,z:0.1},{d:'M326 190 L341 190',w:4,z:0.1}]},
  {say:'Add the leaves',talk:"Now add some leaves on the bamboo. Make them pointy at the end, like little boats.",parts:[{d:'M340 200 Q372 180 388 194 Q362 208 340 200 Z',f:'#4FA34A',z:0.2},{d:'M332 262 Q300 252 288 264 Q314 274 332 262 Z',f:'#4FA34A',z:0.2},{d:'M343 160 Q360 132 380 136 Q366 158 343 160 Z',f:'#4FA34A',z:0.2}]}
 ]},
-{id:'bear',name:'Teddy Bear',bg:'#F6DDBF',steps:[
+{id:'bear',name:'Teddy Bear',bg:'#F6DDBF',tex:{fur:[0,1,2]},cast:[200,348,84,9],steps:[
  {say:'Draw the round head',talk:"Let's draw a teddy bear! Start with a big round head. Go around, like drawing a ball.",parts:[{d:ell(200,220,96,88),f:'#B9783F',z:2}]},
  {say:'Draw the ears',talk:"Draw two round ears on top. Then draw a smaller circle inside each ear.",parts:[{d:circ(124,142,32),f:'#B9783F',z:1},{d:circ(124,142,16),f:'#E8B98A',z:1.1},{d:circ(276,142,32),f:'#B9783F',z:1},{d:circ(276,142,16),f:'#E8B98A',z:1.1}]},
  {say:'Draw the snout',talk:"Now draw the snout. It's an oval at the bottom of the face, like a little egg.",parts:[{d:ell(200,256,46,35),f:'#EBCB9F',z:3}]},
@@ -260,7 +262,7 @@ const LESSONS=[
  {say:'Add a bow tie',talk:"Let's give him a bow tie! Draw two triangles touching in the middle, and a small circle in the center.",parts:[{d:'M200 320 L160 298 L160 342 Z',f:'#E8423A',z:7},{d:'M200 320 L240 298 L240 342 Z',f:'#E8423A',z:7},{d:circ(200,320,10),f:'#C2302A',z:7.1}]},
  {say:'Add a fluffy tuft',talk:"Last step! Draw a little bumpy tuft of fur on top of the head. Your teddy bear is ready!",parts:[{d:'M186 136 Q192 120 200 134 Q207 118 214 136',w:5,z:6}]}
 ]},
-{id:'car',name:'Race Car',bg:'#FFD1CC',steps:[
+{id:'car',name:'Race Car',bg:'#FFD1CC',cast:[200,304,168,10],steps:[
  {say:'Draw the car body',talk:"Vroom vroom! Let's draw a race car. First, draw the car body. A long shape at the bottom, and a bump on top for the roof.",parts:[{d:'M50 262 L50 228 Q50 212 70 210 L128 206 L165 158 Q170 152 180 152 L262 152 Q272 152 278 158 L314 206 L338 210 Q352 214 352 232 L352 262 Q352 270 344 270 L58 270 Q50 270 50 262 Z',f:'#E8423A',z:1}]},
  {say:'Draw the windows',talk:"Now draw two windows in the roof. One on this side, and one on that side.",parts:[{d:'M146 204 L174 168 L210 168 L210 204 Z',f:'#BFE6FF',z:2},{d:'M226 168 L260 168 L290 204 L226 204 Z',f:'#BFE6FF',z:2},{d:'M184 176 L170 196',w:4,s:'#fff',z:2.1,t:0},{d:'M244 176 L234 194',w:4,s:'#fff',z:2.1,t:0}]},
  {say:'Draw two big wheels',talk:"Every car needs wheels! Draw two big circles at the bottom, and color them black.",parts:[{d:circ(122,272,34),f:INK,z:3},{d:circ(284,272,34),f:INK,z:3}]},
@@ -270,7 +272,7 @@ const LESSONS=[
  {say:'Add a racing number',talk:"Race cars have numbers! Draw a white circle on the side, and the number seven inside.",parts:[{d:circ(164,238,15),f:'#fff',z:2},{d:'M157 231 L171 231 L161 247',w:4,z:2.1}]},
  {say:'Draw the road and speed lines',talk:"Last step! Draw the road under the car, and speed lines behind it. Zoom! It's going so fast!",parts:[{d:'M24 308 L376 308',w:6,z:0},{d:'M18 196 L40 196',w:5,z:0},{d:'M10 224 L36 224',w:5,z:0},{d:'M18 252 L38 252',w:5,z:0}]}
 ]},
-{id:'tree',name:'Apple Tree',bg:'#D3F0C7',steps:[
+{id:'tree',name:'Apple Tree',bg:'#D3F0C7',tex:{bark:[0],leaf:[1,2]},cast:[200,352,110,9],steps:[
  {say:'Draw the trunk',talk:"Let's draw an apple tree! First, draw the trunk. Two lines going up, a little wider at the bottom.",parts:[{d:'M180 345 Q186 290 184 236 L216 236 Q214 290 222 345 Z',f:'#9B6B43',z:1}]},
  {say:'Draw the fluffy leaves',talk:"Now draw the leaves on top. Make a big fluffy cloud shape, bumpy all around.",parts:[{d:wavy(200,158,100,10,26),f:'#4CB05E',z:2}]},
  {say:'Add lighter leaves',talk:"Draw two smaller bumpy clouds inside the big one. This makes the tree look fluffy and soft.",parts:[{d:wavy(158,178,40,7,10),f:'#62C473',z:3},{d:wavy(244,136,40,7,10),f:'#62C473',z:3}]},
@@ -279,7 +281,7 @@ const LESSONS=[
  {say:'Draw the grass',talk:"Draw a line for the ground, and some pointy grass. Spiky, spiky!",parts:[{d:'M30 352 L370 352',w:5,s:'#3E9B4F',z:0},{d:'M60 352 L67 336 L74 352',w:4,s:'#3E9B4F',z:0},{d:'M300 352 L307 336 L314 352',w:4,s:'#3E9B4F',z:0},{d:'M110 352 L116 340 L122 352',w:4,s:'#3E9B4F',z:0}]},
  {say:'Add the sun and a bird',talk:"Last step! Draw a sun in the sky and a little bird flying. Your tree is so pretty!",parts:[{d:circ(345,52,24),f:'#FFC93C',z:0},{d:'M64 70 Q76 58 88 70 Q100 58 112 70',w:5,z:0}]}
 ]},
-{id:'fish',name:'Little Fish',bg:'#BFE6FF',steps:[
+{id:'fish',name:'Little Fish',bg:'#BFE6FF',tex:{scale:[0]},steps:[
  {say:'Draw the fish body',talk:"Let's draw a fish! Draw a shape like a lemon lying on its side. Pointy at both ends.",parts:[{d:'M80 200 Q170 100 280 200 Q170 300 80 200 Z',f:'#FF9F43',z:2}]},
  {say:'Draw the tail',talk:"Now draw the tail at the back. It looks like a triangle with a curvy end.",parts:[{d:'M275 200 L345 140 Q330 200 345 260 Z',f:'#FF7A30',z:1}]},
  {say:'Draw the fins',talk:"Fish have fins to swim. Draw one on top, one on the bottom, and a little one on the side.",parts:[{d:'M150 145 Q185 82 246 152 Z',f:'#FF7A30',z:1},{d:'M168 254 Q190 302 222 258 Z',f:'#FF7A30',z:1},{d:'M168 206 Q196 188 206 216 Q190 232 168 206 Z',f:'#FF7A30',z:3}]},
@@ -288,7 +290,7 @@ const LESSONS=[
  {say:'Draw the mouth and scales',talk:"Draw a tiny smile at the front. Then add little curves on the body for scales.",parts:[{d:'M90 206 Q99 214 108 208',w:4,z:3},{d:'M160 168 Q168 176 176 168',w:4,z:2.6},{d:'M164 228 Q172 236 180 228',w:4,z:2.6},{d:'M186 196 Q194 204 202 196',w:4,z:2.6}]},
  {say:'Add the sea',talk:"Last step! Draw bubbles going up, some seaweed, and wavy sand at the bottom. Splash!",parts:[{d:circ(52,140,10),f:'#E6F6FF',z:0},{d:circ(40,98,14),f:'#E6F6FF',z:0},{d:circ(62,58,8),f:'#E6F6FF',z:0},{d:'M330 352 Q314 322 330 292 Q346 262 330 232',w:7,s:'#2FA866',z:0},{d:'M20 356 Q110 340 200 356 Q290 340 380 356',w:5,s:'#D8A657',z:0}]}
 ]},
-{id:'whale',name:'Big Whale',bg:'#BCD9F5',steps:[
+{id:'whale',name:'Big Whale',bg:'#BCD9F5',tex:{skin:[0,2]},steps:[
  {say:'Draw the whale body',talk:"Let's draw a big whale! Draw a big round shape, like a giant jelly bean.",parts:[{d:'M70 228 Q70 140 190 140 Q300 140 312 218 Q300 290 180 290 Q70 290 70 228 Z',f:'#3F7FD6',z:2}]},
  {say:'Draw the tummy',talk:"Now draw the tummy. A curved line along the bottom of the body. Whale tummies are light!",parts:[{d:'M84 246 Q110 290 190 290 Q262 290 302 244 Q246 268 186 268 Q124 268 84 246 Z',f:'#D7ECFF',z:3}]},
  {say:'Draw the tail',talk:"Draw the tail at the back. It goes up, and splits into two ends, like a heart.",parts:[{d:'M300 225 Q330 205 340 165 L362 196 L388 176 Q380 232 312 250 Z',f:'#3F7FD6',z:1}]},
@@ -298,7 +300,7 @@ const LESSONS=[
  {say:'Draw the water spout',talk:"Whales blow water from their heads! Draw a line going up, and two curls at the top.",parts:[{d:'M160 140 L160 104',w:6,s:'#6EC1FF',z:0},{d:'M160 104 Q138 76 120 90',w:6,s:'#6EC1FF',z:0},{d:'M160 104 Q182 76 200 90',w:6,s:'#6EC1FF',z:0},{d:circ(116,98,6),f:'#BFE6FF',z:0},{d:circ(204,98,6),f:'#BFE6FF',z:0}]},
  {say:'Draw the waves',talk:"Last step! Draw wavy water under the whale. Up and down, up and down. Splash!",parts:[{d:'M20 330 Q60 310 100 330 Q140 310 180 330 Q220 310 260 330 Q300 310 340 330 Q368 316 386 326',w:5,s:'#2C8CE8',z:5}]}
 ]},
-{id:'dolphin',name:'Happy Dolphin',bg:'#C3ECF2',steps:[
+{id:'dolphin',name:'Happy Dolphin',bg:'#C3ECF2',tex:{skin:[0,2,3,4]},steps:[
  {say:'Draw the dolphin body',talk:"Let's draw a happy dolphin! Draw a long, round body with a little round nose at the front.",parts:[{d:'M58 224 Q60 210 92 212 Q104 196 120 186 Q160 162 230 165 Q300 172 334 220 Q290 256 210 256 Q150 256 108 238 Q72 240 58 224 Z',f:'#6FA8DC',z:2}]},
  {say:'Draw the tummy',talk:"Draw the tummy under the body. A long curvy line from the nose to the back.",parts:[{d:'M108 238 Q150 256 210 256 Q262 256 300 236 Q248 244 200 241 Q146 239 112 228 Z',f:'#E3F2FF',z:3}]},
  {say:'Draw the back fin',talk:"Dolphins have a fin on their back. Draw a shape like a shark fin, curving back.",parts:[{d:'M196 168 Q212 122 248 116 Q234 146 246 172 Z',f:'#5A93C9',z:1}]},
@@ -307,7 +309,7 @@ const LESSONS=[
  {say:'Draw the eye and smile',talk:"Draw a shiny eye, a big smile, and a little blow hole on top of the head.",parts:[...eye(130,204,7),{d:'M70 226 Q92 236 120 226',w:4,z:4},{d:'M158 176 Q164 170 170 176',w:4,z:4}]},
  {say:'Draw the water',talk:"Last step! Draw the waves and some water drops. Your dolphin is jumping! Wheee!",parts:[{d:'M30 318 Q75 298 120 318 Q165 298 210 318 Q255 298 300 318 Q340 300 372 316',w:5,s:'#2C8CE8',z:0},{d:'M64 270 Q56 284 64 292 Q72 284 64 270 Z',f:'#BFE6FF',z:0},{d:'M346 120 Q338 134 346 142 Q354 134 346 120 Z',f:'#BFE6FF',z:0},{d:'M80 120 Q72 134 80 142 Q88 134 80 120 Z',f:'#BFE6FF',z:0}]}
 ]},
-{id:'spider',name:'Silly Spider',bg:'#E4D8F7',steps:[
+{id:'spider',name:'Silly Spider',bg:'#E4D8F7',tex:{fur:[0,1]},cast:[200,352,120,10],steps:[
  {say:'Draw the big body',talk:"Let's draw a silly spider! First, a big round body, like a balloon.",parts:[{d:ell(200,242,62,56),f:'#5B3A8C',z:2}]},
  {say:'Draw the head',talk:"Draw a smaller circle on top of the body. That's the head!",parts:[{d:circ(200,160,38),f:'#6C4BA0',z:3}]},
  {say:'Draw eight legs',talk:"Spiders have eight legs! Draw four bendy legs on this side, and four on that side. Count with me: one, two, three, four!",parts:[{d:'M150 214 Q105 175 85 205',w:9,s:'#3E2766',z:1},{d:'M146 236 Q100 226 75 255',w:9,s:'#3E2766',z:1},{d:'M150 258 Q110 276 95 310',w:9,s:'#3E2766',z:1},{d:'M164 280 Q140 312 140 340',w:9,s:'#3E2766',z:1},{d:'M250 214 Q295 175 315 205',w:9,s:'#3E2766',z:1},{d:'M254 236 Q300 226 325 255',w:9,s:'#3E2766',z:1},{d:'M250 258 Q290 276 305 310',w:9,s:'#3E2766',z:1},{d:'M236 280 Q260 312 260 340',w:9,s:'#3E2766',z:1}]},
@@ -317,7 +319,7 @@ const LESSONS=[
  {say:'Add spots',talk:"Draw some round spots on the body. Big ones and small ones!",parts:[{d:circ(178,230,11),f:'#8E6BCB',z:2.1},{d:circ(222,252,13),f:'#8E6BCB',z:2.1},{d:circ(194,272,7),f:'#8E6BCB',z:2.1}]},
  {say:'Draw the web',talk:"Last step! Draw a line going up, that's the spider's string. And a web in the corner. You did it!",parts:[{d:'M200 122 L200 30',w:4,z:0},{d:'M20 20 L126 20',w:3,s:'#8C97AE',z:0},{d:'M20 20 L20 126',w:3,s:'#8C97AE',z:0},{d:'M20 20 L100 100',w:3,s:'#8C97AE',z:0},{d:'M54 20 Q48 48 20 54',w:3,s:'#8C97AE',z:0},{d:'M92 20 Q80 80 20 92',w:3,s:'#8C97AE',z:0}]}
 ]},
-{id:'hero',name:'Super Rakan',bg:'#FFE08A',steps:[
+{id:'hero',name:'Super Rakan',bg:'#FFE08A',cast:[200,364,90,8],steps:[
  {say:'Draw the head',talk:"Let's draw a superhero. It's Super Rakan! First, draw a round head.",parts:[{d:circ(200,150,52),f:'#F5C9A0',z:3}]},
  {say:'Draw the hair',talk:"Draw the hair on top of the head, with a little wave in the front.",parts:[{d:'M149 142 Q148 92 200 92 Q252 92 251 142 Q238 118 214 116 Q196 128 170 122 Q158 128 149 142 Z',f:'#3A2A20',z:4}]},
  {say:'Draw the hero mask',talk:"Every hero needs a mask! Draw a band across the eyes, and two eye holes.",parts:[{d:'M148 148 Q200 132 252 148 L248 172 Q200 160 152 172 Z',f:'#2C8CE8',z:5},{d:circ(180,156,8),f:'#fff',z:5.1},{d:circ(220,156,8),f:'#fff',z:5.1},...eye(181,157,4,5.2),...eye(219,157,4,5.2)]},
@@ -334,16 +336,46 @@ LESSONS.forEach(l=>{let k=0;l.steps.forEach((s,si)=>s.parts.forEach(p=>{p.si=si;
 const allParts=l=>l.steps.flatMap(s=>s.parts);
 const byZ=arr=>arr.slice().sort((a,b)=>(a.z||0)-(b.z||0)||a.k-b.k);
 
-/* SVG art: mode 'final' = colored picture */
-function artSVG(l,opts){
-  opts=opts||{};
+/* Realistic art. stage: 0 pencil sketch, 1 base colors, 2 + shadows, 3 + highlights, 4 + texture & ground shadow */
+const TEX={
+ fur:'<pattern id="tx-fur" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><path d="M2 1l1.6 7.5M7.5 3l1.4 7" stroke="#3B200C" stroke-opacity=".3" stroke-width="1.3" stroke-linecap="round"/></pattern>',
+ scale:'<pattern id="tx-scale" width="16" height="10" patternUnits="userSpaceOnUse"><path d="M0 10a8 8 0 0 1 16 0M-8 5a8 8 0 0 1 16 0M8 5a8 8 0 0 1 16 0" fill="none" stroke="#7A2800" stroke-opacity=".25" stroke-width="1.3"/></pattern>',
+ bark:'<pattern id="tx-bark" width="10" height="26" patternUnits="userSpaceOnUse"><path d="M3 0q2.5 13 0 26M8 5q-1.5 8 0 16" fill="none" stroke="#3B200C" stroke-opacity=".4" stroke-width="1.5"/></pattern>',
+ leaf:'<pattern id="tx-leaf" width="14" height="12" patternUnits="userSpaceOnUse"><path d="M2 9q3-6 6-1M8 4q3-5 5 0" fill="none" stroke="#123D1A" stroke-opacity=".3" stroke-width="1.3" stroke-linecap="round"/></pattern>',
+ skin:'<pattern id="tx-skin" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="#00204F" fill-opacity=".16"/><circle cx="6.5" cy="6" r=".7" fill="#00204F" fill-opacity=".12"/></pattern>'
+};
+const DEFS=`<defs><radialGradient id="sh" cx=".36" cy=".3" r=".92"><stop offset=".42" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".52"/></radialGradient><radialGradient id="hl" cx=".3" cy=".24" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><radialGradient id="cast" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#1A1A2E" stop-opacity=".38"/><stop offset="1" stop-color="#1A1A2E" stop-opacity="0"/></radialGradient><linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".06"/></linearGradient>${Object.values(TEX).join('')}</defs>`;
+function darken(hex,f){const n=parseInt(hex.slice(1),16);const c=[n>>16&255,n>>8&255,n&255].map(v=>Math.round(v*(1-f)));return'#'+c.map(v=>v.toString(16).padStart(2,'0')).join('')}
+function texFor(l,p){if(!l.tex||!p.f||p.f===INK||p.t===0)return null;for(const k in l.tex)if(l.tex[k].includes(p.si))return k;return null}
+function artSVG(l,stage){
+  if(stage===undefined)stage=4;
   let g='';
+  if(stage>=4&&l.cast){const [cx,cy,rx,ry]=l.cast;g+=`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#cast)"/>`}
   for(const p of byZ(allParts(l))){
-    const st=p.w===0?'none':(p.s||INK);
-    g+=`<path d="${p.d}" fill="${p.f||'none'}" stroke="${st}" stroke-width="${p.w||0}"/>`;
+    if(stage===0){if(p.t===0)continue;g+=`<path d="${p.d}" fill="${p.f?'#fff':'none'}" stroke="#6A6F7A" stroke-width="${p.w===0?2:Math.min(p.w,3.5)}"/>`;continue}
+    const filled=p.f&&p.t!==0;
+    if(p.f)g+=`<path d="${p.d}" fill="${p.f}"/>`;
+    if(filled){
+      const tx=stage>=4&&texFor(l,p);if(tx)g+=`<path d="${p.d}" fill="url(#tx-${tx})"/>`;
+      if(stage>=2)g+=`<path d="${p.d}" fill="url(#sh)"/>`;
+      if(stage>=3)g+=`<path d="${p.d}" fill="url(#hl)"/>`;
+    }
+    if(p.w!==0){
+      const line=p.s||(p.f&&p.f!==INK&&p.f.toLowerCase()!=='#fff'&&p.f.toLowerCase()!=='#ffffff'?darken(p.f,.5):(p.f?'#7B8494':INK));
+      const lw=p.f?Math.min(p.w,3):p.w;
+      g+=`<path d="${p.d}" fill="none" stroke="${line}" stroke-width="${lw}"/>`;
+    }
   }
-  return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="400" fill="${l.bg}"/><g stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
+  return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">${DEFS}<rect width="400" height="400" fill="${l.bg}"/><rect width="400" height="400" fill="url(#bgG)"/><g stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
 }
+const SHADE_STEPS=[
+ {say:'Color it in',talk:"Now let's color it with real colors. Color softly, all in the same direction, just like the picture."},
+ {say:'Add the shadows',talk:"Look! The light comes from the top left, like the sun. So the bottom right side is darker. Press a little harder there to make a shadow."},
+ {say:'Add the shiny light',talk:"Now the light. At the top left, make it lighter and shiny. On paper, leave a little white spot there."},
+ {say:'Add texture and ground shadow',talk:''}
+];
+const TEXTALK={fur:"Now draw lots of tiny short lines, all going the same way, for soft fur. ",scale:"Now draw little curves, like tiny rainbows, for the fish scales. ",bark:"Now draw wiggly lines on the trunk for the bark. ",leaf:"Draw little leaf shapes in the leaves. ",skin:"Now add tiny dots to make the skin look smooth and wet. "};
+function finalTalk(l){let t='';if(l.tex)for(const k in l.tex)t+=TEXTALK[k]||'';if(l.cast)t+="Then draw a soft grey shadow on the ground under it. ";return t+"Wow! Now it looks real!"}
 
 const COLORS=['#1F2A44','#E8423A','#FF7A30','#FFC93C','#2FA866','#2C8CE8','#8E5BD9','#FF7BB5','#B9783F','#FFFFFF'];
 const SIZES=[6,12,22];
@@ -421,10 +453,11 @@ let demo=null; /* {start, parts:[{pts,len}]} "watch me" pencil animation */
 
 function buildSwatches(){
   $('swatches').innerHTML=COLORS.map(c=>`<button class="sw${c===color?' sel':''}" style="background:${c}" data-c="${c}" aria-label="color"></button>`).join('');
-  $('swatches').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{color=b.dataset.c;if(tool==='erase')setTool('pen');buildSwatches()});
+  $('swatches').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{color=b.dataset.c;if(tool!=='pen'&&tool!=='fill')setTool('pen');buildSwatches()});
 }
-function setTool(t){tool=t;$('tPen').classList.toggle('sel',t==='pen');$('tFill').classList.toggle('sel',t==='fill');$('tErase').classList.toggle('sel',t==='erase')}
-$('tPen').onclick=()=>setTool('pen');$('tFill').onclick=()=>setTool('fill');$('tErase').onclick=()=>setTool('erase');
+const TOOLBTN={pen:'tPen',fill:'tFill',erase:'tErase',shade:'tShade',light:'tLight'};
+function setTool(t){tool=t;for(const k in TOOLBTN)$(TOOLBTN[k]).classList.toggle('sel',k===t)}
+for(const k in TOOLBTN)$(TOOLBTN[k]).onclick=()=>setTool(k);
 $('tSize').onclick=()=>{sizeI=(sizeI+1)%SIZES.length;const s=[8,14,22][sizeI];$('sizeDot').style.width=s+'px';$('sizeDot').style.height=s+'px'};
 $('tUndo').onclick=()=>{const im=undoStack.pop();if(im)dctx.putImageData(im,0,0)};
 function pushUndo(){try{undoStack.push(dctx.getImageData(0,0,draw.width,draw.height));if(undoStack.length>20)undoStack.shift()}catch(e){}}
@@ -442,7 +475,7 @@ function openFree(){
   lesson=null;phase='free';show('studio');fit();
   dctx.setTransform(1,0,0,1,0,0);dctx.clearRect(0,0,draw.width,draw.height);undoStack=[];
   color=COLORS[1];setTool('pen');buildSwatches();
-  $('tFill').hidden=false;$('ref').hidden=true;
+  $('tFill').hidden=false;$('tShade').hidden=false;$('tLight').hidden=false;$('ref').hidden=true;
   $('hint').textContent='Draw anything you like!';say('Draw anything you like! Use the bucket to fill colors.');
   $('dots').innerHTML='';
   $('nextBtn').textContent='Save';$('nextBtn').classList.remove('glow');
@@ -454,37 +487,44 @@ function startStep(){
   const tr=s.parts.filter(p=>p.t!==0);
   samples=tr.flatMap(p=>partPts(p.d).pts);
   $('hint').textContent=s.say;
-  $('tFill').hidden=true;if(tool==='fill')setTool('pen');
+  $('tFill').hidden=true;$('tShade').hidden=true;$('tLight').hidden=true;if(tool!=='pen'&&tool!=='erase')setTool('pen');
   $('nextBtn').textContent='Next';$('nextBtn').classList.remove('glow');
   renderDots();
   demo={start:0,parts:tr.map(p=>partPts(p.d)),pending:true};
   redrawGuide();
   say(s.talk+" Watch me first. Now you try!",()=>{if(demo)demo.start=performance.now()});
 }
+let cs=0;
 function startColoring(){
   phase='color';demo=null;
   pushUndo();
-  // clean coloring page: layered white shapes + outlines so the bucket works
   dctx.save();dctx.setTransform(dpr*k,0,0,dpr*k,0,0);
   dctx.lineCap='round';dctx.lineJoin='round';
   for(const p of byZ(allParts(lesson))){
     const path=new Path2D(p.d);
     if(p.f){dctx.fillStyle='#FFFFFF';dctx.fill(path)}
-    if(p.w!==0){dctx.strokeStyle=INK;dctx.lineWidth=Math.min(p.w,6);dctx.stroke(path)}
-    else if(p.f&&p.t!==0){dctx.strokeStyle=INK;dctx.lineWidth=3;dctx.stroke(path)}
+    if(p.w!==0){dctx.strokeStyle='#4A4F5C';dctx.lineWidth=p.f?3.5:Math.min(p.w,5);dctx.stroke(path)}
+    else if(p.f&&p.t!==0){dctx.strokeStyle='#4A4F5C';dctx.lineWidth=2.5;dctx.stroke(path)}
   }
   dctx.restore();
-  $('tFill').hidden=false;setTool('fill');color=COLORS[3];buildSwatches();
-  $('ref').innerHTML=artSVG(lesson);$('ref').hidden=false;
-  $('hint').textContent='Color it like this!';
-  say("Now let's color it! Look at the little picture. Pick a color, then tap inside a shape to paint it.");
-  $('nextBtn').textContent='Done';$('nextBtn').classList.remove('glow');
-  renderDots();redrawGuide();
+  cs=0;colorStep();redrawGuide();
+}
+function colorStep(){
+  const st=SHADE_STEPS[cs];
+  $('ref').innerHTML=artSVG(lesson,cs+1);$('ref').hidden=false;
+  $('tFill').hidden=false;$('tShade').hidden=cs<1;$('tLight').hidden=cs<2;
+  if(cs===0){setTool('fill');color=COLORS[3]}else if(cs===1)setTool('shade');else if(cs===2)setTool('light');else{setTool('pen');sizeI=0;color='#6B4423';$('sizeDot').style.width='8px';$('sizeDot').style.height='8px'}
+  buildSwatches();
+  $('hint').textContent=st.say;
+  const extra=cs===0?" Look at the little picture. Pick a color, then tap inside a shape to paint it.":cs===1?" Use the shadow brush, the half black circle.":cs===2?" Use the light brush, the little sun.":"";
+  say((cs===3?finalTalk(lesson):st.talk)+extra);
+  $('nextBtn').textContent=cs<3?'Next':'Done';$('nextBtn').classList.remove('glow');
+  renderDots();
 }
 function renderDots(){
   if(!lesson){$('dots').innerHTML='';return}
-  const n=lesson.steps.length+1;let h='';
-  const cur=phase==='color'||phase==='finished'?n-1:step;
+  const n=lesson.steps.length+4;let h='';
+  const cur=phase==='color'?lesson.steps.length+cs:phase==='finished'?n:step;
   for(let i=0;i<n;i++)h+=`<span class="dot ${i<cur||phase==='finished'?'ok':i===cur?'now':''}"></span>`;
   $('dots').innerHTML=h;
 }
@@ -499,6 +539,7 @@ $('nextBtn').onclick=()=>{
   if(!lesson){saveDrawing();celebrate('Saved!');say('Saved! Look in My pictures.');return}
   if(phase==='trace'){
     if(step<lesson.steps.length-1){step++;startStep()}else startColoring();
+  }else if(phase==='color'&&cs<3){cs++;colorStep();
   }else if(phase==='color'){
     saveDrawing();
     if(!doneSet[lesson.id]){doneSet[lesson.id]=1;store.set('rk_done',doneSet)}
@@ -553,6 +594,8 @@ function loop(){cancelAnimationFrame(raf);const f=n=>{if(phase==='trace'&&(demo|
 
 /* ---------- DRAWING ---------- */
 let drawing=false,last=null,mid=null;
+const brushCol=()=>tool==='shade'?'rgba(25,20,45,.13)':tool==='light'?'rgba(255,255,255,.4)':color;
+const brushW=()=>tool==='shade'?28:tool==='light'?22:SIZES[sizeI]*(tool==='erase'?2:1);
 function pos(e){const r=draw.getBoundingClientRect();return[(e.clientX-r.left)*(S/r.width),(e.clientY-r.top)*(S/r.height)]}
 draw.addEventListener('pointerdown',e=>{
   unlockAudio();e.preventDefault();
@@ -564,12 +607,12 @@ draw.addEventListener('pointerdown',e=>{
   drawing=true;last=p;mid=p;
   dctx.setTransform(dpr,0,0,dpr,0,0);
   dctx.globalCompositeOperation=tool==='erase'?'destination-out':'source-over';
-  dctx.fillStyle=color;dctx.beginPath();dctx.arc(p[0],p[1],SIZES[sizeI]/2*(tool==='erase'?2:1),0,7);dctx.fill();
+  dctx.fillStyle=brushCol();dctx.beginPath();dctx.arc(p[0],p[1],brushW()/2,0,7);dctx.fill();
 });
 draw.addEventListener('pointermove',e=>{
   if(!drawing)return;
   const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
-  dctx.strokeStyle=color;dctx.lineWidth=SIZES[sizeI]*(tool==='erase'?2:1);dctx.lineCap='round';dctx.lineJoin='round';
+  dctx.strokeStyle=brushCol();dctx.lineWidth=brushW();dctx.lineCap='round';dctx.lineJoin='round';
   for(const ev of evs){const p=pos(ev);const m=[(last[0]+p[0])/2,(last[1]+p[1])/2];
     dctx.beginPath();dctx.moveTo(mid[0],mid[1]);dctx.quadraticCurveTo(last[0],last[1],m[0],m[1]);dctx.stroke();last=p;mid=m}
 });
@@ -642,21 +685,21 @@ function pmText(i){
   const n=pmL.steps.length;
   if(i===0)return{say:'Get your paper ready',talk:"Let's draw a "+pmL.name+" on paper! Get a paper, a pencil, and your crayons. Draw nice and big! Tap the green button when you are ready."};
   if(i<=n){const s=pmL.steps[i-1];return{say:s.say,talk:s.talk+" Watch me, then draw it on your paper. Tap I drew it when you finish."}}
-  if(i===n+1)return{say:'Color it like this!',talk:"Now take your crayons and color your drawing, just like this picture. Take your time!"};
+  if(i>n&&i<=n+4){const c=i-n-1,st=SHADE_STEPS[c];return{say:st.say,talk:(c===3?finalTalk(pmL):st.talk+(c===0?" Use your colored pencils. Take your time!":""))}}
   return{say:'You did it!',talk:"You did it, Rakan! Amazing! Three stars for you! Take a photo of your drawing to keep it."};
 }
 function renderPM(){
   const n=pmL.steps.length,card=$('pmCard');
-  let h='';for(let i=1;i<=n+1;i++)h+=`<span class="dot ${i<pmI?'ok':i===pmI?'now':''}"></span>`;
+  let h='';for(let i=1;i<=n+4;i++)h+=`<span class="dot ${i<pmI?'ok':i===pmI?'now':''}"></span>`;
   $('pmDots').innerHTML=pmI===0?'':h;
   const tx=pmText(pmI);$('pmHint').textContent=tx.say;
   $('pmPrev').style.visibility=pmI>0?'visible':'hidden';
   $('pmReplay').hidden=!(pmI>=1&&pmI<=n);
-  $('pmPhoto').hidden=pmI<n+1;
-  $('pmNext').textContent=pmI===0?"I'm ready!":pmI<=n?'I drew it!':pmI===n+1?'I finished!':'Home';
-  $('pmNext').classList.toggle('glow',pmI>n);
+  $('pmPhoto').hidden=pmI<n+4;
+  $('pmNext').textContent=pmI===0?"I'm ready!":pmI<=n?'I drew it!':pmI<n+4?'I did it!':pmI===n+4?'I finished!':'Home';
+  $('pmNext').classList.toggle('glow',pmI>=n+4);
   if(pmI===0){card.innerHTML=KIT;say(tx.talk);return}
-  if(pmI>n){card.innerHTML=artSVG(pmL);say(tx.talk);return}
+  if(pmI>n){card.innerHTML=artSVG(pmL,Math.min(4,pmI-n));say(tx.talk);return}
   const si=pmI-1;let g='';
   for(const p of byZ(allParts(pmL).filter(p=>p.si<=si))){
     if(p.si<si){
@@ -682,8 +725,8 @@ $('pmBack').onclick=goHome;
 $('pmNext').onclick=()=>{
   unlockAudio();const n=pmL.steps.length;
   if(pmI>=1&&pmI<=n)ding(false);
-  if(pmI===n+1){if(!doneSet[pmL.id]){doneSet[pmL.id]=1;store.set('rk_done',doneSet)}stars+=3;store.set('rk_stars',stars);ding(true)}
-  if(pmI>n+1){goHome();return}
+  if(pmI===n+4){if(!doneSet[pmL.id]){doneSet[pmL.id]=1;store.set('rk_done',doneSet)}stars+=3;store.set('rk_stars',stars);ding(true)}
+  if(pmI>n+4){goHome();return}
   pmI++;renderPM();
 };
 $('photoIn').onchange=e=>{
