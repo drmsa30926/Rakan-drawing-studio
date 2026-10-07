@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Rakan Draw">
+<meta name="theme-color" content="#E3F1FA">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rakan's Drawing Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:wght@600;800&display=swap">
+<style>
+/* Layout: home = lesson cards grid; studio = full-height column (top bar, spoken hint, square paper canvas, chunky crayon toolbar). Single bright look on purpose: a kid's sky-and-paper desk. */
+:root{
+  --sky:#E3F1FA; --paper:#FFFFFF; --ink:#1F2A44; --ink-soft:#5B6785;
+  --tangerine:#FF7A30; --leaf:#2FA866; --sun:#FFC93C; --line:#C9DCEA;
+  --display:"Sniglet","Comic Sans MS","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{background:var(--sky);color:var(--ink);font-family:var(--body);font-size:16px;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible{outline:4px solid var(--tangerine);outline-offset:3px}
+#app{height:100%}
+section{height:100%;box-sizing:border-box}
+
+/* HOME */
+#home,#gallery{overflow-y:auto;padding-inline:16px;padding-block:20px 32px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,7vw,42px);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--tangerine)}
+h2{font-family:var(--display);font-size:22px;margin:0}
+.stars{display:flex;align-items:center;gap:8px;background:var(--paper);border-radius:999px;padding:8px 16px;font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums;box-shadow:0 3px 0 var(--line)}
+.stars svg{width:26px;height:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.card{background:var(--paper);border-radius:22px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 5px 0 var(--line);transition:transform .15s}
+.card:active{transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
+.card svg{width:100%;max-width:150px;aspect-ratio:1;display:block}
+.card b{font-family:var(--display);font-size:19px;font-weight:400}
+.card small{color:var(--ink-soft);font-weight:800;font-size:13px}
+.done-badge{color:var(--leaf)}
+.big-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.big{border-radius:22px;padding:18px 14px;font-family:var(--display);font-size:21px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 5px 0 rgba(31,42,68,.18)}
+.big svg{width:30px;height:30px;flex:none}
+.big.free{background:var(--tangerine);color:#fff}
+.big.gal{background:var(--leaf);color:#fff}
+
+/* STUDIO */
+#studio{display:flex;flex-direction:column;gap:10px;padding-inline:16px;padding-block:12px}
+.top{display:flex;align-items:center;gap:10px}
+.round{width:52px;height:52px;border-radius:50%;background:var(--paper);display:grid;place-items:center;box-shadow:0 3px 0 var(--line);flex:none}
+.round svg{width:26px;height:26px}
+.round.off{opacity:.45}
+.dots{flex:1;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dot.now{background:var(--tangerine);transform:scale(1.25)}
+.dot.ok{background:var(--leaf)}
+.hint{background:var(--paper);border-radius:18px;padding:10px 16px;font-family:var(--display);font-size:clamp(19px,4.8vw,26px);text-align:center;min-height:1.3em;box-shadow:0 3px 0 var(--line);text-wrap:balance}
+.stage{flex:1;min-height:0;display:grid;place-items:center;position:relative}
+.paper{position:relative;background:var(--paper);border-radius:20px;box-shadow:0 6px 0 var(--line);overflow:hidden;touch-action:none}
+.paper canvas{position:absolute;inset:0;width:100%;height:100%}
+#burst{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-family:var(--display);font-size:clamp(34px,10vw,64px);color:var(--tangerine);opacity:0;transition:opacity .2s}
+#burst.show{opacity:1;animation:pop .9s ease}
+@keyframes pop{0%{transform:scale(.4)}40%{transform:scale(1.15)}100%{transform:scale(1)}}
+.tools{display:flex;flex-direction:column;gap:10px}
+.swatches{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.sw{width:46px;height:46px;border-radius:50%;flex:none;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18);border:4px solid var(--paper)}
+.sw.sel{outline:4px solid var(--ink);outline-offset:1px}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.tg{display:flex;gap:8px}
+.tool{width:52px;height:52px;border-radius:16px;background:var(--paper);display:grid;place-items:center;box-shadow:0 3px 0 var(--line)}
+.tool svg{width:28px;height:28px}
+.tool.sel{background:var(--ink);color:#fff;box-shadow:0 3px 0 #0d1426}
+.tool[hidden]{display:none!important}
+.size i{display:block;border-radius:50%;background:currentColor}
+.next{height:52px;padding:0 22px;border-radius:16px;background:var(--leaf);color:#fff;font-family:var(--display);font-size:21px;box-shadow:0 4px 0 #1d7d49}
+.next.glow{animation:glow 1s ease-in-out infinite}
+@keyframes glow{50%{transform:scale(1.08)}}
+
+/* GALLERY */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.pic{position:relative;background:var(--paper);border-radius:18px;padding:8px;box-shadow:0 4px 0 var(--line)}
+.pic img{display:block;width:100%;aspect-ratio:1;border-radius:12px}
+.pic .x{position:absolute;top:-8px;right:-8px;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;font-size:18px}
+.pic.ask .x{background:#D9443A}
+.empty{background:var(--paper);border-radius:20px;padding:28px 20px;text-align:center;color:var(--ink-soft);font-weight:800;line-height:1.5}
+/* CHOOSER SHEET */
+#chooser{position:fixed;inset:0;background:rgba(31,42,68,.45);display:grid;place-items:end center;z-index:10;padding-inline:16px}
+.sheet{background:var(--sky);width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.sheet h2{text-align:center;font-size:26px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice button{border-radius:22px;padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--display);font-size:20px;box-shadow:0 5px 0 rgba(31,42,68,.18)}
+.choice svg{width:54px;height:54px}
+.c-screen{background:var(--tangerine);color:#fff}
+.c-paper{background:var(--paper);color:var(--ink)}
+.sheet .cancel{font-weight:800;color:var(--ink-soft);padding:8px}
+
+/* PAPER MODE */
+#paperMode{display:flex;flex-direction:column;gap:10px;padding-inline:16px;padding-block:12px}
+.pm-stage{flex:1;min-height:0;display:grid;place-items:center}
+.pm-card{background:var(--paper);border-radius:20px;box-shadow:0 6px 0 var(--line);width:300px;height:300px;max-width:100%;display:grid;place-items:center;overflow:hidden;position:relative}
+.pm-card svg{width:100%;height:100%;display:block}
+.pm-card .old{stroke:#B9C6D6}
+.pm-card .new{stroke:var(--tangerine);stroke-dasharray:1;stroke-dashoffset:1}
+.pm-card .new.go{animation:drawin 1.4s ease-in-out forwards}
+@keyframes drawin{to{stroke-dashoffset:0}}
+.pm-card .final{stroke:var(--ink)}
+.ready{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;text-align:center}
+.ready .kit{display:flex;gap:18px}
+.ready .kit svg{width:72px;height:72px}
+.ready p{margin:0;font-weight:800;color:var(--ink-soft);line-height:1.5;max-width:30ch}
+.pm-bar{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.pm-bar .next{flex:1;max-width:260px}
+.photo{height:52px;padding:0 18px;border-radius:16px;background:var(--paper);font-family:var(--display);font-size:18px;display:flex;align-items:center;gap:8px;box-shadow:0 3px 0 var(--line)}
+.photo svg{width:24px;height:24px}
+.photo[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head><body>
+
+
+<div id="app">
+  <section id="home">
+    <div class="wrap">
+      <div class="brand">
+        <h1>Rakan's <span>Drawing</span> Studio</h1>
+        <div class="stars" aria-label="Stars earned"><svg viewBox="0 0 24 24"><path fill="#FFC93C" stroke="#E0A400" stroke-width="1.5" stroke-linejoin="round" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z"/></svg><span id="starCount">0</span></div>
+      </div>
+      <div class="big-row">
+        <button class="big free" id="goFree"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1L19 8a2.1 2.1 0 0 0-3-3L5 16z"/><path d="M14 7l3 3"/></svg>Free draw</button>
+        <button class="big gal" id="goGal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>My pictures</button>
+      </div>
+      <h2>Learn to draw, step by step</h2>
+      <div class="grid" id="lessonGrid"></div>
+    </div>
+  </section>
+
+  <section id="studio" hidden>
+    <div class="top">
+      <button class="round" id="back" aria-label="Back home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="dots" id="dots"></div>
+      <button class="round" id="speakBtn" aria-label="Say it again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+    <div class="hint" id="hint">Trace the line</div>
+    <div class="stage" id="stage">
+      <div class="paper" id="paper">
+        <canvas id="guide"></canvas>
+        <canvas id="draw"></canvas>
+        <div id="burst">Great job!</div>
+      </div>
+    </div>
+    <div class="tools">
+      <div class="swatches" id="swatches"></div>
+      <div class="row">
+        <div class="tg">
+          <button class="tool sel" id="tPen" aria-label="Crayon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1L19 8a2.1 2.1 0 0 0-3-3L5 16z"/></svg></button>
+          <button class="tool" id="tFill" aria-label="Paint bucket"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l8 8-7 7-8-8z"/><path d="M4 10h15"/><path d="M20 15s2 2.6 2 4a2 2 0 0 1-4 0c0-1.4 2-4 2-4z"/></svg></button>
+          <button class="tool" id="tErase" aria-label="Eraser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l5 5-11 11H5l-3-3z"/><path d="M9 10l5 5M10 21h11"/></svg></button>
+          <button class="tool size" id="tSize" aria-label="Crayon size"><i id="sizeDot" style="width:14px;height:14px"></i></button>
+        </div>
+        <div class="tg">
+          <button class="tool" id="tUndo" aria-label="Undo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+          <button class="next" id="nextBtn">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="paperMode" hidden>
+    <div class="top">
+      <button class="round" id="pmBack" aria-label="Back home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="dots" id="pmDots"></div>
+      <button class="round" id="pmSpeak" aria-label="Say it again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    </div>
+    <div class="hint" id="pmHint">Get your paper ready</div>
+    <div class="pm-stage" id="pmStage"><div class="pm-card" id="pmCard"></div></div>
+    <div class="pm-bar">
+      <button class="tool" id="pmPrev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="tool" id="pmReplay" aria-label="Show again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      <label class="photo" id="pmPhoto" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Photo<input type="file" id="photoIn" accept="image/*" capture="environment" hidden></label>
+      <button class="next" id="pmNext">Let's go!</button>
+    </div>
+  </section>
+
+  <div id="chooser" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="chTitle">
+      <h2 id="chTitle">Fish</h2>
+      <div class="choice">
+        <button class="c-screen" id="chScreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M9 14l3-5 3 5"/></svg>On the screen</button>
+        <button class="c-paper" id="chPaper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4"/><path d="M9 16l6-6 2 2-6 6H9z"/></svg>On paper</button>
+      </div>
+      <button class="cancel" id="chCancel">Cancel</button>
+    </div>
+  </div>
+
+  <section id="gallery" hidden>
+    <div class="wrap">
+      <div class="brand">
+        <button class="round" id="galBack" aria-label="Back home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <h1>My <span>pictures</span></h1>
+        <span style="width:52px"></span>
+      </div>
+      <div class="gal-grid" id="galGrid"></div>
+    </div>
+  </section>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><path id="mp"/></svg>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const circ=(cx,cy,r)=>`M${cx-r} ${cy} A${r} ${r} 0 1 1 ${cx+r} ${cy} A${r} ${r} 0 1 1 ${cx-r} ${cy}`;
+
+const wavy=(cx,cy,r,n,amp)=>{let s=`M${cx+r} ${cy}`;for(let i=0;i<n;i++){const a1=(i+.5)/n*2*Math.PI,a2=(i+1)/n*2*Math.PI;s+=` Q${(cx+(r+amp)*Math.cos(a1)).toFixed(1)} ${(cy+(r+amp)*Math.sin(a1)).toFixed(1)} ${(cx+r*Math.cos(a2)).toFixed(1)} ${(cy+r*Math.sin(a2)).toFixed(1)}`}return s};
+const star=(cx,cy,R,r)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;s+=(i?' L':'M')+(cx+q*Math.cos(a)).toFixed(1)+' '+(cy+q*Math.sin(a)).toFixed(1)}return s+' Z'};
+/* Lessons live on a 400 x 400 grid */
+const LESSONS=[
+ {id:'sun',name:'Happy Sun',bg:'#FFE79A',steps:[
+  {say:'Trace the big circle',d:[circ(200,200,70)]},
+  {say:'Now draw the sun rays',d:['M200 115 L200 70','M200 285 L200 330','M115 200 L70 200','M285 200 L330 200','M140 140 L110 110','M260 140 L290 110','M140 260 L110 290','M260 260 L290 290']},
+  {say:'Give the sun a happy face',d:[circ(175,185,7),circ(225,185,7),'M168 218 Q200 250 232 218']}
+ ]},
+ {id:'fish',name:'Little Fish',bg:'#BFE6FF',steps:[
+  {say:'Trace the fish body',d:['M80 200 Q180 105 280 200 Q180 295 80 200']},
+  {say:'Add a tail',d:['M280 200 L345 145 L345 255 Z']},
+  {say:'Draw an eye and a fin',d:[circ(135,185,10),'M165 160 Q195 115 230 152']},
+  {say:'Add some bubbles',d:[circ(60,130,9),circ(45,90,13)]}
+ ]},
+ {id:'house',name:'My House',bg:'#FFD2B8',steps:[
+  {say:'Trace the square walls',d:['M110 200 L290 200 L290 330 L110 330 Z']},
+  {say:'Draw the pointy roof',d:['M90 205 L200 95 L310 205']},
+  {say:'Add a door',d:['M180 330 L180 260 L222 260 L222 330']},
+  {say:'Add a window',d:['M240 222 L272 222 L272 252 L240 252 Z','M128 222 L160 222 L160 252 L128 252 Z']}
+ ]},
+ {id:'cat',name:'Cat Face',bg:'#D6F2C9',steps:[
+  {say:'Trace the round head',d:[circ(200,225,90)]},
+  {say:'Draw two pointy ears',d:['M128 172 L132 92 L184 138','M272 172 L268 92 L216 138']},
+  {say:'Draw the eyes and nose',d:[circ(166,210,11),circ(234,210,11),'M189 244 L211 244 L200 257 Z']},
+  {say:'Add the whiskers',d:['M180 258 L120 248','M180 266 L122 276','M220 258 L280 248','M220 266 L278 276']}
+ ]},
+ {id:'bear',name:'Teddy Bear',bg:'#F3D9B8',steps:[
+  {say:'Trace the big round head',d:[circ(200,222,92)]},
+  {say:'Draw two round ears',d:[circ(126,138,32),circ(274,138,32),circ(126,138,15),circ(274,138,15)]},
+  {say:'Draw the eyes and the round snout',d:[circ(166,205,10),circ(234,205,10),'M160 258 A40 31 0 1 1 240 258 A40 31 0 1 1 160 258']},
+  {say:'Add the nose and a smile',d:['M188 242 L212 242 L200 256 Z','M200 256 L200 268','M200 268 Q189 279 178 271','M200 268 Q211 279 222 271']}
+ ]},
+ {id:'car',name:'Fast Car',bg:'#FFC9C4',steps:[
+  {say:'Trace the car body',d:['M60 268 L60 226 Q60 210 80 210 L130 210 L165 160 L265 160 L305 210 L328 210 Q345 210 345 230 L345 268 Z']},
+  {say:'Draw two big wheels',d:[circ(122,272,32),circ(284,272,32),circ(122,272,11),circ(284,272,11)]},
+  {say:'Draw the windows',d:['M146 205 L173 172 L210 172 L210 205 Z','M226 172 L258 172 L284 205 L226 205 Z']},
+  {say:'Add a door and a light',d:['M218 212 L218 258',circ(330,232,8),'M70 232 L88 232']}
+ ]},
+ {id:'tree',name:'Apple Tree',bg:'#CFEFC4',steps:[
+  {say:'Draw the tree trunk',d:['M182 340 L188 235','M218 340 L212 235','M70 340 L330 340']},
+  {say:'Draw the fluffy leaves',d:[wavy(200,160,92,9,24)]},
+  {say:'Add some red apples',d:[circ(162,148,12),circ(230,125,12),circ(218,195,12),circ(160,205,12)]}
+ ]},
+ {id:'spider',name:'Silly Spider',bg:'#E4D8F7',steps:[
+  {say:'Trace the big round body',d:[circ(200,232,55)]},
+  {say:'Draw the little head on top',d:[circ(200,150,33)]},
+  {say:'Draw eight wiggly legs',d:['M150 210 Q105 175 85 205','M147 230 Q100 225 75 255','M150 250 Q110 275 95 310','M162 272 Q140 310 140 340','M250 210 Q295 175 315 205','M253 230 Q300 225 325 255','M250 250 Q290 275 305 310','M238 272 Q260 310 260 340']},
+  {say:'Add eyes, a smile, and the web line',d:[circ(188,144,7),circ(212,144,7),'M187 162 Q200 172 213 162','M200 117 L200 40']}
+ ]},
+ {id:'panda',name:'Panda',bg:'#DDEFE0',steps:[
+  {say:'Trace the big round head',d:[circ(200,222,92)]},
+  {say:'Draw two round ears',d:[circ(124,140,30),circ(276,140,30)]},
+  {say:'Draw the eye patches and eyes',d:['M140 202 Q148 170 180 185 Q196 215 170 236 Q140 242 140 202 Z','M260 202 Q252 170 220 185 Q204 215 230 236 Q260 242 260 202 Z',circ(168,208,7),circ(232,208,7)]},
+  {say:'Add the nose and a smile',d:['M189 250 L211 250 L200 262 Z','M200 262 Q190 277 179 269','M200 262 Q210 277 221 269']}
+ ]},
+ {id:'lion',name:'Brave Lion',bg:'#FFDDA3',steps:[
+  {say:'Draw the big fluffy mane',d:[wavy(200,212,128,12,26)]},
+  {say:'Trace the round face',d:[circ(200,216,82)]},
+  {say:'Draw the ears and eyes',d:[circ(142,152,18),circ(258,152,18),circ(172,205,9),circ(228,205,9)]},
+  {say:'Add the nose and mouth',d:['M186 238 L214 238 L200 252 Z','M200 252 Q186 270 172 260','M200 252 Q214 270 228 260']}
+ ]},
+ {id:'whale',name:'Big Whale',bg:'#BCD9F5',steps:[
+  {say:'Trace the big whale body',d:['M70 228 Q70 140 190 140 Q300 140 312 218 Q300 290 180 290 Q70 290 70 228 Z']},
+  {say:'Add the tail',d:['M308 222 Q338 205 346 168 L366 196 L388 176 Q378 228 314 248']},
+  {say:'Draw the eye, smile, and fin',d:[circ(128,212,9),'M88 244 Q130 266 176 250','M190 278 Q206 308 232 296']},
+  {say:'Make the water spout',d:['M160 140 L160 108','M160 108 Q140 82 124 94','M160 108 Q180 82 196 94']}
+ ]},
+ {id:'dolphin',name:'Happy Dolphin',bg:'#C3ECF2',steps:[
+  {say:'Trace the dolphin body',d:['M55 225 L96 214 Q140 160 230 165 Q300 172 334 220 Q290 256 210 256 Q140 256 98 238 Z']},
+  {say:'Draw the fin on its back',d:['M198 166 Q214 124 246 118 Q234 145 246 170']},
+  {say:'Add the tail',d:['M330 218 L372 184 L362 222 L378 258 Z']},
+  {say:'Add an eye, a smile, and a flipper',d:[circ(130,205,7),'M96 232 Q110 237 126 230','M190 252 Q195 286 226 290 Q214 268 220 254']}
+ ]},
+ {id:'hero',name:'Super Rakan',bg:'#FFE08A',steps:[
+  {say:'Trace the round head',d:[circ(200,168,58)]},
+  {say:'Draw the hero mask',d:['M141 158 Q200 138 259 158 L254 185 Q200 170 146 185 Z',circ(178,168,8),circ(222,168,8)]},
+  {say:'Draw the body and the cape',d:['M162 232 L238 232 L250 332 L150 332 Z','M162 232 L110 342 L150 332','M238 232 L290 342 L250 332']},
+  {say:'Add a star and a big smile',d:[star(200,280,24,10),'M182 198 Q200 214 218 198']}
+ ]}
+];
+const COLORS=['#1F2A44','#E8423A','#FF7A30','#FFC93C','#2FA866','#2C8CE8','#8E5BD9','#FF7BB5','#8B5A3C','#FFFFFF'];
+const SIZES=[6,12,22];
+
+/* tiny storage helpers (per-device only) */
+const store={get(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+let stars=store.get('rk_stars',0), doneSet=store.get('rk_done',{});
+
+/* ---------- HOME ---------- */
+function preview(l){
+  const paths=l.steps.flatMap(s=>s.d).map(d=>`<path d="${d}"/>`).join('');
+  return `<svg viewBox="0 0 400 400"><circle cx="200" cy="205" r="175" fill="${l.bg}"/><g fill="none" stroke="#1F2A44" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">${paths}</g></svg>`;
+}
+function renderHome(){
+  $('starCount').textContent=stars;
+  $('lessonGrid').innerHTML=LESSONS.map(l=>`<button class="card" data-id="${l.id}">${preview(l)}<b>${l.name}</b><small class="${doneSet[l.id]?'done-badge':''}">${doneSet[l.id]?'Done ★':l.steps.length+' steps'}</small></button>`).join('');
+  $('lessonGrid').querySelectorAll('.card').forEach(b=>b.onclick=()=>{unlockAudio();openChooser(LESSONS.find(l=>l.id===b.dataset.id))});
+}
+function show(id){['home','studio','paperMode','gallery'].forEach(s=>$(s).hidden=s!==id);$('chooser').hidden=true}
+
+/* ---------- CHOOSER ---------- */
+let picked=null;
+function openChooser(l){picked=l;$('chTitle').textContent=l.name;$('chooser').hidden=false;say('Where do you want to draw?')}
+$('chScreen').onclick=()=>{$('chooser').hidden=true;openLesson(picked)};
+$('chPaper').onclick=()=>{$('chooser').hidden=true;openPaper(picked)};
+$('chCancel').onclick=()=>{$('chooser').hidden=true};
+$('chooser').addEventListener('click',e=>{if(e.target.id==='chooser')$('chooser').hidden=true});
+
+/* ---------- PAPER MODE (draw along on real paper) ---------- */
+let pmL=null,pmI=0; /* 0 = get ready, 1..n = steps, n+1 = color it, n+2 = finished */
+const KIT=`<div class="ready"><div class="kit">
+ <svg viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="52" rx="4" fill="#fff" stroke="#1F2A44" stroke-width="3"/><path d="M20 20h24M20 30h24M20 40h16" stroke="#C9DCEA" stroke-width="3" stroke-linecap="round"/></svg>
+ <svg viewBox="0 0 64 64"><path d="M14 50l6-18 26-26 12 12-26 26z" fill="#FFC93C" stroke="#1F2A44" stroke-width="3" stroke-linejoin="round"/><path d="M14 50l6-18 12 12z" fill="#F5D7B5" stroke="#1F2A44" stroke-width="3" stroke-linejoin="round"/><path d="M14 50l2.5-7.5 5 5z" fill="#1F2A44"/></svg>
+ <svg viewBox="0 0 64 64"><rect x="8" y="22" width="12" height="34" rx="3" fill="#E8423A" stroke="#1F2A44" stroke-width="3"/><rect x="26" y="16" width="12" height="40" rx="3" fill="#2C8CE8" stroke="#1F2A44" stroke-width="3"/><rect x="44" y="22" width="12" height="34" rx="3" fill="#2FA866" stroke="#1F2A44" stroke-width="3"/></svg>
+</div><p>Get a paper, a pencil and your crayons. Draw big!</p></div>`;
+function fitPM(){
+  const st=$('pmStage').getBoundingClientRect();
+  const s=Math.max(200,Math.floor(Math.min(st.width,st.height,640)));
+  $('pmCard').style.width=s+'px';$('pmCard').style.height=s+'px';
+}
+window.addEventListener('resize',()=>{if(!$('paperMode').hidden)fitPM()});
+function openPaper(l){pmL=l;pmI=0;show('paperMode');fitPM();renderPM()}
+function pmSay(i){
+  const n=pmL.steps.length;
+  if(i===0)return 'Get a paper and a pencil. Ready?';
+  if(i<=n)return pmL.steps[i-1].say.replace(/^Trace/,'Draw');
+  if(i===n+1)return 'Now color your drawing with crayons';
+  return 'You did it! Take a photo to keep it';
+}
+function renderPM(){
+  const n=pmL.steps.length,card=$('pmCard');
+  // dots: ready + steps + color
+  let h='';for(let i=1;i<=n+1;i++)h+=`<span class="dot ${i<pmI?'ok':i===pmI?'now':''}"></span>`;
+  $('pmDots').innerHTML=pmI===0?'':h;
+  const t=pmSay(pmI);$('pmHint').textContent=t;say(t);
+  $('pmPrev').style.visibility=pmI>0?'visible':'hidden';
+  $('pmReplay').hidden=!(pmI>=1&&pmI<=n);
+  $('pmPhoto').hidden=pmI<n+1;
+  $('pmNext').textContent=pmI===0?"Let's go!":pmI<n?'I drew it!':pmI===n?'I drew it!':pmI===n+1?'I finished!':'Home';
+  $('pmNext').classList.toggle('glow',pmI>n);
+  if(pmI===0){card.innerHTML=KIT;return}
+  let svg=`<svg viewBox="0 0 400 400"><g fill="none" stroke-linecap="round" stroke-linejoin="round">`;
+  if(pmI<=n){
+    for(let i=0;i<pmI-1;i++)pmL.steps[i].d.forEach(d=>svg+=`<path class="old" d="${d}" stroke-width="7"/>`);
+    pmL.steps[pmI-1].d.forEach((d,j)=>svg+=`<path class="new" pathLength="1" d="${d}" stroke-width="10" style="animation-delay:${j*0.5}s"/>`);
+  }else{
+    svg=`<svg viewBox="0 0 400 400"><circle cx="200" cy="205" r="175" fill="${pmL.bg}"/><g fill="none" stroke-linecap="round" stroke-linejoin="round">`;
+    pmL.steps.forEach(s=>s.d.forEach(d=>svg+=`<path class="final" d="${d}" stroke-width="8"/>`));
+  }
+  card.innerHTML=svg+'</g></svg>';
+  animatePM();
+}
+function animatePM(){
+  const ps=$('pmCard').querySelectorAll('.new');
+  if(reduce){ps.forEach(p=>p.style.strokeDashoffset=0);return}
+  ps.forEach(p=>{p.classList.remove('go');void p.getBoundingClientRect();p.classList.add('go')});
+}
+$('pmReplay').onclick=()=>{unlockAudio();animatePM();say(pmSay(pmI))};
+$('pmSpeak').onclick=()=>{unlockAudio();say($('pmHint').textContent)};
+$('pmPrev').onclick=()=>{if(pmI>0){pmI--;renderPM()}};
+$('pmBack').onclick=goHome;
+$('pmNext').onclick=()=>{
+  unlockAudio();const n=pmL.steps.length;
+  if(pmI>=1&&pmI<=n){ding(false)}
+  if(pmI===n+1){
+    if(!doneSet[pmL.id]){doneSet[pmL.id]=1;store.set('rk_done',doneSet)}
+    stars+=3;store.set('rk_stars',stars);ding(true);
+  }
+  if(pmI>n+1){goHome();return}
+  pmI++;renderPM();
+  if(pmI===n+2)say('Amazing! You drew it on paper! Three stars for you! Take a photo to keep it');
+};
+$('photoIn').onchange=e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{
+    const c=document.createElement('canvas');c.width=360;c.height=360;const x=c.getContext('2d');
+    const m=Math.min(im.width,im.height);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,360,360);
+    const pics=store.get('rk_pics',[]);pics.unshift({src:c.toDataURL('image/jpeg',.8),t:Date.now()});
+    while(pics.length&&!store.set('rk_pics',pics.slice(0,24)))pics.pop();
+    $('pmHint').textContent='Photo saved in My pictures!';say('Photo saved!');ding(true);
+  };im.src=r.result};
+  r.readAsDataURL(f);e.target.value='';
+};
+
+/* ---------- SOUND + VOICE ---------- */
+let actx=null, voiceOn=true;
+function unlockAudio(){try{if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){}}
+function ding(big){
+  if(!actx)return;
+  try{const notes=big?[523,659,784,1047]:[659,988];notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type='triangle';o.frequency.value=f;const t=actx.currentTime+i*.11;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+.4)})}catch(e){}
+}
+function say(t){
+  if(!voiceOn)return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;u.pitch=1.25;speechSynthesis.speak(u)}catch(e){}
+}
+$('speakBtn').onclick=()=>{unlockAudio();say($('hint').textContent)};
+$('speakBtn').addEventListener('dblclick',()=>{voiceOn=!voiceOn;$('speakBtn').classList.toggle('off',!voiceOn)});
+
+/* ---------- CANVAS SETUP ---------- */
+const guide=$('guide'),draw=$('draw'),gctx=guide.getContext('2d'),dctx=draw.getContext('2d',{willReadFrequently:true});
+let S=300,dpr=1,k=1;
+function fit(){
+  const st=$('stage').getBoundingClientRect();
+  const ns=Math.max(200,Math.floor(Math.min(st.width,st.height,640)));
+  const nd=Math.min(window.devicePixelRatio||1,2.5);
+  if(ns===S&&nd===dpr&&draw.width)return redrawGuide();
+  let keep=null;
+  if(draw.width){keep=document.createElement('canvas');keep.width=draw.width;keep.height=draw.height;keep.getContext('2d').drawImage(draw,0,0)}
+  S=ns;dpr=nd;k=S/400;
+  $('paper').style.width=S+'px';$('paper').style.height=S+'px';
+  [guide,draw].forEach(c=>{c.width=Math.round(S*dpr);c.height=Math.round(S*dpr)});
+  if(keep)dctx.drawImage(keep,0,0,draw.width,draw.height);
+  undoStack=[];
+  redrawGuide();
+}
+window.addEventListener('resize',()=>{if(!$('studio').hidden)fit()});
+
+/* ---------- STATE ---------- */
+let lesson=null, step=0, phase='free', tool='pen', color=COLORS[0], sizeI=1, undoStack=[], samples=[], stepOk=false, dashT=0, raf=0;
+
+function buildSwatches(){
+  $('swatches').innerHTML=COLORS.map(c=>`<button class="sw${c===color?' sel':''}" style="background:${c}" data-c="${c}" aria-label="color"></button>`).join('');
+  $('swatches').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{color=b.dataset.c;if(tool==='erase')setTool('pen');buildSwatches()});
+}
+function setTool(t){tool=t;$('tPen').classList.toggle('sel',t==='pen');$('tFill').classList.toggle('sel',t==='fill');$('tErase').classList.toggle('sel',t==='erase')}
+$('tPen').onclick=()=>setTool('pen');$('tFill').onclick=()=>setTool('fill');$('tErase').onclick=()=>setTool('erase');
+$('tSize').onclick=()=>{sizeI=(sizeI+1)%SIZES.length;const s=[8,14,22][sizeI];$('sizeDot').style.width=s+'px';$('sizeDot').style.height=s+'px'};
+$('tUndo').onclick=()=>{const im=undoStack.pop();if(im)dctx.putImageData(im,0,0)};
+function pushUndo(){try{undoStack.push(dctx.getImageData(0,0,draw.width,draw.height));if(undoStack.length>20)undoStack.shift()}catch(e){}}
+
+/* ---------- LESSON FLOW ---------- */
+function sampleStep(s){
+  const mp=$('mp'),pts=[];
+  s.d.forEach(d=>{mp.setAttribute('d',d);const L=mp.getTotalLength();for(let l=0;l<=L;l+=7){const p=mp.getPointAtLength(l);pts.push([p.x,p.y])}});
+  return pts;
+}
+function openLesson(l){
+  lesson=l;step=0;show('studio');
+  dctx.setTransform(1,0,0,1,0,0);
+  fit();dctx.clearRect(0,0,draw.width,draw.height);undoStack=[];
+  color=COLORS[0];setTool('pen');buildSwatches();
+  startStep();
+  loop();
+}
+function openFree(){
+  lesson=null;phase='free';show('studio');fit();
+  dctx.clearRect(0,0,draw.width,draw.height);undoStack=[];
+  color=COLORS[1];setTool('pen');buildSwatches();
+  $('tFill').hidden=false;
+  setHint('Draw anything you like!');
+  $('dots').innerHTML='';
+  $('nextBtn').textContent='Save';$('nextBtn').classList.remove('glow');
+  redrawGuide();
+}
+function startStep(){
+  phase='trace';stepOk=false;
+  const s=lesson.steps[step];
+  samples=sampleStep(s);
+  setHint(s.say);
+  $('tFill').hidden=true; if(tool==='fill')setTool('pen');
+  $('nextBtn').textContent='Next';$('nextBtn').classList.remove('glow');
+  renderDots();redrawGuide();
+}
+function startColoring(){
+  phase='color';
+  pushUndo();
+  dctx.save();dctx.setTransform(dpr*k,0,0,dpr*k,0,0);
+  dctx.strokeStyle='#1F2A44';dctx.lineWidth=5/k*1.0;dctx.lineCap='round';dctx.lineJoin='round';
+  lesson.steps.forEach(s=>s.d.forEach(d=>dctx.stroke(new Path2D(d))));
+  dctx.restore();
+  $('tFill').hidden=false;setTool('fill');color=COLORS[3];buildSwatches();
+  setHint('Now color it in! Pick a color and tap inside');
+  $('nextBtn').textContent='Done';$('nextBtn').classList.remove('glow');
+  renderDots();redrawGuide();
+}
+function renderDots(){
+  if(!lesson){$('dots').innerHTML='';return}
+  const n=lesson.steps.length+1;let h='';
+  for(let i=0;i<n;i++){const cur=phase==='color'?n-1:step;h+=`<span class="dot ${i<cur?'ok':i===cur?'now':''}"></span>`}
+  $('dots').innerHTML=h;
+}
+function setHint(t){$('hint').textContent=t;say(t)}
+$('nextBtn').onclick=()=>{
+  unlockAudio();
+  if(!lesson){saveDrawing();celebrate('Saved!');return}
+  if(phase==='trace'){
+    if(step<lesson.steps.length-1){step++;startStep()}else startColoring();
+  }else if(phase==='color'){
+    saveDrawing();
+    if(!doneSet[lesson.id]){doneSet[lesson.id]=1;store.set('rk_done',doneSet)}
+    stars+=3;store.set('rk_stars',stars);
+    celebrate('★ ★ ★');say('Amazing! You drew a '+lesson.name.replace(/^(Happy|Little|My) /,'').toLowerCase()+'! You got three stars!');
+    phase='finished';$('nextBtn').textContent='Home';renderDots();
+  }else{goHome()}
+};
+$('back').onclick=goHome;
+function goHome(){cancelAnimationFrame(raf);try{speechSynthesis.cancel()}catch(e){}renderHome();show('home')}
+
+/* ---------- GUIDE LAYER ---------- */
+function redrawGuide(){
+  gctx.setTransform(1,0,0,1,0,0);gctx.clearRect(0,0,guide.width,guide.height);
+  if(!lesson||phase!=='trace')return;
+  gctx.setTransform(dpr*k,0,0,dpr*k,0,0);
+  gctx.lineCap='round';gctx.lineJoin='round';
+  // earlier steps: faint
+  gctx.strokeStyle='#D7E2EC';gctx.lineWidth=6/k;gctx.setLineDash([]);
+  for(let i=0;i<step;i++)lesson.steps[i].d.forEach(d=>gctx.stroke(new Path2D(d)));
+  // current step: thick soft band + marching dashes + green start dots
+  const s=lesson.steps[step];
+  gctx.strokeStyle=stepOk?'rgba(47,168,102,.25)':'rgba(255,122,48,.18)';gctx.lineWidth=26/k;
+  s.d.forEach(d=>gctx.stroke(new Path2D(d)));
+  gctx.strokeStyle=stepOk?'#2FA866':'#FF7A30';gctx.lineWidth=5/k;gctx.setLineDash([14/k,12/k]);gctx.lineDashOffset=-dashT/k;
+  s.d.forEach(d=>gctx.stroke(new Path2D(d)));
+  gctx.setLineDash([]);
+  if(!stepOk){const mp=$('mp');s.d.forEach(d=>{mp.setAttribute('d',d);const p=mp.getPointAtLength(0);gctx.fillStyle='#2FA866';gctx.beginPath();gctx.arc(p.x,p.y,11/k,0,7);gctx.fill();gctx.fillStyle='#fff';gctx.beginPath();gctx.arc(p.x,p.y,4/k,0,7);gctx.fill()})}
+}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(){cancelAnimationFrame(raf);const f=()=>{if(!reduce&&phase==='trace'&&!stepOk){dashT=(dashT+.6)%26;redrawGuide()}raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f)}
+
+/* ---------- DRAWING ---------- */
+let drawing=false,last=null,mid=null;
+function pos(e){const r=draw.getBoundingClientRect();return[(e.clientX-r.left)*(S/r.width),(e.clientY-r.top)*(S/r.height)]}
+draw.addEventListener('pointerdown',e=>{
+  unlockAudio();e.preventDefault();
+  if(phase==='finished')return;
+  const p=pos(e);
+  if(tool==='fill'){pushUndo();floodFill(Math.floor(p[0]*dpr),Math.floor(p[1]*dpr),color);ding(false);return}
+  draw.setPointerCapture(e.pointerId);pushUndo();
+  drawing=true;last=p;mid=p;
+  dctx.setTransform(dpr,0,0,dpr,0,0);
+  dctx.globalCompositeOperation=tool==='erase'?'destination-out':'source-over';
+  dctx.fillStyle=color;dctx.beginPath();dctx.arc(p[0],p[1],SIZES[sizeI]/2*(tool==='erase'?2:1),0,7);dctx.fill();
+});
+draw.addEventListener('pointermove',e=>{
+  if(!drawing)return;
+  const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+  dctx.strokeStyle=color;dctx.lineWidth=SIZES[sizeI]*(tool==='erase'?2:1);dctx.lineCap='round';dctx.lineJoin='round';
+  for(const ev of evs){const p=pos(ev);const m=[(last[0]+p[0])/2,(last[1]+p[1])/2];
+    dctx.beginPath();dctx.moveTo(mid[0],mid[1]);dctx.quadraticCurveTo(last[0],last[1],m[0],m[1]);dctx.stroke();last=p;mid=m}
+});
+function endStroke(){
+  if(!drawing)return;drawing=false;
+  dctx.globalCompositeOperation='source-over';dctx.setTransform(1,0,0,1,0,0);
+  if(phase==='trace'&&!stepOk)checkTrace();
+}
+draw.addEventListener('pointerup',endStroke);draw.addEventListener('pointercancel',endStroke);
+
+function checkTrace(){
+  const w=draw.width,h=draw.height;let data;
+  try{data=dctx.getImageData(0,0,w,h).data}catch(e){return}
+  const R=Math.round(15*dpr),st=Math.max(2,Math.round(3*dpr));let hit=0;
+  for(const [x,y] of samples){
+    const cx=Math.round(x*k*dpr),cy=Math.round(y*k*dpr);let ok=false;
+    for(let dy=-R;dy<=R&&!ok;dy+=st)for(let dx=-R;dx<=R;dx+=st){const px=cx+dx,py=cy+dy;if(px<0||py<0||px>=w||py>=h)continue;if(data[(py*w+px)*4+3]>40){ok=true;break}}
+    if(ok)hit++;
+  }
+  if(hit/samples.length>=.72){
+    stepOk=true;redrawGuide();ding(false);
+    const praise=['Great job!','Super!','Well done!','Wow!','Awesome!'][Math.floor(Math.random()*5)];
+    celebrate(praise);say(praise);
+    $('dots').children[step]&&$('dots').children[step].classList.add('ok');
+    $('nextBtn').classList.add('glow');
+  }
+}
+let burstT;
+function celebrate(t){const b=$('burst');b.textContent=t;b.classList.remove('show');void b.offsetWidth;b.classList.add('show');ding(true);clearTimeout(burstT);burstT=setTimeout(()=>b.classList.remove('show'),1300)}
+
+/* ---------- PAINT BUCKET ---------- */
+function hexRgb(h){const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+function floodFill(x,y,hex){
+  const w=draw.width,h=draw.height;if(x<0||y<0||x>=w||y>=h)return;
+  const img=dctx.getImageData(0,0,w,h),d=img.data,[r,g,b]=hexRgb(hex);
+  const i0=(y*w+x)*4,t=[d[i0],d[i0+1],d[i0+2],d[i0+3]];
+  if(t[3]>250&&Math.abs(t[0]-r)+Math.abs(t[1]-g)+Math.abs(t[2]-b)<10)return;
+  const tol=90,match=i=>Math.abs(d[i]-t[0])+Math.abs(d[i+1]-t[1])+Math.abs(d[i+2]-t[2])+Math.abs(d[i+3]-t[3])*2<=tol;
+  const seen=new Uint8Array(w*h),filled=new Uint8Array(w*h),stack=[y*w+x];
+  while(stack.length){
+    const p=stack.pop();if(seen[p])continue;seen[p]=1;const i=p*4;if(!match(i))continue;
+    d[i]=r;d[i+1]=g;d[i+2]=b;d[i+3]=255;filled[p]=1;
+    const px=p%w;if(px>0)stack.push(p-1);if(px<w-1)stack.push(p+1);if(p>=w)stack.push(p-w);if(p<w*(h-1))stack.push(p+w);
+  }
+  // soak into the soft edge of the lines so no white halo is left
+  for(let pass=0;pass<2;pass++){
+    const add=[];
+    for(let p=0;p<w*h;p++){if(filled[p])continue;const i=p*4;if(d[i+3]>=230)continue;const px=p%w;
+      if((px>0&&filled[p-1])||(px<w-1&&filled[p+1])||(p>=w&&filled[p-w])||(p<w*(h-1)&&filled[p+w]))add.push(p)}
+    for(const p of add){const i=p*4,a=d[i+3]/255;d[i]=Math.round(d[i]*a+r*(1-a));d[i+1]=Math.round(d[i+1]*a+g*(1-a));d[i+2]=Math.round(d[i+2]*a+b*(1-a));d[i+3]=255;filled[p]=1}
+  }
+  dctx.putImageData(img,0,0);
+}
+
+/* ---------- GALLERY ---------- */
+function saveDrawing(){
+  const c=document.createElement('canvas');c.width=360;c.height=360;const x=c.getContext('2d');
+  x.fillStyle='#fff';x.fillRect(0,0,360,360);x.drawImage(draw,0,0,360,360);
+  const pics=store.get('rk_pics',[]);pics.unshift({src:c.toDataURL('image/jpeg',.82),t:Date.now()});
+  while(pics.length&&!store.set('rk_pics',pics.slice(0,24)))pics.pop();
+}
+function renderGallery(){
+  const pics=store.get('rk_pics',[]);
+  $('galGrid').innerHTML=pics.length?pics.map((p,i)=>`<div class="pic" data-i="${i}"><img src="${p.src}" alt="Drawing ${i+1}"><button class="x" aria-label="Delete">✕</button></div>`).join('')
+    :'<div class="empty">No pictures yet.<br>Finish a lesson or tap Save in Free draw, and your pictures show up here.</div>';
+  $('galGrid').querySelectorAll('.pic').forEach(el=>{
+    el.querySelector('.x').onclick=()=>{
+      if(!el.classList.contains('ask')){el.classList.add('ask');el.querySelector('.x').textContent='?';setTimeout(()=>{el.classList.remove('ask');el.querySelector('.x').textContent='✕'},2500);return}
+      const arr=store.get('rk_pics',[]);arr.splice(+el.dataset.i,1);store.set('rk_pics',arr);renderGallery();
+    };
+  });
+}
+$('goGal').onclick=()=>{renderGallery();show('gallery')};
+$('galBack').onclick=goHome;
+$('goFree').onclick=()=>{unlockAudio();openFree()};
+
+renderHome();
+})();
+</script>
+
+</body></html>
